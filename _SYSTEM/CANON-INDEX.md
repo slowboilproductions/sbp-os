@@ -4,4 +4,7 @@
 
 | Document | Path | Version | Status | Label | Date | Originating record |
 |---|---|---|---|---|---|---|
+| Site Skeleton — sitemap · per-page purpose · content outline | `_SYSTEM/Canon/site-skeleton.md` | v0.1 | DRAFT | INSTANCE | 2026-06-12 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` |
+| Design Directions — three candidate systems | `_SYSTEM/Canon/design-directions.md` | v0.1 | DRAFT | INSTANCE | 2026-06-12 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` |
+| SBP Brand Voice — fleshed-out proposal | `_SYSTEM/Canon/brand-voice.md` | v0.1 | DRAFT | INSTANCE | 2026-06-12 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` |
 | Conventions pointer (substrate standard) | `_SYSTEM/Conventions/README.md` | — | DRAFT | METHOD | 2026-06-12 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` |

@@ -15,3 +15,9 @@
 
 | ID | Captured | Item | Status |
 |---|---|---|---|
+| B-1 | 2026-06-12 | **CRM + Dash public naming/positioning.** How are the CRM and Dash offerings named and positioned publicly? (Internal unit names may not be the outward product names.) Asked at the W1 skeleton presentation; skeleton uses ⟨placeholders⟩ pending the answer. | QUEUED |
+| B-2 | 2026-06-12 | **IC / Motion public visibility.** What of IC (still image) and Motion is public on the site — named offerings, an unnamed capability inside AMS services, or omitted for now? Asked at W1. | QUEUED |
+| B-3 | 2026-06-12 | **Pricing vs contact-for-demo.** Does the site show pricing / a pricing posture (e.g. the 50 %+ undercut claim) or route everything to contact-for-demo? Asked at W1. | QUEUED |
+| B-4 | 2026-06-12 | **Google Ads developer-token application status.** In flight / approved / not yet submitted? Compliance pages survive any cutover regardless; confirm before anything live changes (Step 2 constraint, per the W1 relay). Asked at W1. | QUEUED |
+| B-5 | 2026-06-12 | **Hosting call — deferred by design to the deploy gate (Step 3).** Keep Netlify (zero DNS change) vs consolidate on the operator's existing Vercel account. Not asked until the build gate passes. | QUEUED (deferred) |
+| B-6 | 2026-06-12 | **Business-address inconsistency (found during the legacy mirror).** The legacy site's contact page and footers say **Charlotte, NC**; the Google-Ads token checklist (ams-os) says **Indian Trail, NC** as the business address. Which is correct for the new site + Ads compliance? Asked at W1. | QUEUED |
