@@ -81,7 +81,7 @@ The old six-page site was an AMS-only compliance shell. The new site is a **fami
 5. **The graduation promise** + closing line ("You didn't come this far to fold. Let's get to work." — locked, carries forward).
 
 ### 3.6 Contact `/contact`
-**Job:** zero-friction demo request. Email (`hello@slowboilproductions.com`), business name + location (Indian Trail, NC), a short form ⟨form vs mailto is a Step-2 stack decision⟩, and which-product interest. No popups, no chat widgets.
+**Job:** zero-friction demo request. Email (`hello@slowboilproductions.com`), business name + location ⟨Charlotte vs Indian Trail, NC — open, capture queue B-6: legacy site says Charlotte, the Google-Ads checklist says Indian Trail⟩, a short form ⟨form vs mailto is a Step-2 stack decision⟩, and which-product interest. No popups, no chat widgets.
 
 ### 3.7–3.8 Privacy `/privacy` · Terms `/terms`
 **Job:** compliance continuity (Google Ads destination requirements). Content carried/updated from the legacy pages — reviewed, not creatively rewritten; voice-neutral plain language. These pages exist on day one of any cutover; the domain never serves without them.
