@@ -10,6 +10,8 @@
 
 | ID | Captured | Touches | Item | Status |
 |---|---|---|---|---|
+| A-1 | 2026-06-12 | `site-skeleton.md` (v0.2 bump) | **IA ruling — Shape 2 (operator, chat 2026-06-12, W1 gate unpack).** One umbrella tab with all five offerings as equal siblings (CRM, Dash, Marketing/AMS, Image/IC, Motion), each with its own subpage as it matures; the homepage carries the CRM/Dash emphasis (hero + product cards route straight to those subpages). Supersedes the v0.1 products-vs-services asymmetric nav. Umbrella tab name still open (operator pick: "What We Do" / "The Stack" / other). Fold into v0.2 with the other gate answers. | QUEUED |
+| A-2 | 2026-06-12 | `site-skeleton.md` (v0.2 bump — new page) | **Portfolio ruling (operator, chat 2026-06-12).** The site needs a portfolio/work page to show off SBP's work — seeded with **SSP, DGT, MWC**, built to grow as the roster grows. Fold into v0.2: page slot, purpose, outline, nav placement. | QUEUED |
 
 ## Register B — confirmations / open asks
 
