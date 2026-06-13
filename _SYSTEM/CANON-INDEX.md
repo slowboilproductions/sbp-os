@@ -4,7 +4,7 @@
 
 | Document | Path | Version | Status | Label | Date | Originating record |
 |---|---|---|---|---|---|---|
-| Site Skeleton — sitemap · per-page purpose · content outline | `_SYSTEM/Canon/site-skeleton.md` | v0.3 | DRAFT | INSTANCE | 2026-06-13 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` + W2 gate-answers round |
-| Design Directions — three candidate systems (A selected) | `_SYSTEM/Canon/design-directions.md` | v0.3 | DRAFT | INSTANCE | 2026-06-13 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` + W2 design gate |
-| SBP Brand Voice — fleshed-out proposal | `_SYSTEM/Canon/brand-voice.md` | v0.4 | DRAFT | INSTANCE | 2026-06-13 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` + W2 gate-answers round |
+| Site Skeleton — sitemap · per-page purpose · content outline | `_SYSTEM/Canon/site-skeleton.md` | v0.3 | RATIFIED | INSTANCE | 2026-06-13 | `_SYSTEM/Session_Logs/2026-06-13_SBP-W2_SCL.md` (W2 merge) |
+| Design Directions — three candidate systems (A selected) | `_SYSTEM/Canon/design-directions.md` | v0.3 | RATIFIED | INSTANCE | 2026-06-13 | `_SYSTEM/Session_Logs/2026-06-13_SBP-W2_SCL.md` (W2 merge) |
+| SBP Brand Voice — fleshed-out proposal | `_SYSTEM/Canon/brand-voice.md` | v0.4 | RATIFIED | INSTANCE | 2026-06-13 | `_SYSTEM/Session_Logs/2026-06-13_SBP-W2_SCL.md` (W2 merge) |
 | Conventions pointer (substrate standard) | `_SYSTEM/Conventions/README.md` | — | DRAFT | METHOD | 2026-06-12 | `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` |

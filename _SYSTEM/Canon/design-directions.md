@@ -1,6 +1,6 @@
 # SBP Website — Design Directions (three candidates)
 
-**Status:** v0.3 — **Direction A ("Control Room") SELECTED at the operator's W2 design gate (2026-06-13).** DRAFT pending merge ratification (a push is inert; the merge is live, §K Auditor PASS first). Operator notes he **may still tweak** — A is the ratified *starting point*, not frozen. · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 design gate (this bump)
+**Status:** v0.3 — **RATIFIED at the operator's W2 merge (2026-06-13): Direction A ("Control Room") SELECTED.** Audited PASS-WITH-NITS (nits swept), ratified by the operator's merge to `main`. Operator notes he **may still tweak** — A is the ratified *starting point*, refinements land in Step 2. · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 design gate (this bump)
 **What changed v0.2 → v0.3:** audit nit-sweep (W2 audit D-1) — resolved the leftover `⟨CRM⟩/⟨Dash⟩` placeholder in Direction A's "Why it fits" to the A-6 public names (CRM / Operational Dashboard).
 
 ## ✅ Selected direction — A "Control Room" (operator gate, 2026-06-13)
@@ -49,4 +49,4 @@ The operator picked **A** ("the black and green looks more professional than the
 
 ---
 
-*sbp-os canon — DRAFT v0.3, W2. INSTANCE. Direction A selected at the operator's design gate; the merge is the ratification.*
+*sbp-os canon — RATIFIED v0.3, W2. INSTANCE. Direction A selected; ratified at the operator's merge to `main`, 2026-06-13.*

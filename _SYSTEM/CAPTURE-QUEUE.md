@@ -8,6 +8,8 @@
 
 ## Register A — canon amendments
 
+> **RATIFIED 2026-06-13 (W2 operator merge):** all Register-A rulings A-1..A-14 were folded into the gated canon docs (site-skeleton v0.3, design-directions v0.3, brand-voice v0.4) and **ratified by the operator's merge to `main`** (audited PASS-WITH-NITS, nits swept). The per-row "DRAFTED/RESOLVED" statuses below record the pre-merge folding state and are superseded by this ratification. A-7 remains RESOLVED-by-A-11.
+
 | ID | Captured | Touches | Item | Status |
 |---|---|---|---|---|
 | A-1 | 2026-06-12 | `site-skeleton.md` (v0.2 bump) | **IA ruling — Shape 2 (operator, chat 2026-06-12, W1 gate unpack).** One umbrella tab with all five offerings as equal siblings (CRM, Dash, Marketing/AMS, Image/IC, Motion), each with its own subpage as it matures; the homepage carries the CRM/Dash emphasis (hero + product cards route straight to those subpages). Supersedes the v0.1 products-vs-services asymmetric nav. Umbrella tab name still open (operator pick: "What We Do" / "The Stack" / other). Fold into v0.2 with the other gate answers. | QUEUED |

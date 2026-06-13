@@ -1,6 +1,6 @@
 # SBP Brand Voice — fleshed-out proposal
 
-**Status:** v0.4 — **DRAFT, part of the skeleton/design gate (B-8 ruling: deepen the existing materials, don't discard, don't treat as final).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
+**Status:** v0.4 — **RATIFIED at the operator's W2 merge (2026-06-13)** (B-8 ruling: deepen the existing materials, don't discard, don't treat as final — ratified as the working voice, still open to deepening in Step 2). Audited PASS-WITH-NITS (nits swept), ratified by the operator's merge to `main`. · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
 **What changed v0.3 → v0.4:** audit nit-sweep (W2 audit D-2) — §7's B-2 resolution line re-pointed from the pre-A-11 two-name framing to **A-11** (one "Image Creation" subunit; tree-shape resolved), so the resolution section matches the §5 body.
 **What changed v0.2 → v0.3:** **A-11** — Image Creation is one subunit covering still + motion; §5 imaging register updated (no separate "Motion Image Creation" voice line).
 **What changed v0.1 → v0.2:** folded the now-answered open dependencies — **A-6** public product names (CRM / Operational Dashboard) replace the ⟨CRM⟩/⟨Dash⟩ placeholders in §5; **A-8** no pricing on-site (the 50 %+ figure is voice-internal only, never published) noted in §4; **A-4** brand-relationship guardrail (no ownership claim) noted in §5; §7 open-dependencies resolved.
@@ -64,4 +64,4 @@ The v0.1 dependencies are answered: **B-1 → A-6** (public names CRM / Operatio
 
 ---
 
-*sbp-os canon — DRAFT v0.4, W2. INSTANCE. Deepens, never discards, the locked May-2026 materials (B-8); the operator's merge is the ratification.*
+*sbp-os canon — RATIFIED v0.4, W2. INSTANCE. Deepens, never discards, the locked May-2026 materials (B-8); ratified at the operator's merge to `main`, 2026-06-13.*
