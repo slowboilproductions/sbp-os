@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StackGrid from '../../components/StackGrid.astro';
+// The Stack overview (skeleton v0.3 §3.2) — the umbrella. Show the whole house
+// on one page; route to each offering; tell the "connected set, not a one-trick
+// shop" story plainly. Four equal siblings (A-12).
+---
+<BaseLayout
+  title="The Stack"
+  description="The marketing and the tools a developing brand needs to compete, under one roof — Marketing, CRM, the Operational Dashboard, and Image Creation. One connected house, built for the same brands.">
+  <section class="section">
+    <div class="wrap">
+      <div class="s-hero" data-anim="hero">
+        <span class="eyebrow">// The Stack</span>
+        <h1>Everything a developing brand needs to compete.<br /><span class="g">Under one roof.</span></h1>
+        <p class="lede s-hero__sub">Most brands stitch together an agency, a generic CRM, a pile of distributor spreadsheets, and a photographer. We built the whole stack as one connected house — same voice, same standard, built for the same brands.</p>
+      </div>
+
+      <div class="rule s-stack">
+        <StackGrid />
+      </div>
+    </div>
+  </section>
+
+  <!-- how it fits together -->
+  <section class="section section--band">
+    <div class="wrap two-col">
+      <div>
+        <span class="eyebrow">// The through-line</span>
+        <h2>One house. One standard.</h2>
+      </div>
+      <div>
+        <p class="lede">Each part of the Stack is good on its own. Together they’re a system: the marketing fills the pipeline, the CRM runs the accounts, the Operational Dashboard tells you what actually moved, and Image Creation keeps every asset on-brand.</p>
+        <p class="mut">You don’t have to take all of it. Start where it hurts most — most brands do — and grow into the rest as you need it.</p>
+        <a href="/contact" class="btn btn--primary s-cta">Book a demo →</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .s-hero { max-width: 50ch; }
+    .s-hero__sub { margin-top: var(--s5); max-width: 58ch; }
+    .s-stack { margin-top: var(--s8); padding-top: var(--s7); }
+    .two-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s8); align-items: start; }
+    .two-col p + p { margin-top: var(--s4); }
+    .s-cta { margin-top: var(--s6); }
+    @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; gap: var(--s5); } }
+  </style>
+</BaseLayout>

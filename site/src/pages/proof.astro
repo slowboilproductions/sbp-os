@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Proof (skeleton v0.3 §3.7, A-2/A-3/A-4). Portfolio, named "Proof" (the
+// alcohol-proof double entendre is part of the appeal). Seeded SSP / DGT / MWC,
+// grows as the roster grows.
+//
+// A-4 GUARDRAIL (hard): SBP does NOT own these brands. Frame every entry as a
+// brand SBP "works with / builds for" — NO "our own brands" language anywhere.
+// The operator's personal track record is About-page territory, never an
+// SBP-ownership claim here. Metric slots use the "Coming Soon" pattern until
+// real, cleared numbers exist.
+const brands = [
+  { code: 'SSP', scope: 'Brand and marketing support for a developing spirits brand — positioning, creative, and the digital that moves product.' },
+  { code: 'DGT', scope: 'Go-to-market and creative for a developing brand — built to look established before the budget says it should.' },
+  { code: 'MWC', scope: 'Marketing and brand work for a developing spirits brand — the full stack, scaled to where the brand actually is.' },
+];
+---
+<BaseLayout
+  title="Proof"
+  description="Proof, not promises. A look at the brands Slow Boil works with and builds for — and the results, as they land.">
+  <section class="section">
+    <div class="wrap">
+      <div class="p-hero" data-anim="hero">
+        <span class="eyebrow">// Proof</span>
+        <h1>Proof, not promises.</h1>
+        <p class="lede p-hero__sub">These are brands we work with and build for. We don’t traffic in stock logos and made-up metrics — the real numbers go up here as they clear. (Yes, the name is on purpose.)</p>
+      </div>
+
+      <div class="rule p-list">
+        {brands.map((b) => (
+          <article class="p-entry card">
+            <div class="p-entry__mark mono">{b.code}</div>
+            <div class="p-entry__body">
+              <p class="p-entry__scope">{b.scope}</p>
+              <div class="p-metrics">
+                {['Revenue lift', 'Coverage', 'Velocity'].map((m) => (
+                  <div class="p-metric">
+                    <span class="live">SOON</span>
+                    <span class="p-metric__k mut mono">{m}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+
+        <div class="p-grow card">
+          <p class="mut">More work lands here as the roster grows. Building something we should see? <a href="/contact" class="ilink">Tell us about it.</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="wrap cta-band">
+      <h2>Want to be the next entry?</h2>
+      <p class="mut">We grow brands until they’re too big for us — and we celebrate it. Let’s see where yours is headed.</p>
+      <a href="/contact" class="btn btn--primary">Let’s get to work →</a>
+    </div>
+  </section>
+
+  <style>
+    .p-hero { max-width: 46ch; }
+    .p-hero__sub { margin-top: var(--s5); max-width: 58ch; }
+    .p-list { margin-top: var(--s8); padding-top: var(--s7); display: grid; gap: var(--s5); }
+    .p-entry { display: grid; grid-template-columns: 160px 1fr; gap: var(--s6); align-items: center; }
+    .p-entry__mark { font-size: 40px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); }
+    .p-entry__scope { color: var(--text-2); max-width: 60ch; }
+    .p-metrics { display: flex; gap: var(--s6); margin-top: var(--s4); flex-wrap: wrap; }
+    .p-metric { display: flex; flex-direction: column; gap: 4px; }
+    .p-metric__k { font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; }
+    .p-grow { text-align: center; }
+    .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
+    @media (max-width: 640px) {
+      .p-entry { grid-template-columns: 1fr; gap: var(--s4); }
+      .p-entry__mark { font-size: 32px; }
+    }
+  </style>
+</BaseLayout>

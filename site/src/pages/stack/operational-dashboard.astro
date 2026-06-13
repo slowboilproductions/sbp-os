@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DashboardPanel from '../../components/DashboardPanel.astro';
+// Operational Dashboard subunit (skeleton v0.3 §3.4). PUBLIC NAME
+// "Operational Dashboard" ONLY — the internal unit name "Dash" never appears
+// (A-6, hard constraint). Quality bar: world-class, sharp, very user-friendly
+// (brain-os relay) — the page must look like that bar. Pricing → Contact (A-8).
+// FLAG: capability claims verified against dash-os canon before live (out of
+// this session's repo scope — pre-cutover checklist item).
+const feats = [
+  { n: '01', h: 'Depletions & state tabs', p: 'What moved, where, this week — by state, by account, by SKU. The truth underneath the shipment number.' },
+  { n: '02', h: 'Load-in & AR', p: 'What went in, what’s owed, what’s aging. The money picture next to the movement picture.' },
+  { n: '03', h: 'Open orders & inventory', p: 'What’s in the pipeline and what’s on the shelf — so you’re not flying blind between distributor reports.' },
+  { n: '04', h: 'One summary front page', p: 'The whole business on one screen at 7am. Drill in when a number looks wrong; otherwise just know.' },
+];
+---
+<BaseLayout
+  title="Operational Dashboard"
+  description="Sell-in vs sell-through truth — everywhere you're sold, in one picture. Depletions, load-in, AR, open orders, and inventory, normalized from the feeds you already get. Book a demo.">
+  <section class="section">
+    <div class="wrap od-hero">
+      <div class="prod-hero" data-anim="hero">
+        <span class="eyebrow">// The Stack — Operational Dashboard</span>
+        <h1>Know what actually <span class="g">moved.</span> Everywhere you’re sold.</h1>
+        <p class="lede">Your distributors report in five formats, a month late. None of them add up to a single picture of sell-through. The Operational Dashboard turns those feeds into one clean answer — updated, not archived.</p>
+        <div class="prod-cta">
+          <a href="/contact" class="btn btn--primary">Book a demo →</a>
+          <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
+        </div>
+      </div>
+      <div class="od-hero__panel" data-anim="hero-panel">
+        <DashboardPanel title="operational-dashboard / summary" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="problem">
+        <span class="eyebrow">// The problem</span>
+        <p class="lede">Sell-in is what you shipped. Sell-through is what actually sold. Most brands only see the first one clearly — and find out about the second one too late to do anything about it.</p>
+      </div>
+
+      <div class="prod-sec">
+        <div class="prod-sec__head"><h2>What it does</h2></div>
+        <div class="feats">
+          {feats.map((f) => (
+            <div class="feat card">
+              <span class="feat__n">{f.n}</span>
+              <h3>{f.h}</h3>
+              <p class="mut">{f.p}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="prod-sec">
+        <div class="prod-sec__head">
+          <span class="eyebrow">// Data in, answers out</span>
+          <h2>It eats the feeds you already get.</h2>
+          <p class="mut od-note">Distributor drops, market data, the spreadsheets in your inbox — normalized into one picture instead of one more thing to reconcile by hand.</p>
+        </div>
+        <div class="shot"><span class="shot__label">Operational Dashboard — screenshot slot (the strongest single asset on the site)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="wrap cta-band">
+      <h2>See your distribution in one picture.</h2>
+      <p class="mut">We’ll walk you through it live. Pricing is scoped to the brand — tell us what you’re working with.</p>
+      <a href="/contact" class="btn btn--primary">Book a demo →</a>
+    </div>
+  </section>
+
+  <style>
+    .od-hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--s8); align-items: center; }
+    .od-hero__panel { width: 100%; }
+    .od-note { margin-top: var(--s4); max-width: 52ch; }
+    @media (max-width: 860px) {
+      .od-hero { grid-template-columns: 1fr; gap: var(--s6); }
+      .od-hero__panel { order: 3; }
+    }
+  </style>
+</BaseLayout>

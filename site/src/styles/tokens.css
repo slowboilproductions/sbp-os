@@ -1,0 +1,79 @@
+/* =====================================================================
+   Slow Boil — Control Room design tokens
+   Source of truth: _SYSTEM/Canon/design-directions.md v0.3 (Direction A,
+   RATIFIED). Dark, data-forward; signal-green used with discipline.
+   This file is the "fit" foundation; motion ("feel") rides on top of it.
+   ===================================================================== */
+
+:root {
+  /* ---- Color: Control Room ------------------------------------------ */
+  --bg: #0D1117;            /* near-black blue-slate ground */
+  --bg-2: #11161D;          /* faint raised ground (section banding) */
+  --panel: #161B22;         /* panel slate */
+  --panel-2: #1B222B;       /* hover / nested panel */
+  --line: #222B36;          /* 1px grid lines, borders */
+  --line-2: #2D3643;        /* stronger divider / hover border */
+  --text: #E6EDF3;          /* off-white primary text */
+  --text-2: #B6C2CF;        /* secondary text */
+  --mut: #7D8590;           /* muted labels, captions */
+
+  /* signal green — data-positive. CTAs, live numbers, chart strokes, state.
+     Used as a precision instrument, never a decorative flood. */
+  --grn: #3FB950;
+  --grn-deep: #1F6F38;      /* gradient base / pressed */
+  --grn-ink: #04210D;       /* text on a green fill (AA on --grn) */
+  --grn-glow: rgba(63, 185, 80, 0.35);
+  --grn-wash: rgba(63, 185, 80, 0.08);
+
+  /* muted data hues — charts only, never UI chrome */
+  --data-blue: #4C8DFF;
+  --data-amber: #D9A33A;
+  --data-violet: #A77BF0;
+
+  /* ---- Type --------------------------------------------------------- */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* fluid type scale (clamp: min .. preferred .. max) */
+  --t-eyebrow: 0.75rem;                                   /* 12px mono labels */
+  --t-sm: 0.875rem;                                       /* 14px */
+  --t-base: 1.0625rem;                                    /* 17px body */
+  --t-lg: 1.25rem;                                        /* 20px */
+  --t-h3: clamp(1.0625rem, 0.9rem + 0.7vw, 1.35rem);
+  --t-h2: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  --t-h1: clamp(2.4rem, 1.4rem + 4.4vw, 3.6rem);          /* hero */
+  --leading-tight: 1.05;
+  --leading-snug: 1.3;
+  --leading: 1.6;
+
+  /* ---- Space (8px base) --------------------------------------------- */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+  --s9: 6rem;
+  --s10: 8rem;
+
+  /* ---- Radius / shadow / layout ------------------------------------- */
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 12px;
+  --r-pill: 999px;
+  --shadow-panel: 0 20px 60px rgba(0, 0, 0, 0.40);
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.30);
+  --maxw: 1200px;          /* content max width */
+  --maxw-prose: 720px;     /* legal / prose pages */
+  --nav-h: 73px;
+
+  /* ---- Motion (durations/easing; honored only when motion is allowed) */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 140ms;
+  --dur: 280ms;
+  --dur-slow: 600ms;
+}

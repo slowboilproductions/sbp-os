@@ -1,0 +1,17 @@
+# build output
+dist/
+# generated types
+.astro/
+# deps
+node_modules/
+# env (NEVER commit secrets — platform env stores only, spec §O)
+.env
+.env.production
+.env.*.local
+# os / editor
+.DS_Store
+*.log
+npm-debug.log*
+# local screenshot tooling (not part of the site source)
+shot.mjs
+shots/

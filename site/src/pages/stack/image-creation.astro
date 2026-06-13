@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// Image Creation subunit (skeleton v0.3 §3.6 / A-11). ONE subunit covering
+// BOTH still and motion — motion is a capability within it, not a separate
+// sibling. Pricing → Contact (A-8).
+// HARD CONSTRAINT: this is SBP's motion-imagery capability — Black Company
+// appears NOWHERE on the site. No BC reference, no link, no mention.
+const feats = [
+  { n: '01', h: 'Still imagery', p: 'Product and lifestyle stills trained on your brand — consistent across every channel, ready when the campaign is, not six weeks later.' },
+  { n: '02', h: 'Motion', p: 'Short-form motion and video from the same trained model — the scroll-stopping stuff, without a production crew on the calendar.' },
+];
+---
+<BaseLayout
+  title="Image Creation"
+  description="Brand-true imagery — stills and motion from one model trained on your brand. The $50,000 look without the $50,000 shoot. Part of the Slow Boil stack.">
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-hero" data-anim="hero">
+        <span class="eyebrow">// The Stack — Image Creation</span>
+        <h1>The $50,000 look.<br /><span class="g">Without the $50,000 shoot.</span></h1>
+        <p class="lede">Product photography and motion that look like a big-budget shoot. They aren’t one — that’s the point. One model, trained on your brand, driving both the stills and the motion.</p>
+        <div class="prod-cta">
+          <a href="/contact" class="btn btn--primary">Start a conversation →</a>
+          <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
+        </div>
+      </div>
+
+      <div class="prod-sec">
+        <div class="prod-sec__head"><h2>Still and motion, from one engine.</h2></div>
+        <div class="feats">
+          {feats.map((f) => (
+            <div class="feat card">
+              <span class="feat__n">{f.n}</span>
+              <h3>{f.h}</h3>
+              <p class="mut">{f.p}</p>
+            </div>
+          ))}
+        </div>
+        <div class="shot ic-shot"><span class="shot__label">Before / after &amp; sample reel — visual slot</span></div>
+      </div>
+
+      <div class="prod-sec problem">
+        <span class="eyebrow">// One engine, two outputs</span>
+        <p class="lede">Because the same brand-trained model drives both the stills and the motion, everything matches — the photo, the clip, the next campaign. That’s why it’s one offering, not two vendors who never talk.</p>
+        <p class="mut od-note">No price on the page — every shoot’s different. <a href="/contact" class="ilink">Tell us what you’re launching.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="wrap cta-band">
+      <h2>Brand-true imagery, on your timeline.</h2>
+      <p class="mut">Stills, motion, or both — scoped to the brand. Start with a conversation.</p>
+      <a href="/contact" class="btn btn--primary">Start a conversation →</a>
+    </div>
+  </section>
+
+  <style>
+    .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
+    .od-note { margin-top: var(--s4); }
+    .ic-shot { margin-top: var(--s6); }
+  </style>
+</BaseLayout>

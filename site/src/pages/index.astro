@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DashboardPanel from '../components/DashboardPanel.astro';
+import StackGrid from '../components/StackGrid.astro';
+// Home — the family storefront (skeleton v0.3 §3.1). Orient in 5s, route in
+// 15, look like a real operation: every subunit up and running (A-12). Hero
+// sells the WHOLE stack, not one product. No pricing anywhere (A-8). Headline
+// is a voice candidate (brand-voice v0.4 §6) — operator may tweak.
+---
+<BaseLayout
+  title="Slow Boil Productions"
+  description="The marketing and the tools developing brands need to compete — strategy, a CPG-native CRM, distribution analytics, and brand-true image creation. One operational stack, at a level that doesn't insult you.">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy" data-anim="hero">
+        <span class="eyebrow">// Built for developing brands</span>
+        <h1>The marketing and the tools.<br /><span class="g">All running.</span></h1>
+        <p class="lede hero__sub">Strategy, a CPG-native CRM, distribution analytics, and brand-true imagery — one operational stack, at a level that doesn’t insult you.</p>
+        <div class="hero__btns">
+          <a href="/contact" class="btn btn--primary">See it live →</a>
+          <a href="/stack" class="btn btn--ghost">Tour the Stack</a>
+        </div>
+      </div>
+      <div class="hero__panel" data-anim="hero-panel">
+        <DashboardPanel />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The Stack, even ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head rule">
+        <h2>One stack. Every part of it running.</h2>
+        <span class="mono mut sec-head__tag">4 subunits · all operational</span>
+      </div>
+      <StackGrid />
+    </div>
+  </section>
+
+  <!-- ===== Why it's accessible (honest-AI) ===== -->
+  <section class="section section--band">
+    <div class="wrap two-col">
+      <div>
+        <span class="eyebrow">// Why it’s within reach</span>
+        <h2>AI does the heavy lifting. The instincts are still earned.</h2>
+      </div>
+      <div class="two-col__body">
+        <p class="lede">Think of AI like a chef’s knife. It doesn’t replace the cook — it makes every cut cleaner and faster. That’s how serious marketing and serious tools land within reach for a developing brand instead of a Fortune 500 budget.</p>
+        <p class="mut">The judgment, the taste, the strategy — that’s still human, and still earned. We just stopped charging you for the slow parts. Want to know what it costs? <a href="/contact" class="ilink">Tell us about your brand.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Proof slot (Coming Soon metric grid) ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head rule">
+        <h2>Proof, not promises.</h2>
+        <a href="/proof" class="mono g sec-head__tag">See the work →</a>
+      </div>
+      <div class="grid grid--4 metric-grid">
+        {[
+          { k: 'Revenue lift', s: 'per brand' },
+          { k: 'Time saved', s: 'per week' },
+          { k: 'Content velocity', s: 'assets / mo' },
+          { k: 'Coverage', s: 'accounts live' },
+        ].map((m) => (
+          <div class="metric card">
+            <div class="metric__v mono">
+              <span class="live">SOON</span>
+            </div>
+            <div class="metric__k">{m.k}</div>
+            <div class="metric__s mut mono">{m.s}</div>
+          </div>
+        ))}
+      </div>
+      <p class="metric-note mut">Real numbers land here as the first client results clear. We show the bar — we don’t claim the phrase.</p>
+    </div>
+  </section>
+
+  <!-- ===== Graduation promise ===== -->
+  <section class="section section--band grad">
+    <div class="wrap center">
+      <span class="eyebrow">// The promise</span>
+      <h2 class="grad__h">We grow you until you outgrow us.</h2>
+      <p class="grad__p mut">And when you’re too big for us, we’ll celebrate it. You didn’t come this far to fold.</p>
+      <a href="/contact" class="btn btn--primary grad__cta">Let’s get to work →</a>
+    </div>
+  </section>
+
+  <style>
+    /* hero */
+    .hero { padding-block: var(--s8) var(--s7); }
+    .hero__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--s8); align-items: center; }
+    .hero__sub { margin: var(--s5) 0 var(--s6); max-width: 44ch; }
+    .hero__btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* section heads */
+    .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s6); }
+    .sec-head__tag { font-size: var(--t-sm); white-space: nowrap; }
+
+    /* two-col explainer */
+    .two-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s8); align-items: start; }
+    .two-col__body p + p { margin-top: var(--s4); }
+    .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
+
+    /* metric grid */
+    .metric { text-align: left; }
+    .metric__v { font-size: 26px; font-weight: 600; min-height: 30px; display: flex; align-items: center; }
+    .metric__k { font-family: var(--font-display); font-size: var(--t-base); margin-top: var(--s3); }
+    .metric__s { font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+    .metric-note { font-size: var(--t-sm); margin-top: var(--s5); }
+
+    /* graduation */
+    .grad__h { margin: var(--s3) auto var(--s4); max-width: 18ch; }
+    .grad__p { margin: 0 auto; max-width: 46ch; }
+    .grad__cta { margin-top: var(--s6); }
+
+    @media (max-width: 860px) {
+      .hero__grid { grid-template-columns: 1fr; gap: var(--s6); }
+      .hero__panel { order: 3; }
+      .two-col { grid-template-columns: 1fr; gap: var(--s5); }
+      .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s2); }
+    }
+  </style>
+</BaseLayout>
