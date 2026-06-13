@@ -1,6 +1,7 @@
 # SBP Brand Voice — fleshed-out proposal
 
-**Status:** v0.1 — **DRAFT, part of the W1 skeleton/design pass (B-8 ruling: deepen the existing materials, don't discard, don't treat as final).** · **Date:** 2026-06-12 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md`
+**Status:** v0.2 — **DRAFT, part of the skeleton/design gate (B-8 ruling: deepen the existing materials, don't discard, don't treat as final).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
+**What changed v0.1 → v0.2:** folded the now-answered open dependencies — **A-6** public product names (CRM / Operational Dashboard) replace the ⟨CRM⟩/⟨Dash⟩ placeholders in §5; **A-8** no pricing on-site (the 50 %+ figure is voice-internal only, never published) noted in §4; **A-4** brand-relationship guardrail (no ownership claim) noted in §5; §7 open-dependencies resolved.
 **Sources carried forward (the starting point, preserved):** `SBP - Positioning & Origin Story.md` (Drive Brand Vault SBP, Locked May 2026) — positioning foundation, origin story, closing line, terminology lock; ams-os `SBP-system-upgrade-roadmap` §SBP Brand Voice ("real, raw, authentic, no Madison Avenue suits"). Everything in §1 is inherited and stays locked unless the operator unlocks it; §§2–6 are the new flesh, proposed here for the operator's review.
 
 ---
@@ -34,16 +35,16 @@
 ## 4. Mechanics (how sentences behave)
 
 - Second person, present tense, contractions on. One idea per sentence; cut the second clause first.
-- Concrete number > adjective ("50 %+ under market," "five distributor formats, one picture") — every claim on a product page must be true of the real build (verified against unit canon before copy lands).
+- Concrete number > adjective ("five distributor formats, one picture") — every claim on a product page must be true of the real build (verified against unit canon before copy lands). **Pricing is the exception: per A-8, no price or pricing posture appears anywhere on-site — the 50 %+ undercut figure stays voice-internal (it shapes how we think, it is never published); every cost question routes to Contact.**
 - Profanity posture: the voice is gritty, the site is clean — "damn"-grade at most on the site, and never in product or legal surfaces. (Raw ≠ crude; proposed, operator's call.)
 - Rhythm signature: long setup line, short punch. The locked closing line is the template.
 
 ## 5. Voice across the new surfaces (the family flex)
 
 The May site spoke only as the agency. The reset speaks as **one house with two registers**:
-- **Products (⟨CRM⟩/⟨Dash⟩):** pillars 1–3 lead — precision, operator empathy, honest machine. The grit shows in *what we choose to say plainly* ("a CRM that knows what a depletion is"), not in attitude.
-- **Services (AMS/IC):** the original register — the wall, the fair price, the knife.
-- **About/home:** full voice — the origin story is the differentiator and carries the heat.
+- **Products (CRM / Operational Dashboard):** pillars 1–3 lead — precision, operator empathy, honest machine. The grit shows in *what we choose to say plainly* ("a CRM that knows what a depletion is"), not in attitude. (Public names per A-6 — never the internal name "Dash.")
+- **Marketing + imaging (AMS / Image Creation / Motion Image Creation):** the original register — the wall, the fair price, the knife.
+- **About/home/Proof:** full voice — the origin story is the differentiator and carries the heat. **Guardrail (A-4): on Proof and elsewhere, SBP frames SSP/DGT/MWC as brands it works with / builds for — never "our own brands"; the operator's personal track record lives on About as personal credibility, not an SBP-ownership claim.**
 - **One rule binds all:** the same person is talking on every page. If a product page couldn't have been written by the person who wrote the origin story, it's off-voice.
 
 ## 6. Short-form variants (the positioning doc's open list — candidates, illustrative, NOT locked copy)
@@ -55,10 +56,10 @@ These discharge the "Short-Form Variants (To Be Developed)" list the locked doc 
 - **Elevator (30s, spoken):** the origin story's paras 5–7 compressed: the wall → AI as the knife → fair price → graduation.
 - **Boilerplate (2 sentences):** "Slow Boil Productions builds marketing and business tools for developing consumer brands — strategy, creative, a CPG-native CRM, and distribution analytics — using AI to do the heavy lifting so the price stays fair. We grow brands until they're too big for us, and we celebrate that."
 
-## 7. Open dependencies
+## 7. Open dependencies — RESOLVED (W2)
 
-§§5–6 firm up when the operator answers capture-queue B-1 (CRM/Dash public names), B-2 (IC/Motion visibility), B-3 (pricing posture — if the 50 %+ claim appears on-site, pillar 1 requires it be currently true and defensible). This document then bumps with the answers folded in.
+The v0.1 dependencies are answered: **B-1 → A-6** (public names CRM / Operational Dashboard, folded into §5/§6) · **B-2 → A-7** (Image Creation + Motion Image Creation both present and named; their tree-shape is an open *skeleton* node, not a voice question) · **B-3 → A-8** (no pricing on-site; 50 %+ silent — folded into §4). No voice dependency remains open. Future bumps follow the normal change-record path.
 
 ---
 
-*sbp-os canon — DRAFT v0.1, W1. INSTANCE. Deepens, never discards, the locked May-2026 materials (B-8); the operator's merge is the ratification.*
+*sbp-os canon — DRAFT v0.2, W2. INSTANCE. Deepens, never discards, the locked May-2026 materials (B-8); the operator's merge is the ratification.*

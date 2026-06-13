@@ -1,94 +1,145 @@
 # SBP Website — Site Skeleton (sitemap · per-page purpose · content outline)
 
-**Status:** v0.1 — **DRAFT, awaiting the operator's skeleton gate (W1 Step 1).** · **Date:** 2026-06-12 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md`
-**Binding premises (operator rulings 2026-06-12, brain-os CAPTURE-QUEUE B-7 / A-5):** full reset of content and style; the site presents the **whole family** (AMS, CRM, Dash, IC, Motion); **Black Company appears nowhere**; driver = **going after new clients on CRM/Dash**; this is a skeleton — **no copy is drafted here**, outlines only.
-**Open asks that flex this skeleton (capture queue B-1..B-3):** CRM/Dash public names · IC/Motion public visibility · pricing vs contact-for-demo. Placeholders are marked ⟨…⟩ throughout; nothing locks until the operator answers.
+**Status:** v0.2 — **DRAFT, awaiting the operator's skeleton gate (W2).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
+**Binding premises (operator rulings — brain-os CAPTURE-QUEUE B-7 / A-5; sbp-os A-1..A-10):** full reset of content and style; the site presents the **whole family** (Marketing/AMS, CRM, Operational Dashboard, Image Creation, Motion Image Creation); **Black Company appears nowhere**; driver = **going after new clients on CRM / Operational Dashboard**; this is a skeleton — **no copy is drafted here**, outlines only.
+**What changed v0.1 → v0.2:** folded the W1 gate answers. **A-1** Shape-2 umbrella nav (five equal siblings under one tab). **A-2/A-3** added the **Proof** portfolio page (seeded SSP/DGT/MWC). **A-4** loose brand-relationship framing (no ownership claim). **A-5** umbrella tab named **"The Stack"**; nav = The Stack · Proof · About · Contact. **A-6** public names: **CRM** stays "CRM," Dash → **"Operational Dashboard."** **A-7** Image Creation + Motion Image Creation — site treatment **OPEN**, carried as a clearly-marked **either/or** (§2, §3.6) for the operator to resolve at the gate. **A-8** **no pricing anywhere** — everything routes to Contact; the 50 %+ line stays silent. **A-9** Google Ads folded **inside** Marketing, never a headline (§3.5). **A-10** business address = **Charlotte, NC** sitewide + footer.
+**One open node remaining (A-7):** the Image-Creation / Motion-Image-Creation tree-shape — see §2 and §3.6. Nothing else in this skeleton is placeholdered.
 
 ---
 
 ## 1. The site's one job
 
-Make a brand owner who runs a developing CPG/spirits brand — or the distributor/supplier team around one — believe, within one page, that SBP runs serious tools and serious marketing at a price that doesn't insult them, and get them to ask for a demo of ⟨CRM⟩ or ⟨Dash⟩.
+Make a brand owner who runs a developing CPG/spirits brand — or the distributor/supplier team around one — believe, within one page, that SBP runs serious tools and serious marketing at a level that doesn't insult them, and get them to ask for a demo of **CRM** or the **Operational Dashboard**.
 
-The old six-page site was an AMS-only compliance shell. The new site is a **family storefront with two product doors and a services door**:
+The old six-page site was an AMS-only compliance shell. The new site is a **family storefront** organized under one umbrella — **The Stack** — with the two software products carrying the homepage:
 
-- **Products** (the acquisition driver): ⟨CRM⟩ and ⟨Dash⟩ — software a client runs their business in.
-- **Services**: AMS marketing (strategy, content, digital marketing) with IC still-image creation presented per the operator's B-2 answer, and Motion per the same answer (likely "coming" or silent at launch).
-- **The house**: who SBP is, why it's cheap without being thin (AI does the heavy lifting), the graduation promise.
+- **The acquisition drivers:** **CRM** and the **Operational Dashboard** — software a client runs their business in. Hero + homepage cards route straight to these two.
+- **The rest of the Stack:** **Marketing (AMS)** — the full marketing stack, with Google-Ads optimization folded inside (never a headline); **Image Creation** (still); **Motion Image Creation**.
+- **The house:** who SBP is, why the work is accessible (AI does the heavy lifting), the graduation promise.
+- **The receipts:** **Proof** — brands SBP works with / builds for (seeded SSP, DGT, MWC), grown as the roster grows.
 
-## 2. Sitemap (8 pages)
+## 2. Sitemap
+
+Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings under one umbrella tab, "The Stack"** (A-5). Each has its own subpage as it matures; the homepage carries the CRM / Operational-Dashboard emphasis.
 
 ```
-/                  Home — the family storefront
-/⟨crm⟩             Product: the CRM offering
-/⟨dash⟩            Product: the distribution-performance offering
-/services          AMS marketing services (+ IC imagery per B-2)
-/about             The house: origin story, how we work, the graduation promise
-/contact           Demo request + plain contact
-/privacy           Privacy policy        (compliance — survives reset)
-/terms             Terms of service      (compliance — survives reset)
+/                          Home — the family storefront (CRM + Operational Dashboard up front)
+/stack                     The Stack — umbrella overview of all offerings
+/stack/crm                 CRM
+/stack/operational-dashboard   Operational Dashboard
+/stack/marketing           Marketing (AMS) — full stack; Google-Ads optimization folded in
+   ┌─────────────────────────────────────────────────────────────────────┐
+   │  A-7 OPEN NODE — Image Creation + Motion Image Creation (operator      │
+   │  picks one shape at the gate; both names are fixed, only the tree is   │
+   │  open):                                                                │
+   │                                                                       │
+   │  OPTION 1 — shared sub-tree (they're tightly coupled):                 │
+   │     /stack/imaging                  Imaging overview (still + motion)  │
+   │       ├ Image Creation        (section or child page)                 │
+   │       └ Motion Image Creation (section or child page)                 │
+   │                                                                       │
+   │  OPTION 2 — separate equal siblings (the A-1 Shape-2 default):         │
+   │     /stack/image-creation           Image Creation                    │
+   │     /stack/motion-image-creation    Motion Image Creation             │
+   └─────────────────────────────────────────────────────────────────────┘
+/proof                     Proof — portfolio (SSP · DGT · MWC; grows)
+/about                     The house: origin story, how we work, the graduation promise
+/contact                   Demo request + all pricing inquiries route here
+/privacy                   Privacy policy        (compliance — survives reset)
+/terms                     Terms of service      (compliance — survives reset)
 ```
 
-**Navigation:** Products (⟨CRM⟩ · ⟨Dash⟩) · Services · About · Contact. Footer: business name (Slow Boil Productions LLC), contact, privacy, terms — the Google-Ads destination-requirements set (HTTPS, mobile-responsive, business name, contact, privacy, terms) holds on every page.
+**Page count:** 10 pages under **Option 1**, 11 under **Option 2** (the A-7 node is the only difference).
 
-**Deliberately absent at v0.1:** blog/case-studies (no content engine yet — proof slots use the "Coming Soon" metric-grid pattern from the DGT pitch deck, structurally present, filled when first client metrics exist); a pricing page (pending B-3 — if the answer is contact-for-demo, pricing *posture* still appears in copy, e.g. the 50 %+ undercut claim, without a rate card).
+**Navigation (A-5, fixed):** **The Stack · Proof · About · Contact.** "The Stack" is the umbrella tab (an overview page at `/stack`, with the offerings reachable beneath it — as a dropdown and/or overview cards, a Step-2 build detail). Footer on every page: business name (**Slow Boil Productions LLC**), **Charlotte, NC** (A-10), contact, privacy, terms — the Google-Ads destination-requirements set (HTTPS, mobile-responsive, business name, contact, privacy, terms) holds on every page.
+
+**Deliberately absent at v0.2:** blog/case-studies (no content engine yet — proof slots use the "Coming Soon" metric-grid pattern from the DGT pitch deck, structurally present, filled when first client metrics exist); **any pricing page or rate card** (A-8 — pricing is absent site-wide; every "what does it cost" lands on Contact, and the 50 %+ undercut figure is *not* published anywhere on-site).
 
 ## 3. Per-page purpose + content outline
 
 ### 3.1 Home `/`
-**Job:** orient in 5 seconds, route in 15. Audience: brand owners (primary), distributor/supplier ops people (secondary).
-1. **Hero** — single headline in the locked voice (≤10 words; candidates live in `brand-voice.md` §6, illustrative); subline naming who it's for (developing brands); primary CTA → demo (⟨CRM⟩/⟨Dash⟩), secondary CTA → services.
-2. **The two products** — one card each for ⟨CRM⟩ and ⟨Dash⟩: what it is in one sentence, three concrete capabilities, screenshot slot, CTA to product page.
-3. **The services band** — AMS in one paragraph + 3–4 service tiles (strategy, content/creative incl. ⟨IC imagery per B-2⟩, digital marketing, web).
-4. **Why it's affordable** — the honest AI paragraph (chef-knife frame): AI does the heavy lifting, judgment stays human, that's why the price undercuts the market.
-5. **Proof slot** — "Coming Soon" metric grid (revenue lift · time saved · cost vs agency · content velocity), structural placeholder.
+**Job:** orient in 5 seconds, route in 15. Audience: brand owners (primary), distributor/supplier ops people (secondary). The two software products carry this page (A-1: homepage emphasis on CRM / Operational Dashboard).
+1. **Hero** — single headline in the locked voice (≤10 words; candidates live in `brand-voice.md` §6, illustrative); subline naming who it's for (developing brands); primary CTA → demo (CRM / Operational Dashboard), secondary CTA → The Stack.
+2. **The two products** — one card each for **CRM** and the **Operational Dashboard**: what it is in one sentence, three concrete capabilities, screenshot slot, CTA to the product subpage. These two lead; the rest of the Stack sits below.
+3. **The rest of the Stack** — compact band introducing **Marketing (AMS)**, **Image Creation**, and **Motion Image Creation** as the wider house, each linking into The Stack. (Layout of the imaging items follows the A-7 pick.)
+4. **Why it's accessible** — the honest-AI paragraph (chef-knife frame): AI does the heavy lifting, judgment stays human, that's why serious work is within reach for developing brands. **No price, no number** (A-8); cost questions route to Contact.
+5. **Proof slot** — "Coming Soon" metric grid (revenue lift · time saved · content velocity · coverage), structural placeholder; links to `/proof`.
 6. **The graduation promise** — short band: we grow you until you outgrow us.
-7. **Footer** (compliance set).
+7. **Footer** (compliance set + Charlotte, NC).
 
-### 3.2 Product — ⟨CRM⟩ `/⟨crm⟩`
+### 3.2 The Stack `/stack`
+**Job:** the umbrella overview (A-1/A-5) — show the whole house on one page and route to each offering. This is where the "we're a connected set of tools and marketing, not a one-trick shop" story is told plainly.
+1. **Hero** — what The Stack is: the marketing and the tools a developing brand needs to compete, under one roof.
+2. **Offering cards** — one per sibling: **CRM**, **Operational Dashboard**, **Marketing (AMS)**, **Image Creation**, **Motion Image Creation** — each a one-liner + CTA to its subpage. (Card grouping of the two imaging items follows the A-7 pick: paired card under Option 1, two standalone cards under Option 2.)
+3. **How it fits together** — short band on the through-line (same house, same voice, built for the same brands) — outline only.
+4. **CTA** — demo (CRM / Operational Dashboard) / Contact.
+
+### 3.3 The Stack — CRM `/stack/crm`
 **Job:** convince a CPG/spirits brand's owner or sales lead this is the system their field reality fits into — accounts, depletions, call activity — and get the demo.
-1. **Hero** — what it is for whom; CTA: ⟨book a demo / contact⟩.
+1. **Hero** — what it is for whom; CTA: book a demo / Contact.
 2. **The problem** — running accounts out of spreadsheets and a generic CRM that doesn't know what a depletion is.
 3. **What it does** — 4–6 capability blocks drawn from the real build (account & contact management for retail outlets; depletion tracking; rep call activity & territory workflow; brand-level walls so each brand sees only its own world). *Outline only — final claims verified against crm-os before copy drafts (Step 2).*
 4. **Built for CPG** — the category-native angle: keys, SKUs, distributors are first-class, not customizations.
 5. **Screenshot/walkthrough slot.**
-6. **Demo CTA band** + ⟨pricing posture per B-3⟩.
+6. **Demo CTA band** — pricing inquiries route to Contact (A-8; no rate card, no posture line on-page).
 
-### 3.3 Product — ⟨Dash⟩ `/⟨dash⟩`
-**Job:** sell the distribution-performance dashboard — sell-in vs sell-through truth — as the daily tool. Quality bar context: operator ruled Dash presentation is *world-class, sharp, very user-friendly* (brain-os B-2 relay); the page must look like that bar.
+### 3.4 The Stack — Operational Dashboard `/stack/operational-dashboard`
+**Job:** sell the distribution-performance dashboard — sell-in vs sell-through truth — as the daily tool. Quality bar context: operator ruled this presentation is *world-class, sharp, very user-friendly* (brain-os relay); the page must look like that bar. (Public name "Operational Dashboard" per A-6; internal unit name "Dash" never appears.)
 1. **Hero** — know what actually moved, everywhere you're sold; demo CTA.
 2. **The problem** — distributor reports in five formats, a month late, no single picture of sell-through.
-3. **What it does** — capability blocks from the real build (depletion/state tabs; load-in & AR; open orders; inventory; summary front page), stated as outcomes. *Same verification rule as §3.2.*
+3. **What it does** — capability blocks from the real build (depletion/state tabs; load-in & AR; open orders; inventory; summary front page), stated as outcomes. *Same verification rule as §3.3.*
 4. **Data in, answers out** — ingests the feeds brands already get (distributor/market data drops), normalized into one picture.
 5. **Screenshot slot** (the strongest single asset on the site when available).
-6. **Demo CTA band** + ⟨pricing posture per B-3⟩.
+6. **Demo CTA band** — pricing inquiries route to Contact (A-8).
 
-### 3.4 Services `/services`
-**Job:** carry the original SBP offer — real marketing at a fair price for developing brands — now as one door among three.
+### 3.5 The Stack — Marketing (AMS) `/stack/marketing`
+**Job:** carry the original SBP offer — real marketing at a fair level for developing brands — now as the marketing arm of the Stack.
 1. **Hero** — the agency-alternative claim, voice-forward.
-2. **Service blocks** — strategy & positioning; content & creative (product photography ⟨named as AI/IC-trained per B-2⟩); websites that convert; digital marketing that moves product.
-3. **How the price works** — the AI-honesty paragraph again, deeper: trained on your brand so every asset feels like you.
-4. **⟨Motion — per B-2:⟩** either a "motion/video — coming" tile or absent.
-5. **Engagement shape** — how working with SBP goes (no retainers theater; concrete scopes) — outline; specifics are operator calls at copy time.
-6. **CTA** — contact.
+2. **Service blocks** — strategy & positioning; content & creative; websites that convert; **digital marketing that moves product** — and **inside digital marketing, Google-Ads optimization is one element among several** (A-9: folded in, *never its own headline tile or hero*). The block list reads as a full stack, not a Google-Ads shop.
+3. **How the work stays affordable** — the AI-honesty paragraph, deeper: trained on your brand so every asset feels like you. No price/number (A-8); cost → Contact.
+4. **CTA** — Contact.
 
-### 3.5 About `/about`
+### 3.6 The Stack — Image Creation + Motion Image Creation  ⟨A-7 OPEN — operator picks the shape⟩
+**Both on-site names are fixed (A-7): "Image Creation" (still) and "Motion Image Creation."** What is *open* is whether they share a sub-tree or stand as separate siblings. The operator is torn because the two are tightly coupled (same pipeline, same trained-on-your-brand model) yet the A-1 Shape-2 default lists every offering as an equal sibling. **This skeleton builds the page content once and presents both shapes; the operator resolves at the gate.**
+
+- **OPTION 1 — one shared "Imaging" sub-tree** (`/stack/imaging`): a single overview that presents still + motion as one coupled capability, with Image Creation and Motion Image Creation as two sections (or two light child pages) underneath. *Reads as:* "one imaging engine, two outputs." Best if the story is the shared pipeline.
+- **OPTION 2 — two separate equal siblings** (`/stack/image-creation` + `/stack/motion-image-creation`): each stands on its own under The Stack, matching every other offering. *Reads as:* "five peers." Best if motion is meant to grow into a headline offering of its own.
+
+**Page content (shape-independent — same blocks either way):**
+1. **Hero** — brand-true imagery without the $50k shoot; CTA: Contact.
+2. **Still — Image Creation** — product/lifestyle stills trained on the brand; before/after or sample slot.
+3. **Motion — Motion Image Creation** — short-form motion/video from the same trained model; sample slot. *(Distinct from Black Company, which appears nowhere on the site — this is SBP's motion-imagery service, not BC.)*
+4. **How it stays affordable** — the AI/knife frame; no price (A-8); cost → Contact.
+5. **CTA** — Contact.
+
+> **Doer note (surface, don't smooth):** my lean is **Option 1** *if* motion is launching thin (coupled keeps it from looking like a half-empty fifth tab), **Option 2** *if* motion is a real standalone push. This is an operator call — both are built above; pick one at the gate.
+
+### 3.7 Proof `/proof`  (A-2 / A-3 / A-4)
+**Job:** show that SBP's work is real — the portfolio page (A-2), named **"Proof"** with the alcohol-proof double entendre noted as part of the appeal (A-3). Seeded with **SSP, DGT, MWC**; built to grow as the roster grows.
+1. **Hero** — short, voice-forward ("Proof, not promises").
+2. **Brand entries** — one block each for **SSP**, **DGT**, **MWC**: what SBP did for them (work shown), framed as **brands SBP works with / builds for** — **no ownership claim, no "our own brands" language anywhere** (A-4). Logo/visual + a line of work scope; metrics slots use the "Coming Soon" pattern until real numbers exist.
+3. **Grow-as-we-go** — structural room for more entries.
+4. **CTA** — Contact / demo.
+> **A-4 guardrail:** SBP does not own SSP/DGT/MWC. The operator's personal credibility ("runs spirits brands every day") is **About-page, personal territory** (§3.9) — never an SBP-ownership claim on Proof.
+
+### 3.8 Contact `/contact`  (A-8 / A-10)
+**Job:** zero-friction demo request **and the single destination for every pricing question** (A-8). Email (`hello@slowboilproductions.com`), business name + **Charlotte, NC** (A-10), a short form ⟨form vs mailto is a Step-2 stack decision⟩, and which-offering interest (CRM · Operational Dashboard · Marketing · Imaging). No popups, no chat widgets.
+> **A-10 watch-item:** Charlotte is correct sitewide. If the live Google-Ads account lists **Indian Trail**, flag the mismatch to the operator before any Ads-destination check — do not silently diverge.
+
+### 3.9 About `/about`
 **Job:** the trust page — the origin story is the differentiator (locked May 2026, carried forward; terminology lock applies).
 1. **The wall** — origin story condensed from the locked positioning doc.
 2. **The belief** — "brands that deserve to win are losing because of money, not merit."
 3. **How we use AI** — the chef-knife metaphor, stated plainly; no AI mystique.
-4. **The family** — one honest paragraph: SBP runs a connected set of tools and units (marketing, CRM, distribution analytics, image ⟨, motion⟩) built for the same brands. Depth per B-2.
+4. **The house** — one honest paragraph: SBP runs a connected set of tools and units (marketing, CRM, the operational dashboard, image and motion creation) built for the same brands. **This is the one place the operator's personal track record can live** ("runs spirits brands every day") — as *personal* credibility, never an SBP-ownership claim over SSP/DGT/MWC (A-4).
 5. **The graduation promise** + closing line ("You didn't come this far to fold. Let's get to work." — locked, carries forward).
 
-### 3.6 Contact `/contact`
-**Job:** zero-friction demo request. Email (`hello@slowboilproductions.com`), business name + location ⟨Charlotte vs Indian Trail, NC — open, capture queue B-6: legacy site says Charlotte, the Google-Ads checklist says Indian Trail⟩, a short form ⟨form vs mailto is a Step-2 stack decision⟩, and which-product interest. No popups, no chat widgets.
-
-### 3.7–3.8 Privacy `/privacy` · Terms `/terms`
-**Job:** compliance continuity (Google Ads destination requirements). Content carried/updated from the legacy pages — reviewed, not creatively rewritten; voice-neutral plain language. These pages exist on day one of any cutover; the domain never serves without them.
+### 3.10–3.11 Privacy `/privacy` · Terms `/terms`
+**Job:** compliance continuity (Google Ads destination requirements). Content carried/updated from the legacy pages — reviewed, not creatively rewritten; voice-neutral plain language; business address shown as **Charlotte, NC** (A-10). These pages exist on day one of any cutover; the domain never serves without them.
 
 ## 4. What approval here unlocks
-Operator approves this skeleton (with B-1..B-3 answers folded in) **+ one direction from `design-directions.md`** → Step 2: stack proposal, then build in this repo. Until then: no copy, no code.
+Operator approves this skeleton (and resolves the **A-7** imaging-tree either/or) **+ picks one direction from `design-directions.md`** → Step 2: stack proposal, then build in this repo. Until then: no copy, no code.
 
 ---
 
-*sbp-os canon — DRAFT v0.1, W1. INSTANCE (SBP-specific). Ships for the operator's skeleton gate; the merge is the ratification.*
+*sbp-os canon — DRAFT v0.2, W2. INSTANCE (SBP-specific). Ships for the operator's skeleton gate; the merge is the ratification. One open node (A-7) is surfaced for the operator's pick, not smoothed.*
