@@ -1,6 +1,7 @@
 # SBP Website — Design Directions (three candidates)
 
-**Status:** v0.2 — **Direction A ("Control Room") SELECTED at the operator's W2 design gate (2026-06-13).** DRAFT pending merge ratification (a push is inert; the merge is live, §K Auditor PASS first). Operator notes he **may still tweak** — A is the ratified *starting point*, not frozen. · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 design gate (this bump)
+**Status:** v0.3 — **Direction A ("Control Room") SELECTED at the operator's W2 design gate (2026-06-13).** DRAFT pending merge ratification (a push is inert; the merge is live, §K Auditor PASS first). Operator notes he **may still tweak** — A is the ratified *starting point*, not frozen. · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 design gate (this bump)
+**What changed v0.2 → v0.3:** audit nit-sweep (W2 audit D-1) — resolved the leftover `⟨CRM⟩/⟨Dash⟩` placeholder in Direction A's "Why it fits" to the A-6 public names (CRM / Operational Dashboard).
 
 ## ✅ Selected direction — A "Control Room" (operator gate, 2026-06-13)
 The operator picked **A** ("the black and green looks more professional than the other two"). It best serves A-12 — the live-dashboard-as-hero shows the whole stack *running*, not described. **B "Shop Floor"** and **C "Signal"** are retained below as the considered-and-rejected alternatives (record, not deleted). Operator flagged he may still tweak; refinements land at Step 2.
@@ -18,7 +19,7 @@ The operator picked **A** ("the black and green looks more professional than the
 - **Color:** near-black blue-slate ground `#0D1117`; panel slate `#161B22`; off-white text `#E6EDF3`; **signal green accent `#3FB950`** (data-positive, used for CTAs, live numbers, chart strokes); muted data hues for charts only.
 - **Type:** **Space Grotesk** (display — technical but characterful) · **IBM Plex Sans** (body) · **IBM Plex Mono** (numbers, labels, table accents).
 - **Texture/imagery:** UI screenshots framed as the hero objects; thin 1px grid lines; subtle terminal/ledger motifs; no photography required at launch.
-- **Why it fits:** makes ⟨CRM⟩/⟨Dash⟩ look like world-class software on sight — the B-2 quality bar. The voice supplies the warmth the palette withholds; that contrast (gritty plain talk inside a precise dark UI) is distinctive.
+- **Why it fits:** makes CRM / the Operational Dashboard look like world-class software on sight — the quality bar (A-6 names). The voice supplies the warmth the palette withholds; that contrast (gritty plain talk inside a precise dark UI) is distinctive.
 - **Risk:** dark sites can read "crypto/devtool" and feel distant from a brand-owner audience; services pages need care so marketing work doesn't look like an afterthought inside a software shell.
 
 ## Direction B — "Shop Floor"
@@ -48,4 +49,4 @@ The operator picked **A** ("the black and green looks more professional than the
 
 ---
 
-*sbp-os canon — DRAFT v0.2, W2. INSTANCE. Direction A selected at the operator's design gate; the merge is the ratification.*
+*sbp-os canon — DRAFT v0.3, W2. INSTANCE. Direction A selected at the operator's design gate; the merge is the ratification.*
