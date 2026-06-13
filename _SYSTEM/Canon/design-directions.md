@@ -1,13 +1,18 @@
 # SBP Website — Design Directions (three candidates)
 
-**Status:** v0.1 — **DRAFT, awaiting the operator's design-direction pick (W1 Step 1).** · **Date:** 2026-06-12 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md`
+**Status:** v0.2 — **Direction A ("Control Room") SELECTED at the operator's W2 design gate (2026-06-13).** DRAFT pending merge ratification (a push is inert; the merge is live, §K Auditor PASS first). Operator notes he **may still tweak** — A is the ratified *starting point*, not frozen. · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 design gate (this bump)
+
+## ✅ Selected direction — A "Control Room" (operator gate, 2026-06-13)
+The operator picked **A** ("the black and green looks more professional than the other two"). It best serves A-12 — the live-dashboard-as-hero shows the whole stack *running*, not described. **B "Shop Floor"** and **C "Signal"** are retained below as the considered-and-rejected alternatives (record, not deleted). Operator flagged he may still tweak; refinements land at Step 2.
+- **Responsive reference mockup** (illustrative — not build code, voice lines illustrative per `brand-voice.md` §6): `_SYSTEM/Canon/design-refs/control-room/` (home hero + even four-card stack, desktop + mobile). This is the agreed starting point the full design system builds out from in Step 2.
+
 **Binding premise (B-7):** the old system — parchment cream `#f5f1e8` / burnt copper `#b8451f` / Fraunces + Inter Tight + JetBrains Mono, warm editorial spirits-adjacent — is **dead and does not port**. None of the directions below reuse its palette family (warm cream/copper), its typefaces, or its mood. All three are built to sell **software (CRM/Dash) first**, services second, in the locked SBP voice (real, raw, no suits).
 
 **Constants across all three (not up for vote):** mobile-responsive; WCAG-AA contrast; fast static pages; no popups; system respects the compliance set on every page; one accent color used with discipline; real product screenshots over stock anything; all typefaces freely licensed (Google Fonts) — no font invoice.
 
 ---
 
-## Direction A — "Control Room"
+## Direction A — "Control Room"  ← ✅ SELECTED
 **Mood:** dark, calm, data-forward. The site looks like the product: a serious operations tool you'd run your business in at 7am. Closest analog: modern dev-tool/analytics sites, but warmed by SBP's human voice rather than cold enterprise.
 
 - **Color:** near-black blue-slate ground `#0D1117`; panel slate `#161B22`; off-white text `#E6EDF3`; **signal green accent `#3FB950`** (data-positive, used for CTAs, live numbers, chart strokes); muted data hues for charts only.
@@ -39,8 +44,8 @@
 ## Recommendation (Doer's, non-binding)
 **A ("Control Room") to sell the products hardest; B ("Shop Floor") to embody the brand hardest.** If the next 12 months are mostly *CRM/Dash client acquisition* (the stated driver), A is the sharpest weapon. A hybrid is possible at Step 2 (e.g., B's typographic attitude on A's product-screenshot discipline) but the operator should pick one center of gravity — hybrids drift.
 
-**The gate:** the operator picks one direction (or directs a named hybrid) together with skeleton approval. Mood boards / a sample hero mock per direction can be produced on request before the pick — say the word; nothing builds until the pick.
+**The gate — RESOLVED (2026-06-13):** operator picked **A "Control Room"** alongside skeleton v0.3 approval. Sample hero mocks for all three were produced and reviewed; A won on "more professional." Full design system (color tokens, type scale, components, the dashboard-as-hero pattern, all-page treatment, responsive rules) builds out at Step 2; operator may still tweak.
 
 ---
 
-*sbp-os canon — DRAFT v0.1, W1. INSTANCE. Ships for the operator's design gate; the merge is the ratification.*
+*sbp-os canon — DRAFT v0.2, W2. INSTANCE. Direction A selected at the operator's design gate; the merge is the ratification.*

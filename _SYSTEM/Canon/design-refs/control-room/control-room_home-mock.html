@@ -1,0 +1,122 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0D1117;--panel:#161B22;--line:#222b36;--text:#E6EDF3;--mut:#7d8590;--grn:#3FB950;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--line)}
+  .logo{font-family:'Space Grotesk';font-weight:700;letter-spacing:-.02em;font-size:19px;display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--grn);box-shadow:0 0 10px var(--grn)}
+  .navlinks{display:flex;gap:30px;font-size:14px;color:var(--mut);font-weight:500}
+  .navlinks span:first-child{color:var(--text)}
+  .navright{display:flex;align-items:center;gap:18px}
+  .navcta{font-family:'IBM Plex Mono';font-size:13px;color:var(--grn);border:1px solid #1f6f38;background:rgba(63,185,80,.08);padding:8px 16px;border-radius:6px;white-space:nowrap}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .burger i{display:block;width:24px;height:2px;background:var(--text);border-radius:2px}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:64px 0 56px}
+  .eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--grn);margin-bottom:20px}
+  h1{font-family:'Space Grotesk';font-weight:700;font-size:54px;line-height:1.04;letter-spacing:-.03em}
+  h1 .g{color:var(--grn)}
+  .sub{color:var(--mut);font-size:17px;line-height:1.6;margin:22px 0 30px;max-width:440px}
+  .btns{display:flex;gap:14px}
+  .b1{background:var(--grn);color:#04210d;font-weight:600;padding:13px 22px;border-radius:7px;font-size:15px;text-align:center}
+  .b2{border:1px solid var(--line);color:var(--text);padding:13px 22px;border-radius:7px;font-size:15px;text-align:center}
+  /* dash panel */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .ptop{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .tl{width:11px;height:11px;border-radius:50%;background:#30363d}
+  .ptitle{font-family:'IBM Plex Mono';font-size:12px;color:var(--mut);margin-left:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pbody{padding:20px}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+  .stat{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:12px}
+  .stat .k{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+  .stat .v{font-family:'IBM Plex Mono';font-weight:600;font-size:22px;margin-top:6px}
+  .stat .v.up{color:var(--grn)}
+  .chart{height:118px;display:flex;align-items:flex-end;gap:7px;padding-top:6px}
+  .bar{flex:1;background:linear-gradient(180deg,var(--grn),#1f6f38);border-radius:3px 3px 0 0;opacity:.85}
+  .legend{font-family:'IBM Plex Mono';font-size:10px;color:var(--mut);margin-top:10px;display:flex;justify-content:space-between}
+  /* stack */
+  .stack{padding:18px 0 70px}
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--line);padding-top:26px;margin-bottom:24px;gap:12px}
+  .sechead h2{font-family:'Space Grotesk';font-weight:500;font-size:22px;letter-spacing:-.01em}
+  .sechead .tag{font-family:'IBM Plex Mono';font-size:12px;color:var(--mut);white-space:nowrap}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;position:relative}
+  .card .live{position:absolute;top:16px;right:16px;font-family:'IBM Plex Mono';font-size:10px;color:var(--grn);display:flex;align-items:center;gap:5px}
+  .card .live i{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn);display:inline-block}
+  .card h3{font-family:'Space Grotesk';font-weight:500;font-size:17px;margin-bottom:9px;padding-right:46px}
+  .card p{font-size:13.5px;color:var(--mut);line-height:1.55}
+  .card .arrow{margin-top:16px;color:var(--grn);font-family:'IBM Plex Mono';font-size:13px}
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width:760px){
+    .wrap{padding:0 20px}
+    nav{padding:18px 0}
+    .navlinks{display:none}
+    .burger{display:flex}
+    .navcta{display:none}
+    .hero{grid-template-columns:1fr;gap:30px;padding:38px 0 40px}
+    .eyebrow{margin-bottom:16px}
+    h1{font-size:40px;line-height:1.05}
+    .sub{font-size:16px;margin:18px 0 24px;max-width:none}
+    .btns{flex-direction:column;gap:11px}
+    .b1,.b2{padding:15px 22px;font-size:16px}
+    .panel{order:3}
+    .stat .v{font-size:19px}
+    .chart{height:96px}
+    .sechead{flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:18px}
+    .grid{grid-template-columns:1fr;gap:12px}
+    .card{padding:18px 18px 16px}
+    .card h3{font-size:18px}
+    .card p{font-size:14px}
+  }
+</style></head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="logo"><span class="dot"></span>SLOW&nbsp;BOIL</div>
+    <div class="navlinks"><span>The Stack</span><span>Proof</span><span>About</span><span>Contact</span></div>
+    <div class="navright">
+      <div class="navcta">Book a demo</div>
+      <div class="burger"><i></i><i></i><i></i></div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">// Built for developing brands</div>
+      <h1>The marketing and the tools.<br><span class="g">All running.</span></h1>
+      <p class="sub">Strategy, a CPG-native CRM, distribution analytics, and brand-true imagery — one operational stack, at a level that doesn't insult you.</p>
+      <div class="btns"><div class="b1">See it live →</div><div class="b2">Tour the Stack</div></div>
+    </div>
+    <div class="panel">
+      <div class="ptop"><span class="tl"></span><span class="tl"></span><span class="tl"></span><span class="ptitle">operational-dashboard / sell-through</span></div>
+      <div class="pbody">
+        <div class="stat-row">
+          <div class="stat"><div class="k">Depletions</div><div class="v up">+18.4%</div></div>
+          <div class="stat"><div class="k">Accounts</div><div class="v">1,204</div></div>
+          <div class="stat"><div class="k">Coverage</div><div class="v up">92%</div></div>
+        </div>
+        <div class="chart"><span class="bar" style="height:42%"></span><span class="bar" style="height:55%"></span><span class="bar" style="height:48%"></span><span class="bar" style="height:67%"></span><span class="bar" style="height:60%"></span><span class="bar" style="height:78%"></span><span class="bar" style="height:71%"></span><span class="bar" style="height:88%"></span><span class="bar" style="height:82%"></span><span class="bar" style="height:96%"></span></div>
+        <div class="legend"><span>Q1</span><span>sell-in vs sell-through</span><span>Q4</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <div class="sechead"><h2>One stack. Every part of it running.</h2><span class="tag">4 subunits · all operational</span></div>
+    <div class="grid">
+      <div class="card"><div class="live"><i></i>LIVE</div><h3>Marketing</h3><p>Strategy, content, web, and digital that moves product. Full stack.</p><div class="arrow">→</div></div>
+      <div class="card"><div class="live"><i></i>LIVE</div><h3>CRM</h3><p>A CRM that knows what a depletion is. Accounts, reps, territories.</p><div class="arrow">→</div></div>
+      <div class="card"><div class="live"><i></i>LIVE</div><h3>Operational Dashboard</h3><p>Sell-in vs sell-through truth. Everywhere you're sold, in one picture.</p><div class="arrow">→</div></div>
+      <div class="card"><div class="live"><i></i>LIVE</div><h3>Image Creation</h3><p>Brand-true stills and motion from one trained model.</p><div class="arrow">→</div></div>
+    </div>
+  </section>
+</div>
+</body></html>

@@ -1,11 +1,11 @@
 # STATE — sbp-os (generated snapshot)
 
-**As-of:** 2026-06-12 close · round **SBP-W1** (founding Build session)
+**As-of:** 2026-06-13 · round **SBP-W2** (gate-answers + design pick) · _on branch `claude/adoring-cori-onesaa`, not yet merged_
 
-1. **Current canon versions** (from `_SYSTEM/CANON-INDEX.md` — all DRAFT, all gated on the operator's W1 skeleton/design approval): `site-skeleton.md` v0.1 DRAFT · `design-directions.md` v0.1 DRAFT · `brand-voice.md` v0.1 DRAFT · Conventions pointer DRAFT.
-2. **Open items:** 6 — `_SYSTEM/CAPTURE-QUEUE.md` Register B: B-1 CRM/Dash public names · B-2 IC/Motion visibility · B-3 pricing posture · B-4 Google-Ads application status · B-5 hosting (deferred to deploy gate) · B-6 business address (Charlotte vs Indian Trail). B-1..B-4 + B-6 asked at the W1 gate presentation.
-3. **Live dispatches:** 1 — `_SYSTEM/DISPATCH-INBOX.md` D-1 (W1 build relay): Steps 0–1 executed, Steps 2–3 gated.
-4. **In-flight branch:** `claude/adoring-cori-onesaa`, ahead of `main` (which holds only the bootstrap commit `b46c1ed` — the recorded one-time exception).
-5. **Last round:** SBP-W1 — repo founded (substrate + legacy mirror + skeleton/design/voice DRAFTs); independent Opus audit PASS-WITH-NITS, both nits addressed at close.
-6. **Next action:** operator gate — answer B-1..B-4 + B-6, approve the skeleton, pick a design direction (A Control Room / B Shop Floor / C Signal, or a named hybrid). Then Step 2 (stack proposal → build) in a new round.
-7. **Open gates:** the W1 skeleton + design-direction approval (= ratification of the three DRAFTs via operator merge of this branch); hosting call deferred to the Step-3 deploy gate.
+1. **Current canon versions** (from `_SYSTEM/CANON-INDEX.md` — all DRAFT, gate-approved, pending the operator's merge ratification): `site-skeleton.md` **v0.3** (APPROVED at the W2 gate) · `design-directions.md` **v0.2** (**Direction A "Control Room" SELECTED**) · `brand-voice.md` **v0.3** · Conventions pointer DRAFT.
+2. **W2 gate — RESULT:** operator answered all open asks (A-5..A-10), then two follow-on rulings (A-11 combine IC+Motion into one "Image Creation" subunit; A-12 present the whole stack as equal/operational, no CRM/Dash "up front" on-site). **Skeleton v0.3 approved (A-14); design direction = A Control Room (A-13).** Operator: "good start… capture now so we don't have to start over," may still tweak.
+3. **Open items:** `_SYSTEM/CAPTURE-QUEUE.md` — **B-4** (Google-Ads dev-token *application status*; positioning resolved by A-9, status still open; not build-blocking) · **B-5** (hosting — deferred to deploy gate) · **A-10 watch-item** (flag if live Google-Ads account lists Indian Trail vs Charlotte). All A-1..A-14 DRAFTED/folded.
+4. **Design reference preserved:** `_SYSTEM/Canon/design-refs/control-room/` — responsive home mock (HTML + desktop/mobile PNG) = the agreed Step-2 starting point (illustrative, not build code).
+5. **Live dispatches:** D-1 (W1 build relay) — Steps 0–1 done; **gate now passed**, Step 2 unlocked.
+6. **In-flight branch:** `claude/adoring-cori-onesaa`, ahead of `main` (which holds only bootstrap `b46c1ed`).
+7. **Next action:** (a) operator merge to ratify (§K Auditor PASS first); (b) **Step 2 — stack proposal → build in `site/`** on the Control Room system at skeleton v0.3. No copy/code lands until ratification. Session close still owes: Session_Log/SCL + COST-REGISTER row (after audit).
