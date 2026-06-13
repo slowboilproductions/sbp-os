@@ -1,47 +1,40 @@
 # SBP Website — Site Skeleton (sitemap · per-page purpose · content outline)
 
-**Status:** v0.2 — **DRAFT, awaiting the operator's skeleton gate (W2).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
-**Binding premises (operator rulings — brain-os CAPTURE-QUEUE B-7 / A-5; sbp-os A-1..A-10):** full reset of content and style; the site presents the **whole family** (Marketing/AMS, CRM, Operational Dashboard, Image Creation, Motion Image Creation); **Black Company appears nowhere**; driver = **going after new clients on CRM / Operational Dashboard**; this is a skeleton — **no copy is drafted here**, outlines only.
-**What changed v0.1 → v0.2:** folded the W1 gate answers. **A-1** Shape-2 umbrella nav (five equal siblings under one tab). **A-2/A-3** added the **Proof** portfolio page (seeded SSP/DGT/MWC). **A-4** loose brand-relationship framing (no ownership claim). **A-5** umbrella tab named **"The Stack"**; nav = The Stack · Proof · About · Contact. **A-6** public names: **CRM** stays "CRM," Dash → **"Operational Dashboard."** **A-7** Image Creation + Motion Image Creation — site treatment **OPEN**, carried as a clearly-marked **either/or** (§2, §3.6) for the operator to resolve at the gate. **A-8** **no pricing anywhere** — everything routes to Contact; the 50 %+ line stays silent. **A-9** Google Ads folded **inside** Marketing, never a headline (§3.5). **A-10** business address = **Charlotte, NC** sitewide + footer.
-**One open node remaining (A-7):** the Image-Creation / Motion-Image-Creation tree-shape — see §2 and §3.6. Nothing else in this skeleton is placeholdered.
+**Status:** v0.3 — **DRAFT, awaiting the operator's skeleton gate (W2).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
+**Binding premises (operator rulings — brain-os CAPTURE-QUEUE B-7 / A-5; sbp-os A-1..A-12):** full reset of content and style; the site presents the **whole family as one operational stack** — **Marketing (AMS), CRM, Operational Dashboard, Image Creation** (still + motion, A-11) — every subunit shown up and running (A-12); **Black Company appears nowhere**; the operator's outbound go-to-market leads with CRM / Operational Dashboard, but the **site weights all subunits equally**; this is a skeleton — **no copy is drafted here**, outlines only.
+**What changed v0.2 → v0.3:** **A-11** — Image Creation + Motion combined into **one subunit, "Image Creation"** (motion is a capability inside it); the A-7 either/or is removed — one sibling, one subpage. **A-12** — homepage rebalanced: **no privileged "two products up front" tier**; the stack is presented as four equal, operational peers (revises A-1's homepage-emphasis clause; A-1's Shape-2 equal-sibling *structure* stands and is reinforced).
+**Earlier folds (v0.1 → v0.2, retained):** **A-1** Shape-2 umbrella nav · **A-2/A-3** **Proof** page (SSP/DGT/MWC) · **A-4** loose brand-relationship framing (no ownership claim) · **A-5** umbrella tab **"The Stack"**, nav = The Stack · Proof · About · Contact · **A-6** public names CRM / Operational Dashboard (never "Dash") · **A-8** **no pricing anywhere** (routes to Contact; 50 %+ silent) · **A-9** Google Ads folded inside Marketing, never a headline · **A-10** address = **Charlotte, NC**.
+**Open nodes:** none in the skeleton. (Remaining gate items are operator decisions, not skeleton placeholders: approve v0.3 + pick a design direction.)
 
 ---
 
 ## 1. The site's one job
 
-Make a brand owner who runs a developing CPG/spirits brand — or the distributor/supplier team around one — believe, within one page, that SBP runs serious tools and serious marketing at a level that doesn't insult them, and get them to ask for a demo of **CRM** or the **Operational Dashboard**.
+Make a brand owner who runs a developing CPG/spirits brand — or the distributor/supplier team around one — believe, within one page, that SBP runs a **real, operational stack**: serious marketing and serious tools, all up and running, at a level that doesn't insult them — and get them to reach out.
 
-The old six-page site was an AMS-only compliance shell. The new site is a **family storefront** organized under one umbrella — **The Stack** — with the two software products carrying the homepage:
+The old six-page site was an AMS-only compliance shell. The new site is a **family storefront** organized under one umbrella — **The Stack** — presented as **one operational whole**, every subunit shown live and equal (A-12):
 
-- **The acquisition drivers:** **CRM** and the **Operational Dashboard** — software a client runs their business in. Hero + homepage cards route straight to these two.
-- **The rest of the Stack:** **Marketing (AMS)** — the full marketing stack, with Google-Ads optimization folded inside (never a headline); **Image Creation** (still); **Motion Image Creation**.
+- **The Stack (four equal, operational peers):**
+  - **Marketing (AMS)** — the full marketing stack, with Google-Ads optimization folded inside (never a headline).
+  - **CRM** — the CPG-native system a client runs their accounts in.
+  - **Operational Dashboard** — distribution performance, sell-in vs sell-through truth.
+  - **Image Creation** — brand-true imagery, **still and motion** (one subunit, A-11).
 - **The house:** who SBP is, why the work is accessible (AI does the heavy lifting), the graduation promise.
 - **The receipts:** **Proof** — brands SBP works with / builds for (seeded SSP, DGT, MWC), grown as the roster grows.
 
+> **A-12 — homepage weighting:** the operator's *outbound go-to-market* leads with CRM / Operational Dashboard, but the *site* does **not** put those two "up front" in a way that subordinates the rest — that would minimize the stack and the other subunits. All four read as equally operational. Demo/contact CTAs are present throughout; CRM and Operational Dashboard naturally carry demo-forward CTAs because that's where the operator points prospects, but their **visual weight equals** Marketing and Image Creation.
+
 ## 2. Sitemap
 
-Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings under one umbrella tab, "The Stack"** (A-5). Each has its own subpage as it matures; the homepage carries the CRM / Operational-Dashboard emphasis.
+Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings under one umbrella tab, "The Stack"** (A-5) — and are presented as equally operational (A-12). Each has its own subpage. Image Creation is **one subunit** covering still + motion (A-11).
 
 ```
-/                          Home — the family storefront (CRM + Operational Dashboard up front)
+/                          Home — the family storefront (the whole stack, all operational)
 /stack                     The Stack — umbrella overview of all offerings
+/stack/marketing           Marketing (AMS) — full stack; Google-Ads optimization folded in
 /stack/crm                 CRM
 /stack/operational-dashboard   Operational Dashboard
-/stack/marketing           Marketing (AMS) — full stack; Google-Ads optimization folded in
-   ┌─────────────────────────────────────────────────────────────────────┐
-   │  A-7 OPEN NODE — Image Creation + Motion Image Creation (operator      │
-   │  picks one shape at the gate; both names are fixed, only the tree is   │
-   │  open):                                                                │
-   │                                                                       │
-   │  OPTION 1 — shared sub-tree (they're tightly coupled):                 │
-   │     /stack/imaging                  Imaging overview (still + motion)  │
-   │       ├ Image Creation        (section or child page)                 │
-   │       └ Motion Image Creation (section or child page)                 │
-   │                                                                       │
-   │  OPTION 2 — separate equal siblings (the A-1 Shape-2 default):         │
-   │     /stack/image-creation           Image Creation                    │
-   │     /stack/motion-image-creation    Motion Image Creation             │
-   └─────────────────────────────────────────────────────────────────────┘
+/stack/image-creation      Image Creation — still + motion (one subunit, A-11)
 /proof                     Proof — portfolio (SSP · DGT · MWC; grows)
 /about                     The house: origin story, how we work, the graduation promise
 /contact                   Demo request + all pricing inquiries route here
@@ -49,28 +42,27 @@ Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings 
 /terms                     Terms of service      (compliance — survives reset)
 ```
 
-**Page count:** 10 pages under **Option 1**, 11 under **Option 2** (the A-7 node is the only difference).
+**Page count:** 10 pages (4 Stack subpages + Home + Stack overview + Proof + About + Contact + Privacy + Terms).
 
 **Navigation (A-5, fixed):** **The Stack · Proof · About · Contact.** "The Stack" is the umbrella tab (an overview page at `/stack`, with the offerings reachable beneath it — as a dropdown and/or overview cards, a Step-2 build detail). Footer on every page: business name (**Slow Boil Productions LLC**), **Charlotte, NC** (A-10), contact, privacy, terms — the Google-Ads destination-requirements set (HTTPS, mobile-responsive, business name, contact, privacy, terms) holds on every page.
 
-**Deliberately absent at v0.2:** blog/case-studies (no content engine yet — proof slots use the "Coming Soon" metric-grid pattern from the DGT pitch deck, structurally present, filled when first client metrics exist); **any pricing page or rate card** (A-8 — pricing is absent site-wide; every "what does it cost" lands on Contact, and the 50 %+ undercut figure is *not* published anywhere on-site).
+**Deliberately absent at v0.3:** blog/case-studies (no content engine yet — proof slots use the "Coming Soon" metric-grid pattern from the DGT pitch deck, structurally present, filled when first client metrics exist); **any pricing page or rate card** (A-8 — pricing is absent site-wide; every "what does it cost" lands on Contact, and the 50 %+ undercut figure is *not* published anywhere on-site).
 
 ## 3. Per-page purpose + content outline
 
 ### 3.1 Home `/`
-**Job:** orient in 5 seconds, route in 15. Audience: brand owners (primary), distributor/supplier ops people (secondary). The two software products carry this page (A-1: homepage emphasis on CRM / Operational Dashboard).
-1. **Hero** — single headline in the locked voice (≤10 words; candidates live in `brand-voice.md` §6, illustrative); subline naming who it's for (developing brands); primary CTA → demo (CRM / Operational Dashboard), secondary CTA → The Stack.
-2. **The two products** — one card each for **CRM** and the **Operational Dashboard**: what it is in one sentence, three concrete capabilities, screenshot slot, CTA to the product subpage. These two lead; the rest of the Stack sits below.
-3. **The rest of the Stack** — compact band introducing **Marketing (AMS)**, **Image Creation**, and **Motion Image Creation** as the wider house, each linking into The Stack. (Layout of the imaging items follows the A-7 pick.)
-4. **Why it's accessible** — the honest-AI paragraph (chef-knife frame): AI does the heavy lifting, judgment stays human, that's why serious work is within reach for developing brands. **No price, no number** (A-8); cost questions route to Contact.
-5. **Proof slot** — "Coming Soon" metric grid (revenue lift · time saved · content velocity · coverage), structural placeholder; links to `/proof`.
-6. **The graduation promise** — short band: we grow you until you outgrow us.
-7. **Footer** (compliance set + Charlotte, NC).
+**Job:** orient in 5 seconds, route in 15, and **look like a real operation** — every subunit up and running (A-12). Audience: brand owners (primary), distributor/supplier ops people (secondary).
+1. **Hero** — single headline in the locked voice (≤10 words; candidates live in `brand-voice.md` §6, illustrative); subline naming who it's for (developing brands); primary CTA → demo / contact, secondary CTA → The Stack. The hero sells the **whole operational stack**, not one product.
+2. **The Stack, even** — a single grid of **four equal offering cards** (Marketing · CRM · Operational Dashboard · Image Creation), **same visual weight** (A-12): what each is in one sentence, a concrete capability or two, a screenshot/visual slot showing it live, CTA to its subpage. No privileged product tier, no minimized "rest of the stack" band. CRM and Operational Dashboard carry demo-forward CTAs (operator's outbound lead) without dominating the layout.
+3. **Why it's accessible** — the honest-AI paragraph (chef-knife frame): AI does the heavy lifting, judgment stays human, that's why serious work is within reach for developing brands. **No price, no number** (A-8); cost questions route to Contact.
+4. **Proof slot** — "Coming Soon" metric grid (revenue lift · time saved · content velocity · coverage), structural placeholder; links to `/proof`.
+5. **The graduation promise** — short band: we grow you until you outgrow us.
+6. **Footer** (compliance set + Charlotte, NC).
 
 ### 3.2 The Stack `/stack`
 **Job:** the umbrella overview (A-1/A-5) — show the whole house on one page and route to each offering. This is where the "we're a connected set of tools and marketing, not a one-trick shop" story is told plainly.
 1. **Hero** — what The Stack is: the marketing and the tools a developing brand needs to compete, under one roof.
-2. **Offering cards** — one per sibling: **CRM**, **Operational Dashboard**, **Marketing (AMS)**, **Image Creation**, **Motion Image Creation** — each a one-liner + CTA to its subpage. (Card grouping of the two imaging items follows the A-7 pick: paired card under Option 1, two standalone cards under Option 2.)
+2. **Offering cards** — one per sibling, equal weight (A-12): **Marketing (AMS)**, **CRM**, **Operational Dashboard**, **Image Creation** (still + motion, A-11) — each a one-liner + CTA to its subpage.
 3. **How it fits together** — short band on the through-line (same house, same voice, built for the same brands) — outline only.
 4. **CTA** — demo (CRM / Operational Dashboard) / Contact.
 
@@ -99,20 +91,14 @@ Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings 
 3. **How the work stays affordable** — the AI-honesty paragraph, deeper: trained on your brand so every asset feels like you. No price/number (A-8); cost → Contact.
 4. **CTA** — Contact.
 
-### 3.6 The Stack — Image Creation + Motion Image Creation  ⟨A-7 OPEN — operator picks the shape⟩
-**Both on-site names are fixed (A-7): "Image Creation" (still) and "Motion Image Creation."** What is *open* is whether they share a sub-tree or stand as separate siblings. The operator is torn because the two are tightly coupled (same pipeline, same trained-on-your-brand model) yet the A-1 Shape-2 default lists every offering as an equal sibling. **This skeleton builds the page content once and presents both shapes; the operator resolves at the gate.**
-
-- **OPTION 1 — one shared "Imaging" sub-tree** (`/stack/imaging`): a single overview that presents still + motion as one coupled capability, with Image Creation and Motion Image Creation as two sections (or two light child pages) underneath. *Reads as:* "one imaging engine, two outputs." Best if the story is the shared pipeline.
-- **OPTION 2 — two separate equal siblings** (`/stack/image-creation` + `/stack/motion-image-creation`): each stands on its own under The Stack, matching every other offering. *Reads as:* "five peers." Best if motion is meant to grow into a headline offering of its own.
-
-**Page content (shape-independent — same blocks either way):**
+### 3.6 The Stack — Image Creation `/stack/image-creation`  (A-11)
+**Job:** sell brand-true imagery — **still and motion from one subunit** (A-11: IC + Motion are one offering, "Image Creation"; motion is a capability within it, not a separate sibling).
 1. **Hero** — brand-true imagery without the $50k shoot; CTA: Contact.
-2. **Still — Image Creation** — product/lifestyle stills trained on the brand; before/after or sample slot.
-3. **Motion — Motion Image Creation** — short-form motion/video from the same trained model; sample slot. *(Distinct from Black Company, which appears nowhere on the site — this is SBP's motion-imagery service, not BC.)*
-4. **How it stays affordable** — the AI/knife frame; no price (A-8); cost → Contact.
-5. **CTA** — Contact.
-
-> **Doer note (surface, don't smooth):** my lean is **Option 1** *if* motion is launching thin (coupled keeps it from looking like a half-empty fifth tab), **Option 2** *if* motion is a real standalone push. This is an operator call — both are built above; pick one at the gate.
+2. **Still imagery** — product/lifestyle stills trained on the brand; before/after or sample slot.
+3. **Motion** — short-form motion/video from the same trained model; sample slot. *(Distinct from Black Company, which appears nowhere on the site — this is SBP's motion-imagery capability, not BC.)*
+4. **One engine, two outputs** — the coupling story: the same trained-on-your-brand model drives both stills and motion (the reason they're one subunit).
+5. **How it stays affordable** — the AI/knife frame; no price (A-8); cost → Contact.
+6. **CTA** — Contact.
 
 ### 3.7 Proof `/proof`  (A-2 / A-3 / A-4)
 **Job:** show that SBP's work is real — the portfolio page (A-2), named **"Proof"** with the alcohol-proof double entendre noted as part of the appeal (A-3). Seeded with **SSP, DGT, MWC**; built to grow as the roster grows.
@@ -123,7 +109,7 @@ Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings 
 > **A-4 guardrail:** SBP does not own SSP/DGT/MWC. The operator's personal credibility ("runs spirits brands every day") is **About-page, personal territory** (§3.9) — never an SBP-ownership claim on Proof.
 
 ### 3.8 Contact `/contact`  (A-8 / A-10)
-**Job:** zero-friction demo request **and the single destination for every pricing question** (A-8). Email (`hello@slowboilproductions.com`), business name + **Charlotte, NC** (A-10), a short form ⟨form vs mailto is a Step-2 stack decision⟩, and which-offering interest (CRM · Operational Dashboard · Marketing · Imaging). No popups, no chat widgets.
+**Job:** zero-friction demo request **and the single destination for every pricing question** (A-8). Email (`hello@slowboilproductions.com`), business name + **Charlotte, NC** (A-10), a short form ⟨form vs mailto is a Step-2 stack decision⟩, and which-offering interest (Marketing · CRM · Operational Dashboard · Image Creation). No popups, no chat widgets.
 > **A-10 watch-item:** Charlotte is correct sitewide. If the live Google-Ads account lists **Indian Trail**, flag the mismatch to the operator before any Ads-destination check — do not silently diverge.
 
 ### 3.9 About `/about`
@@ -138,8 +124,8 @@ Per the operator's Shape-2 ruling (A-1), all offerings live as **equal siblings 
 **Job:** compliance continuity (Google Ads destination requirements). Content carried/updated from the legacy pages — reviewed, not creatively rewritten; voice-neutral plain language; business address shown as **Charlotte, NC** (A-10). These pages exist on day one of any cutover; the domain never serves without them.
 
 ## 4. What approval here unlocks
-Operator approves this skeleton (and resolves the **A-7** imaging-tree either/or) **+ picks one direction from `design-directions.md`** → Step 2: stack proposal, then build in this repo. Until then: no copy, no code.
+Operator approves this skeleton **+ picks one direction from `design-directions.md`** → Step 2: stack proposal, then build in this repo. Until then: no copy, no code.
 
 ---
 
-*sbp-os canon — DRAFT v0.2, W2. INSTANCE (SBP-specific). Ships for the operator's skeleton gate; the merge is the ratification. One open node (A-7) is surfaced for the operator's pick, not smoothed.*
+*sbp-os canon — DRAFT v0.3, W2. INSTANCE (SBP-specific). Ships for the operator's skeleton gate; the merge is the ratification. No open nodes remain in the skeleton.*

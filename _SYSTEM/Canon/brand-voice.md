@@ -1,6 +1,7 @@
 # SBP Brand Voice — fleshed-out proposal
 
-**Status:** v0.2 — **DRAFT, part of the skeleton/design gate (B-8 ruling: deepen the existing materials, don't discard, don't treat as final).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
+**Status:** v0.3 — **DRAFT, part of the skeleton/design gate (B-8 ruling: deepen the existing materials, don't discard, don't treat as final).** · **Date:** 2026-06-13 · **Label:** INSTANCE · **Originating record:** `_SYSTEM/Session_Logs/2026-06-12_SBP-W1_SCL.md` (founding) + W2 gate-answers round (this bump)
+**What changed v0.2 → v0.3:** **A-11** — Image Creation is one subunit covering still + motion; §5 imaging register updated (no separate "Motion Image Creation" voice line).
 **What changed v0.1 → v0.2:** folded the now-answered open dependencies — **A-6** public product names (CRM / Operational Dashboard) replace the ⟨CRM⟩/⟨Dash⟩ placeholders in §5; **A-8** no pricing on-site (the 50 %+ figure is voice-internal only, never published) noted in §4; **A-4** brand-relationship guardrail (no ownership claim) noted in §5; §7 open-dependencies resolved.
 **Sources carried forward (the starting point, preserved):** `SBP - Positioning & Origin Story.md` (Drive Brand Vault SBP, Locked May 2026) — positioning foundation, origin story, closing line, terminology lock; ams-os `SBP-system-upgrade-roadmap` §SBP Brand Voice ("real, raw, authentic, no Madison Avenue suits"). Everything in §1 is inherited and stays locked unless the operator unlocks it; §§2–6 are the new flesh, proposed here for the operator's review.
 
@@ -43,7 +44,7 @@
 
 The May site spoke only as the agency. The reset speaks as **one house with two registers**:
 - **Products (CRM / Operational Dashboard):** pillars 1–3 lead — precision, operator empathy, honest machine. The grit shows in *what we choose to say plainly* ("a CRM that knows what a depletion is"), not in attitude. (Public names per A-6 — never the internal name "Dash.")
-- **Marketing + imaging (AMS / Image Creation / Motion Image Creation):** the original register — the wall, the fair price, the knife.
+- **Marketing + imaging (AMS / Image Creation — still + motion, one subunit per A-11):** the original register — the wall, the fair price, the knife.
 - **About/home/Proof:** full voice — the origin story is the differentiator and carries the heat. **Guardrail (A-4): on Proof and elsewhere, SBP frames SSP/DGT/MWC as brands it works with / builds for — never "our own brands"; the operator's personal track record lives on About as personal credibility, not an SBP-ownership claim.**
 - **One rule binds all:** the same person is talking on every page. If a product page couldn't have been written by the person who wrote the origin story, it's off-voice.
 
@@ -62,4 +63,4 @@ The v0.1 dependencies are answered: **B-1 → A-6** (public names CRM / Operatio
 
 ---
 
-*sbp-os canon — DRAFT v0.2, W2. INSTANCE. Deepens, never discards, the locked May-2026 materials (B-8); the operator's merge is the ratification.*
+*sbp-os canon — DRAFT v0.3, W2. INSTANCE. Deepens, never discards, the locked May-2026 materials (B-8); the operator's merge is the ratification.*
