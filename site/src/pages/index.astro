@@ -17,9 +17,9 @@ import StackGrid from '../components/StackGrid.astro';
   <section class="hero">
     <div class="wrap hero__grid">
       <div class="hero__copy" data-anim="hero">
-        <span class="eyebrow">// For developing spirits &amp; bev-alc brands</span>
-        <h1>Built by a brand owner,<br /><span class="g">for brand owners like you.</span></h1>
-        <p class="lede hero__sub">I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
+        <span class="eyebrow">// Marketing &amp; tools for beverage-alcohol brands</span>
+        <h1>Built for developing<br /><span class="g">spirits &amp; bev-alc brands.</span></h1>
+        <p class="lede hero__sub">Built by a brand owner, for brand owners like you. I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
         <div class="hero__btns">
           <a href="/contact" class="btn btn--primary">Let’s get to work →</a>
           <a href="/stack" class="btn btn--ghost">See what’s running</a>
@@ -70,30 +70,29 @@ import StackGrid from '../components/StackGrid.astro';
     </div>
   </section>
 
-  <!-- ===== Proof slot (Coming Soon metric grid) ===== -->
+  <!-- ===== Proof slot (proof of craft, not commercial lift) ===== -->
   <section class="section">
     <div class="wrap">
       <div class="sec-head rule">
         <h2>Proof, not promises.</h2>
         <a href="/proof" class="mono g sec-head__tag">See the work →</a>
       </div>
-      <div class="grid grid--4 metric-grid">
+      <div class="grid grid--3 proof-grid">
         {[
-          { k: 'Revenue lift', s: 'per brand' },
-          { k: 'Time saved', s: 'per week' },
-          { k: 'Content velocity', s: 'assets / mo' },
-          { k: 'Coverage', s: 'accounts live' },
+          { k: 'Websites that convert', s: 'design + build' },
+          { k: 'A category-native CRM', s: 'live + running' },
+          { k: 'Operational dashboards', s: 'real data, real answers' },
+          { k: 'Bottle & lifestyle photography', s: '$50k-studio look' },
+          { k: 'Video & motion spots', s: 'scroll-stopping' },
+          { k: 'Full Meta & paid campaigns', s: 'built + optimized' },
         ].map((m) => (
-          <div class="metric card">
-            <div class="metric__v mono">
-              <span class="live">SOON</span>
-            </div>
-            <div class="metric__k">{m.k}</div>
-            <div class="metric__s mut mono">{m.s}</div>
+          <div class="proof-cell card">
+            <span class="proof-cell__k">{m.k}</span>
+            <span class="proof-cell__s mut mono">{m.s}</span>
           </div>
         ))}
       </div>
-      <p class="metric-note mut">Real numbers land here as the first brands’ results clear. I show the bar — I don’t claim the phrase.</p>
+      <p class="metric-note mut">Proof I can build it — smarter, cheaper, faster. Not a promise about your numbers; a show of the work I ship.</p>
     </div>
   </section>
 
@@ -122,6 +121,11 @@ import StackGrid from '../components/StackGrid.astro';
     .two-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s8); align-items: start; }
     .two-col__body p + p { margin-top: var(--s4); }
     .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
+
+    /* proof-of-craft grid */
+    .proof-cell { display: flex; flex-direction: column; gap: var(--s2); min-height: 116px; justify-content: space-between; }
+    .proof-cell__k { font-family: var(--font-display); font-weight: 500; font-size: var(--t-h3); line-height: 1.2; }
+    .proof-cell__s { font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; }
 
     /* metric grid */
     .metric { text-align: left; }
