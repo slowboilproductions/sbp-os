@@ -1,37 +1,63 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// Marketing subunit (skeleton v0.3 §3.5), spirits-first, operator voice (A-15).
-// Carries the original SBP offer (the legacy "two pillars": infrastructure +
-// tailored strategy). A-9: Google-Ads optimization is ONE element inside
-// digital — NEVER its own headline. Pricing → Contact (A-8); no number on page.
+// Marketing subunit (skeleton v0.3 §3.5), rebuilt on the operator's first-pass
+// two-pillar structure (A-18): Infrastructure + Tailored Strategy + the weekly
+// rhythm, operator's own copy, bev/alc-framed. Pricing analogies allowed
+// (A-18 amends A-8: "half the cost" etc. OK; actual quote → Contact).
+// A-9: Google Ads is one channel in the list, never a standalone headline.
 const infra = [
-  { n: '01', h: 'Websites that convert', p: 'Fast, age-gated, compliant sites that turn visitors into contacts — on platforms you actually own. (You’re looking at one.)' },
-  { n: '02', h: 'Bottle & product photography', p: 'Bottle shots and lifestyle scenes that look like a $50,000 studio day — AI-trained on your brand, delivered in a fraction of the time.' },
-  { n: '03', h: 'Content & social', p: 'Calendars, captions, posts — in your brand voice and inside the alcohol-advertising rules, reviewed by a human before anything ships.' },
-  { n: '04', h: 'Paid that moves cases', p: 'Age-gated paid social and search built around your conversion paths — plus the trade and distributor-facing channels that actually move product. Google-Ads optimization is part of the mix, not a magic trick.' },
+  { h: 'Sites that convert.', label: 'Websites', p: 'Custom-built marketing sites that load fast, look right on every device, and turn visitors into customers — age-gated where the category requires it. Built on platforms you actually own, no proprietary lock-in.' },
+  { h: 'Product shots that look like a $50,000 studio.', label: 'Photography', p: 'AI-trained on your brand. Bottle shots, lifestyle scenes, social-ready angles, hero imagery. The kind of photography that used to require a full studio day — delivered in a fraction of the time.' },
+  { h: 'Content calendars that write themselves in your voice.', label: 'Content & Social', p: 'Social posts, captions, blog content, newsletters — generated from your brand voice, inside the alcohol-advertising rules, and reviewed by a human before anything ships.' },
+  { h: 'Ads that actually move product.', label: 'Paid Advertising', p: 'Google, Meta, and platform-native advertising — age-gated and built around your conversion paths, optimized weekly, reported transparently.' },
+  { h: 'Email that builds the list and runs the list.', label: 'Email Marketing', p: 'Welcome sequences, campaigns, automations. Every email reads like it came from your brand because it did — the system speaks your voice.' },
+  { h: 'Reporting you can actually read.', label: 'Analytics', p: 'Weekly performance reports built for brand owners, not for analytics professionals. Real numbers. Plain language. Clear next steps.' },
+];
+const strategy = [
+  { h: 'Who you are. Who you’re for. Why it matters.', label: 'Brand Positioning', p: 'Structured positioning that defines your brand’s place in the market — not a Google Doc that gets read once, but a living foundation every other piece of marketing builds on.' },
+  { h: 'Specifically who you’re trying to reach.', label: 'Audience Definition', p: 'Not personas with stock photos. Real audience segments grounded in your category, your price point, and your distribution reality.' },
+  { h: 'The three to five things you should be talking about.', label: 'Content Pillars', p: 'Topical authority territory, mapped specifically to your brand — the themes that compound your relevance over time.' },
+  { h: 'How a stranger becomes a customer.', label: 'Conversion Paths', p: 'From first impression to first purchase to repeat purchase. Mapped, measured, optimized.' },
+  { h: 'What you should be measuring.', label: 'Performance Frameworks', p: 'The metrics that actually predict growth in your category. Not vanity metrics, not industry-standard fluff — the numbers that tell you whether the work is working.' },
+  { h: 'Who’s doing what, and what to do about it.', label: 'Competitive Analysis', p: 'Structured analysis of your competitive landscape — not a report you file away, but input that shapes every other piece of work.' },
+];
+const rhythm = [
+  { day: 'Monday', h: 'Brief.', p: 'A 30-minute call. You tell us what you want this week.' },
+  { day: 'Wednesday', h: 'Review.', p: 'Drafts, mockups, copy — ready for your judgment.' },
+  { day: 'Friday', h: 'Ship.', p: 'Approved work goes live. Reports show what’s working.' },
 ];
 ---
 <BaseLayout
   title="Marketing"
-  description="Real marketing for developing spirits brands — strategy and positioning, websites, product photography, content, and digital that moves product. The same marketing arm I run for my own brands.">
+  description="Agency-grade marketing for beverage-alcohol brands — websites, $50k-studio photography, content, paid, and email, plus strategy work that takes consultancies four weeks, delivered in two hours.">
   <section class="section">
     <div class="wrap">
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — Marketing</span>
         <h1>Agency-grade marketing,<br /><span class="g">built for beverage alcohol.</span></h1>
-        <p class="lede">The agency model wasn’t built for you — it was built to bill you. This is real marketing for a regulated category, run by someone who’s actually carried inventory, chased a distributor, and navigated three-tier.</p>
+        <p class="lede">Real, professional marketing at a price point that won’t drain your tank before you ever get to market — run by someone who’s actually carried inventory, chased a distributor, and navigated three-tier.</p>
         <div class="prod-cta">
           <a href="/contact" class="btn btn--primary">Start a conversation →</a>
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
         </div>
       </div>
 
+      <div class="prod-sec rule problem">
+        <span class="eyebrow">// Built for a regulated category</span>
+        <p class="lede">Most marketers don’t know you can’t ship into a dry county, can’t make a health claim, and live or die by the distributor relationship. I do. Age-gating, three-tier, on- vs off-premise, trade marketing — it’s built into the work, not bolted on after legal flags it.</p>
+      </div>
+
+      <!-- Pillar 01 -->
       <div class="prod-sec">
-        <div class="prod-sec__head"><h2>The full stack — not a one-trick shop.</h2></div>
-        <div class="feats">
+        <div class="prod-sec__head">
+          <span class="eyebrow">// Pillar 01 — Infrastructure</span>
+          <h2>Same services as a traditional agency. Half the cost.</h2>
+          <p class="mut m-tag">Faster turnarounds. No 6-week kickoffs.</p>
+        </div>
+        <div class="m-grid">
           {infra.map((b) => (
             <div class="feat card">
-              <span class="feat__n">{b.n}</span>
+              <span class="feat__n">{b.label}</span>
               <h3>{b.h}</h3>
               <p class="mut">{b.p}</p>
             </div>
@@ -39,19 +65,44 @@ const infra = [
         </div>
       </div>
 
-      <div class="prod-sec problem">
-        <span class="eyebrow">// Built for a regulated category</span>
-        <p class="lede">Most marketers don’t know you can’t ship into a dry county, can’t make a health claim, and live or die by the distributor relationship. I do. Age-gating, three-tier, on- vs off-premise, trade marketing — it’s built into the work, not bolted on after legal flags it.</p>
+      <!-- Pillar 02 -->
+      <div class="prod-sec">
+        <div class="prod-sec__head">
+          <span class="eyebrow">// Pillar 02 — Tailored Strategy</span>
+          <h2>Strategy that takes consultancies four weeks. Delivered in two hours.</h2>
+        </div>
+        <div class="m-grid">
+          {strategy.map((b) => (
+            <div class="feat card">
+              <span class="feat__n">{b.label}</span>
+              <h3>{b.h}</h3>
+              <p class="mut">{b.p}</p>
+            </div>
+          ))}
+        </div>
+        <p class="m-kicker">“The template alone isn’t the moat. The template plus the system that turns its outputs into deployed reality — that’s the moat.”</p>
       </div>
 
-      <div class="prod-sec problem">
-        <span class="eyebrow">// Plus the strategy underneath</span>
-        <p class="lede">Positioning, audience, content pillars, conversion paths — the strategy work that takes a consultancy four weeks, grounded in your category and your distribution reality. Not a Google Doc that gets read once. A living foundation everything else builds on.</p>
+      <!-- How we work -->
+      <div class="prod-sec">
+        <div class="prod-sec__head">
+          <span class="eyebrow">// How we work</span>
+          <h2>A weekly rhythm.</h2>
+        </div>
+        <div class="grid grid--3">
+          {rhythm.map((r) => (
+            <div class="feat card">
+              <span class="feat__n">{r.day}</span>
+              <h3>{r.h}</h3>
+              <p class="mut">{r.p}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div class="prod-sec problem">
         <span class="eyebrow">// How it stays affordable</span>
-        <p class="lede">I train AI on your brand so every asset already sounds and looks like you — that’s the heavy lifting. The strategy and the taste stay human. You stop paying agency rates for the slow parts, and the price stays fair.</p>
+        <p class="lede">We use AI to do the heavy lifting so we can offer real, professional marketing at a price that won’t drain your tank. The strategy and the taste stay human. You stop paying agency rates for the slow parts.</p>
         <p class="mut od-note">Want to know what fair looks like for your brand? <a href="/contact" class="ilink">Tell me what you need.</a></p>
       </div>
     </div>
@@ -68,5 +119,10 @@ const infra = [
   <style>
     .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
     .od-note { margin-top: var(--s4); }
+    .m-tag { margin-top: var(--s3); }
+    .m-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5); }
+    .m-kicker { font-family: var(--font-display); font-size: var(--t-lg); line-height: 1.4; color: var(--text-2); max-width: 60ch; margin-top: var(--s6); padding-left: var(--s5); border-left: 2px solid var(--grn); }
+    @media (max-width: 900px) { .m-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .m-grid { grid-template-columns: 1fr; } }
   </style>
 </BaseLayout>
