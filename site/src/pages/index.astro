@@ -2,29 +2,45 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DashboardPanel from '../components/DashboardPanel.astro';
 import StackGrid from '../components/StackGrid.astro';
-// Home — the family storefront (skeleton v0.3 §3.1). Orient in 5s, route in
-// 15, look like a real operation: every subunit up and running (A-12). Hero
-// sells the WHOLE stack, not one product. No pricing anywhere (A-8). Headline
-// is a voice candidate (brand-voice v0.4 §6) — operator may tweak.
+// Home — the family storefront (skeleton v0.3 §3.1), rewritten spirits-first
+// in the operator's first-person voice (A-15). Lead audience: developing
+// spirits & bev-alc brand owners; CPG is the eventual expansion, not the
+// headline. Every subunit shown up and running (A-12). No pricing (A-8) —
+// cost routes to Contact. Headline/copy are voice-true to the first-pass
+// site + brand bible; operator may tweak.
 ---
 <BaseLayout
   title="Slow Boil Productions"
-  description="The marketing and the tools developing brands need to compete — strategy, a CPG-native CRM, distribution analytics, and brand-true image creation. One operational stack, at a level that doesn't insult you.">
+  description="Built by a brand owner, for other brand owners. The marketing and the tools developing spirits brands need to compete — strategy, a category-native CRM, distribution analytics, and brand-true image creation. All of it, running.">
 
   <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="wrap hero__grid">
       <div class="hero__copy" data-anim="hero">
-        <span class="eyebrow">// Built for developing brands</span>
-        <h1>The marketing and the tools.<br /><span class="g">All running.</span></h1>
-        <p class="lede hero__sub">Strategy, a CPG-native CRM, distribution analytics, and brand-true imagery — one operational stack, at a level that doesn’t insult you.</p>
+        <span class="eyebrow">// For developing spirits &amp; bev-alc brands</span>
+        <h1>Built by a brand owner,<br /><span class="g">for brand owners like you.</span></h1>
+        <p class="lede hero__sub">I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
         <div class="hero__btns">
-          <a href="/contact" class="btn btn--primary">See it live →</a>
-          <a href="/stack" class="btn btn--ghost">Tour the Stack</a>
+          <a href="/contact" class="btn btn--primary">Let’s get to work →</a>
+          <a href="/stack" class="btn btn--ghost">See what’s running</a>
         </div>
       </div>
       <div class="hero__panel" data-anim="hero-panel">
         <DashboardPanel />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The wall ===== -->
+  <section class="section section--band">
+    <div class="wrap two-col">
+      <div>
+        <span class="eyebrow">// The wall</span>
+        <h2>The brands that deserve to win are losing because of money, not merit.</h2>
+      </div>
+      <div class="two-col__body">
+        <p class="lede">You built something real — a product you believe in, a vision you’ve carried for years. Then you hit the place where passion meets budget, and budget usually wins.</p>
+        <p class="mut">The agencies want a fortune. The freelancers vanish. The DIY tools look easy until midnight. I’ve been on both sides of that wall — so I built the way around it.</p>
       </div>
     </div>
   </section>
@@ -48,8 +64,8 @@ import StackGrid from '../components/StackGrid.astro';
         <h2>AI does the heavy lifting. The instincts are still earned.</h2>
       </div>
       <div class="two-col__body">
-        <p class="lede">Think of AI like a chef’s knife. It doesn’t replace the cook — it makes every cut cleaner and faster. That’s how serious marketing and serious tools land within reach for a developing brand instead of a Fortune 500 budget.</p>
-        <p class="mut">The judgment, the taste, the strategy — that’s still human, and still earned. We just stopped charging you for the slow parts. Want to know what it costs? <a href="/contact" class="ilink">Tell us about your brand.</a></p>
+        <p class="lede">I use AI the way a chef uses a sharp knife — not to replace the cook, but to make every cut cleaner and faster. The strategy is still human. The taste is still earned. The execution is where we close the gap.</p>
+        <p class="mut">That’s how real, professional marketing lands within reach for a developing brand instead of a Fortune-500 budget. Want to know what it costs? <a href="/contact" class="ilink">Tell me about your brand.</a></p>
       </div>
     </div>
   </section>
@@ -77,7 +93,7 @@ import StackGrid from '../components/StackGrid.astro';
           </div>
         ))}
       </div>
-      <p class="metric-note mut">Real numbers land here as the first client results clear. We show the bar — we don’t claim the phrase.</p>
+      <p class="metric-note mut">Real numbers land here as the first brands’ results clear. I show the bar — I don’t claim the phrase.</p>
     </div>
   </section>
 
@@ -85,8 +101,8 @@ import StackGrid from '../components/StackGrid.astro';
   <section class="section section--band grad">
     <div class="wrap center">
       <span class="eyebrow">// The promise</span>
-      <h2 class="grad__h">We grow you until you outgrow us.</h2>
-      <p class="grad__p mut">And when you’re too big for us, we’ll celebrate it. You didn’t come this far to fold.</p>
+      <h2 class="grad__h">I want to grow you until you’re too big for me.</h2>
+      <p class="grad__p mut">And when that day comes, we’re going to celebrate it. That’s the slow boil — the moment right before everything changes. You didn’t come this far to fold.</p>
       <a href="/contact" class="btn btn--primary grad__cta">Let’s get to work →</a>
     </div>
   </section>
@@ -95,7 +111,7 @@ import StackGrid from '../components/StackGrid.astro';
     /* hero */
     .hero { padding-block: var(--s8) var(--s7); }
     .hero__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--s8); align-items: center; }
-    .hero__sub { margin: var(--s5) 0 var(--s6); max-width: 44ch; }
+    .hero__sub { margin: var(--s5) 0 var(--s6); max-width: 46ch; }
     .hero__btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
     /* section heads */
@@ -115,8 +131,8 @@ import StackGrid from '../components/StackGrid.astro';
     .metric-note { font-size: var(--t-sm); margin-top: var(--s5); }
 
     /* graduation */
-    .grad__h { margin: var(--s3) auto var(--s4); max-width: 18ch; }
-    .grad__p { margin: 0 auto; max-width: 46ch; }
+    .grad__h { margin: var(--s3) auto var(--s4); max-width: 20ch; }
+    .grad__p { margin: 0 auto; max-width: 52ch; }
     .grad__cta { margin-top: var(--s6); }
 
     @media (max-width: 860px) {

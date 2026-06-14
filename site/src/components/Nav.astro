@@ -17,7 +17,7 @@ const stackLinks = [
 <header class="nav">
   <div class="wrap nav__inner">
     <a href="/" class="nav__logo" aria-label="Slow Boil Productions — home">
-      <span class="nav__dot" aria-hidden="true"></span>SLOW&nbsp;BOIL
+      <span class="nav__dot" aria-hidden="true"></span><span class="nav__name">Slow&nbsp;Boil&nbsp;Productions</span>
     </a>
 
     <nav class="nav__links" aria-label="Primary">
@@ -54,7 +54,8 @@ const stackLinks = [
 <style>
   .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
   .nav__inner { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
-  .nav__logo { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 19px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .nav__logo { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 16px; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+  @media (max-width: 380px) { .nav__logo { font-size: 14px; } }
   .nav__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--grn); box-shadow: 0 0 10px var(--grn); }
   .nav__links { display: flex; gap: 30px; font-size: var(--t-sm); color: var(--mut); font-weight: 500; align-items: center; }
   .nav__links a:hover, .nav__links a.is-active { color: var(--text); }

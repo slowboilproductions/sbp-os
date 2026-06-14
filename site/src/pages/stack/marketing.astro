@@ -1,25 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// Marketing (AMS) subunit (skeleton v0.3 §3.5). Carries the original SBP offer
-// as the marketing arm of the Stack. A-9: Google-Ads optimization is ONE
-// element inside digital marketing — NEVER its own headline tile or hero.
-// Pricing → Contact (A-8). No price/number on page.
-const blocks = [
-  { n: '01', h: 'Strategy & positioning', p: 'Who you’re for, why you win, and the line that makes it land. The work everything else hangs on.' },
-  { n: '02', h: 'Content & creative', p: 'The assets that carry the brand — on-voice, on-pace, and built to actually ship, not sit in a deck.' },
-  { n: '03', h: 'Websites that convert', p: 'Sites built to turn attention into contact — fast, clean, and made to be found. (You’re looking at one.)' },
-  { n: '04', h: 'Digital that moves product', p: 'Paid and organic that drives real demand — with search and Google-Ads optimization handled as part of the mix, not sold as a magic trick.' },
+// Marketing subunit (skeleton v0.3 §3.5), spirits-first, operator voice (A-15).
+// Carries the original SBP offer (the legacy "two pillars": infrastructure +
+// tailored strategy). A-9: Google-Ads optimization is ONE element inside
+// digital — NEVER its own headline. Pricing → Contact (A-8); no number on page.
+const infra = [
+  { n: '01', h: 'Websites that convert', p: 'Fast, clean sites that turn visitors into customers — on platforms you actually own. (You’re looking at one.)' },
+  { n: '02', h: 'Product photography', p: 'Bottle shots and lifestyle scenes that look like a $50,000 studio day — AI-trained on your brand, delivered in a fraction of the time.' },
+  { n: '03', h: 'Content & social', p: 'Calendars, captions, posts — generated in your brand voice, reviewed by a human before anything ships.' },
+  { n: '04', h: 'Digital that moves product', p: 'Paid and organic built around your conversion paths — with search and Google-Ads optimization handled as part of the mix, not sold as a magic trick.' },
 ];
 ---
 <BaseLayout
   title="Marketing"
-  description="Real marketing at a fair level for developing brands — strategy, content and creative, websites that convert, and digital that moves product. The marketing arm of the Slow Boil stack.">
+  description="Real marketing for developing spirits brands — strategy and positioning, websites, product photography, content, and digital that moves product. The same marketing arm I run for my own brands.">
   <section class="section">
     <div class="wrap">
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — Marketing</span>
-        <h1>Big-brand firepower. <span class="g">Developing-brand</span> prices.</h1>
-        <p class="lede">The agency model wasn’t built for you — it was built to bill you. This is real marketing, at a level that doesn’t insult a serious brand, run by people who’ve actually carried inventory and chased a distributor.</p>
+        <h1>The same work an agency does.<br /><span class="g">Without the agency wall.</span></h1>
+        <p class="lede">The agency model wasn’t built for you — it was built to bill you. This is real marketing at a level that doesn’t insult a serious brand, run by someone who’s actually carried inventory and chased a distributor.</p>
         <div class="prod-cta">
           <a href="/contact" class="btn btn--primary">Start a conversation →</a>
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
@@ -29,7 +29,7 @@ const blocks = [
       <div class="prod-sec">
         <div class="prod-sec__head"><h2>The full stack — not a one-trick shop.</h2></div>
         <div class="feats">
-          {blocks.map((b) => (
+          {infra.map((b) => (
             <div class="feat card">
               <span class="feat__n">{b.n}</span>
               <h3>{b.h}</h3>
@@ -40,9 +40,14 @@ const blocks = [
       </div>
 
       <div class="prod-sec problem">
+        <span class="eyebrow">// Plus the strategy underneath</span>
+        <p class="lede">Positioning, audience, content pillars, conversion paths — the strategy work that takes a consultancy four weeks, grounded in your category and your distribution reality. Not a Google Doc that gets read once. A living foundation everything else builds on.</p>
+      </div>
+
+      <div class="prod-sec problem">
         <span class="eyebrow">// How it stays affordable</span>
-        <p class="lede">We train AI on your brand so every asset already sounds and looks like you — that’s the heavy lifting. The strategy and the taste stay human. You stop paying agency rates for the slow parts, and the price stays fair.</p>
-        <p class="mut od-note">Want to know what fair looks like for your brand? <a href="/contact" class="ilink">Tell us what you need.</a></p>
+        <p class="lede">I train AI on your brand so every asset already sounds and looks like you — that’s the heavy lifting. The strategy and the taste stay human. You stop paying agency rates for the slow parts, and the price stays fair.</p>
+        <p class="mut od-note">Want to know what fair looks like for your brand? <a href="/contact" class="ilink">Tell me what you need.</a></p>
       </div>
     </div>
   </section>
@@ -50,7 +55,7 @@ const blocks = [
   <section class="section section--band">
     <div class="wrap cta-band">
       <h2>Marketing that respects the brand and the budget.</h2>
-      <p class="mut">No rate card, no runaround — just a real answer once we know what you’re building.</p>
+      <p class="mut">No rate card, no runaround — just a real answer once I know what you’re building.</p>
       <a href="/contact" class="btn btn--primary">Start a conversation →</a>
     </div>
   </section>

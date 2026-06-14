@@ -1,26 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// CRM subunit (skeleton v0.3 §3.3). Public name "CRM" (A-6). Pricing → Contact
-// only (A-8). Capability claims below are drawn from the skeleton outline and
-// kept conservative; FLAG: final feature claims must be verified against
-// crm-os canon before this copy goes live (crm-os is outside this session's
-// repo scope — verification is a pre-cutover checklist item, not a build blocker).
+// CRM subunit (skeleton v0.3 §3.3), spirits/bev-alc-first, operator voice (A-15).
+// Public name "CRM" (A-6). Pricing → Contact only (A-8).
+// FLAG: capability claims drawn from the skeleton outline, kept conservative;
+// verify against crm-os canon before live (out of this session's repo scope).
 const feats = [
-  { n: '01', h: 'Accounts & contacts, CPG-shaped', p: 'Every retail outlet, distributor, and buyer in one place — keyed the way CPG actually works, not bent out of a generic sales CRM.' },
+  { n: '01', h: 'Accounts & contacts, the way spirits sells', p: 'Every retail outlet, on-premise account, distributor, and buyer in one place — keyed the way our world actually works, not bent out of a generic sales CRM.' },
   { n: '02', h: 'Depletion tracking', p: 'Track what’s actually moving through accounts, not just what shipped. The number your distributor’s report buries.' },
-  { n: '03', h: 'Rep activity & territory', p: 'Call activity, visit logs, and territory workflow built for a field team — so you know where the reps are and what they moved.' },
-  { n: '04', h: 'Brand-level walls', p: 'Run more than one brand? Each one sees only its own world. Clean separation, no cross-contamination.' },
+  { n: '03', h: 'Reps, distributors & territory', p: 'Call activity, visit logs, distributor relationships, and territory workflow built for a field team — so you know where the reps are and what they moved.' },
+  { n: '04', h: 'Brand-level walls', p: 'Run more than one label? Each brand sees only its own world. Clean separation, no cross-contamination.' },
 ];
 ---
 <BaseLayout
   title="CRM"
-  description="A CRM that knows what a depletion is. Accounts, contacts, depletions, rep activity, and territory workflow — built for how CPG and spirits brands actually sell. Book a demo.">
+  description="A CRM that knows what a depletion is. Accounts, distributors, depletions, rep activity, and territory workflow — built for how spirits and bev-alc brands actually sell. Book a demo.">
   <section class="section">
     <div class="wrap">
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — CRM</span>
         <h1>A CRM that knows what a <span class="g">depletion</span> is.</h1>
-        <p class="lede">You’re running accounts out of spreadsheets and a CRM built for software sales reps. It doesn’t know what a distributor is, what a depletion is, or how your category really moves. This one does.</p>
+        <p class="lede">You’re running accounts out of spreadsheets and a CRM built for software reps. It doesn’t know what a distributor is, what a depletion is, or that you can’t ship into a dry county. This one does — because I run my own brands on it.</p>
         <div class="prod-cta">
           <a href="/contact" class="btn btn--primary">Book a demo →</a>
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
@@ -47,8 +46,8 @@ const feats = [
 
       <div class="prod-sec">
         <div class="prod-sec__head">
-          <span class="eyebrow">// Built for CPG</span>
-          <h2>Keys, SKUs, and distributors are first-class — not customizations.</h2>
+          <span class="eyebrow">// Built for the category</span>
+          <h2>Distributors, depletions, and SKUs are first-class — not customizations.</h2>
         </div>
         <div class="shot"><span class="shot__label">CRM walkthrough — screenshot slot</span></div>
       </div>
@@ -58,7 +57,7 @@ const feats = [
   <section class="section section--band">
     <div class="wrap cta-band">
       <h2>See it running on your accounts.</h2>
-      <p class="mut">Demos are real — we’ll show you the system with category data that looks like yours. Pricing is scoped to the brand; tell us what you need.</p>
+      <p class="mut">Demos are real — I’ll show you the system with category data that looks like yours. Pricing’s scoped to the brand; tell me what you need.</p>
       <a href="/contact" class="btn btn--primary">Book a demo →</a>
     </div>
   </section>
