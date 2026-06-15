@@ -9,11 +9,25 @@
 //
 // Progressive + accessible: continuous scroll-scrub (no discrete stages);
 // static stills gallery under no-JS / prefers-reduced-motion.
-const FRAMES = 24;
-const stillIdx = [0, 4, 8, 12, 16, 20];
 const pad = (n) => String(n).padStart(2, '0');
+
+// ===========================================================================
+// ASSET SWAP — replace the placeholder art with the real Sunshine Punch shoot.
+// (See public/ic-360/README.md for the full spec.)
+//   PHASE A (360):  drop turntable frames into public/ic-360/ named
+//                   frame-00.png .. frame-NN.png, then set FRAMES to the count.
+//   PHASE B (stills): point `stills` at the real stills (any paths);
+//                   defaults to six turntable frames.
+//   PHASE C (motion): set `motionSrc` to a muted clip ('/ic-360/motion.mp4');
+//                   it autoplays muted in view. null -> bubble placeholder.
+// ===========================================================================
+const FRAMES = 24;                                   // turntable frame count
+const framePath = (i) => `/ic-360/frame-${pad(i)}.png`;
+const stillIdx = [0, 4, 8, 12, 16, 20];
+const stills = stillIdx.map(framePath);              // or: ['/ic-360/still-1.jpg', ...]
+const motionSrc = null;                              // or: '/ic-360/motion.mp4'
 ---
-<section class="studio" aria-label="One studio shoot, every angle, brought to life">
+<section class="studio" aria-label="One studio shoot, every angle, brought to life" data-frames={FRAMES}>
   <div class="studio__live">
     <div class="studio__sticky">
       <p class="studio__cap" data-phase="a">One bottle. One studio shoot.</p>
@@ -22,28 +36,32 @@ const pad = (n) => String(n).padStart(2, '0');
 
       <!-- phase A: the 360 orbit (scroll-scrubbed frames) -->
       <div class="studio__orbit">
-        <img class="studio__frame" src={`/ic-360/frame-00.png`} alt="A bottle from the shoot, turned through every angle" width="500" height="760" />
+        <img class="studio__frame" src={framePath(0)} alt="A bottle from the shoot, turned through every angle" width="500" height="760" />
       </div>
 
       <!-- phase B: the generated stills fan in -->
       <div class="studio__gallery" aria-hidden="true">
-        {stillIdx.map((n, i) => (
+        {stills.map((src, i) => (
           <div class={`studio__still st${i}`}>
-            <img src={`/ic-360/frame-${pad(n)}.png`} alt="" width="500" height="760" loading="lazy" />
+            <img src={src} alt="" width="500" height="760" loading="lazy" />
           </div>
         ))}
       </div>
 
       <!-- phase C: the last still moves -->
       <div class="studio__motion" aria-hidden="true">
-        <div class="studio__motion-bottle">
-          <img src={`/ic-360/frame-00.png`} alt="" width="500" height="760" />
-          <span class="bubble" style="left:46%; animation-delay:0s"></span>
-          <span class="bubble" style="left:54%; animation-delay:0.5s"></span>
-          <span class="bubble" style="left:50%; animation-delay:1s"></span>
-          <span class="bubble" style="left:43%; animation-delay:1.4s"></span>
-          <span class="bubble" style="left:57%; animation-delay:0.8s"></span>
-        </div>
+        {motionSrc ? (
+          <video class="studio__video" src={motionSrc} muted loop playsinline preload="none" width="500" height="760"></video>
+        ) : (
+          <div class="studio__motion-bottle">
+            <img src={framePath(0)} alt="" width="500" height="760" />
+            <span class="bubble" style="left:46%; animation-delay:0s"></span>
+            <span class="bubble" style="left:54%; animation-delay:0.5s"></span>
+            <span class="bubble" style="left:50%; animation-delay:1s"></span>
+            <span class="bubble" style="left:43%; animation-delay:1.4s"></span>
+            <span class="bubble" style="left:57%; animation-delay:0.8s"></span>
+          </div>
+        )}
       </div>
     </div>
   </div>
@@ -110,6 +128,7 @@ const pad = (n) => String(n).padStart(2, '0');
   /* phase C — motion finale */
   .studio__motion { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity 0.5s var(--ease); pointer-events: none; }
   .studio.is-c .studio__motion { opacity: 1; }
+  .studio__video { height: min(62vh, 500px); width: auto; display: block; border-radius: var(--r); box-shadow: var(--shadow-panel); }
   .studio__motion-bottle { position: relative; }
   .studio__motion-bottle img { height: min(62vh, 500px); width: auto; display: block; }
   .studio__motion-bottle .bubble { position: absolute; bottom: 26%; width: 12px; height: 12px; border-radius: 50%; background: rgba(251, 248, 242, 0.85); opacity: 0; transform: translateX(-50%); }
@@ -127,9 +146,7 @@ const pad = (n) => String(n).padStart(2, '0');
 </style>
 
 <script>
-  const FRAMES = 24;
   const pad = (n) => String(n).padStart(2, '0');
-  const srcs = Array.from({ length: FRAMES }, (_, i) => '/ic-360/frame-' + pad(i) + '.png');
 
   function initStudio() {
     const section = document.querySelector('.studio');
@@ -138,7 +155,10 @@ const pad = (n) => String(n).padStart(2, '0');
     section.dataset.wired = '1';
     section.classList.add('is-ready');
 
+    const FRAMES = parseInt(section.dataset.frames || '24', 10);
+    const srcs = Array.from({ length: FRAMES }, (_, i) => '/ic-360/frame-' + pad(i) + '.png');
     const frameImg = section.querySelector('.studio__frame');
+    const video = section.querySelector('.studio__video');
     srcs.forEach((s) => { const im = new Image(); im.src = s; }); // preload for smooth scrub
 
     let raf = 0, lastIdx = -1, phase = '';
@@ -147,6 +167,7 @@ const pad = (n) => String(n).padStart(2, '0');
       phase = p;
       section.classList.remove('is-a', 'is-b', 'is-c');
       section.classList.add('is-' + p);
+      if (video) { if (p === 'c') { video.play().catch(() => {}); } else { video.pause(); } }
     }
     function onScroll() {
       if (raf) return;
