@@ -12,6 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="About"
   description="The story behind Slow Boil Productions — built by a spirits brand owner who hit the marketing wall and built the marketing and the tools he wished existed.">
   <section class="section">
+    <div class="wrap a-logo-block">
+      <img src="/logo-dark.png" alt="Slow Boil Productions" class="a-logo" width="232" height="229" />
+    </div>
     <div class="wrap a-top">
       <span class="eyebrow">// Built by a spirits brand owner</span>
       <h1>I’ve been on both sides of the wall.</h1>
@@ -61,10 +64,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>Every win, every failure, every weird thing I learn about a distributor or a state regulation or a content format that’s working — it all feeds back into Slow Boil overnight. The system you hire today is smarter tomorrow.</p>
 
       <a href="/contact" class="btn btn--primary a-cta">Get in touch →</a>
+
+      <div class="a-logo-block a-logo-block--foot">
+        <img src="/logo-dark.png" alt="" class="a-logo" width="232" height="229" />
+      </div>
     </div>
   </section>
 
   <style>
+    .a-logo-block { text-align: center; margin-bottom: var(--s6); }
+    .a-logo { height: 160px; width: auto; display: inline-block; }
+    .a-logo-block--foot { margin-top: var(--s8); margin-bottom: 0; }
+    @media (max-width: 560px) { .a-logo { height: 120px; } }
     .a-top { max-width: 46rem; }
     .a-top h1 { margin-top: var(--s2); max-width: 15ch; }
     .a-body { margin-top: var(--s7); max-width: 720px; }

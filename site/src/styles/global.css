@@ -118,6 +118,11 @@ p { max-width: 62ch; }
 .prose ul { margin: 0 0 var(--s4) var(--s5); list-style: disc; }
 .prose li { margin-bottom: var(--s2); }
 .prose a { color: var(--grn); text-decoration: underline; text-underline-offset: 3px; }
+/* buttons placed inside prose keep button styling, not link styling
+   (otherwise `.prose a` color out-specifies the button and hides the label) */
+.prose a.btn { text-decoration: none; }
+.prose a.btn--primary { color: var(--grn-ink); }
+.prose a.btn--ghost { color: var(--text); }
 
 /* ---- utility -------------------------------------------------------- */
 .center { text-align: center; }

@@ -34,9 +34,9 @@
   --brown: #4B2E20;         /* Chocolate Brown */
   --cream: #FBF8F2;
 
-  /* Avocado — live-data state only (period-true; AA as data text). */
-  --avocado: #4F5A28;       /* data text / live values (AA on light) */
-  --avocado-bright: #6B7233;/* live dot glow (decorative) */
+  /* Live-data state = black (operator 2026-06-15: avocado didn't work). */
+  --avocado: #141414;       /* data text / live values */
+  --avocado-bright: #141414;/* live dot */
 
   /* Accent system (legacy token names, repointed AA-safe). --grn carries the
      brand accent used as TEXT and as CTA fill: deep rust passes both ways. */
