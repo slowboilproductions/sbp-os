@@ -131,15 +131,15 @@ const s0 = stages[0];
   /* layout switch: static by default, pinned tour only when .is-ready -------- */
   .tour { position: relative; }
   .tour__live { display: none; }
-  .tour.is-ready .tour__live { display: block; }
-  .tour.is-ready { height: 400vh; }
+  /* the tall scroll length must live on the sticky's OWN parent so the frame
+     has room to pin across all four stages (not on .tour). */
+  .tour.is-ready .tour__live { display: block; height: 400vh; }
   .tour__static { display: block; padding-block: var(--s9); }
   .tour.is-ready .tour__static { display: none; }
   /* never engage the pinned version under reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .tour.is-ready .tour__live { display: none; }
+    .tour.is-ready .tour__live { display: none; height: auto; }
     .tour.is-ready .tour__static { display: block; }
-    .tour.is-ready { height: auto; }
   }
 
   .tour__static-grid { margin-top: var(--s6); }
