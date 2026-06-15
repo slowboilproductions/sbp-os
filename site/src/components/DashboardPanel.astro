@@ -45,7 +45,9 @@ const { title = 'operational-dashboard / sell-through' } = Astro.props;
 <style>
   .dp { overflow: hidden; box-shadow: var(--shadow-panel); }
   .dp__top { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
-  .dp__dot { width: 11px; height: 11px; border-radius: 50%; background: #30363d; }
+  .dp__dot { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+  /* live/positive values read avocado (the live-data state color) */
+  .dp .dp__v.g { color: var(--avocado); }
   .dp__title { font-size: var(--t-eyebrow); color: var(--mut); margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .dp__live { margin-left: auto; font-size: 10px; }
   .dp__body { padding: 20px; }
@@ -54,7 +56,7 @@ const { title = 'operational-dashboard / sell-through' } = Astro.props;
   .dp__k { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mut); }
   .dp__v { font-weight: 600; font-size: 22px; margin-top: 6px; }
   .dp__chart { height: 118px; display: flex; align-items: flex-end; gap: 7px; padding-top: 6px; }
-  .dp__bar { flex: 1; background: linear-gradient(180deg, var(--grn), var(--grn-deep)); border-radius: 3px 3px 0 0; opacity: 0.85; }
+  .dp__bar { flex: 1; background: linear-gradient(180deg, var(--gold), var(--orange) 55%, var(--brown)); border-radius: 3px 3px 0 0; opacity: 0.92; }
   .dp__legend { font-size: 10px; color: var(--mut); margin-top: 10px; display: flex; justify-content: space-between; }
   @media (max-width: 760px) {
     .dp__v { font-size: 19px; }

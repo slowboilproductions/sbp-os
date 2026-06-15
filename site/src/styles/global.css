@@ -18,6 +18,12 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   background: var(--bg);
+  /* faint sun-baked warmth at the top — static instrument-panel texture,
+     no motion (motion layer is a later pass). */
+  background-image:
+    radial-gradient(120% 60% at 85% -10%, rgba(226, 179, 74, 0.16), transparent 60%),
+    radial-gradient(90% 50% at 0% -5%, rgba(224, 106, 44, 0.07), transparent 55%);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-size: var(--t-base);
@@ -81,11 +87,11 @@ p { max-width: 62ch; }
 .btn--mono { font-family: var(--font-mono); font-size: var(--t-eyebrow); color: var(--grn); border: 1px solid var(--grn-deep); background: var(--grn-wash); border-radius: var(--r-sm); padding: 0.65em 1.2em; }
 .btn--mono:hover { background: rgba(63,185,80,0.14); }
 
-/* ---- live signal (the "alive" chip) --------------------------------- */
-.live { font-family: var(--font-mono); font-size: var(--t-eyebrow); letter-spacing: 0.08em; color: var(--grn); display: inline-flex; align-items: center; gap: 0.5em; }
+/* ---- live signal (the "alive" chip) — avocado = live/operational state -- */
+.live { font-family: var(--font-mono); font-size: var(--t-eyebrow); letter-spacing: 0.08em; color: var(--avocado); display: inline-flex; align-items: center; gap: 0.5em; }
 .live::before {
   content: ""; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--grn); box-shadow: 0 0 8px var(--grn);
+  background: var(--avocado-bright); box-shadow: 0 0 8px var(--avocado-bright);
   animation: pulse 2.4s var(--ease) infinite;
 }
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
