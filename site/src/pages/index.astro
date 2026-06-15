@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DashboardPanel from '../components/DashboardPanel.astro';
 import StackGrid from '../components/StackGrid.astro';
+import StackTour from '../components/StackTour.astro';
 // Home — the family storefront (skeleton v0.3 §3.1), rewritten spirits-first
 // in the operator's first-person voice (A-15). Lead audience: developing
 // spirits & bev-alc brand owners; CPG is the eventual expansion, not the
@@ -56,6 +57,9 @@ import StackGrid from '../components/StackGrid.astro';
       <StackGrid />
     </div>
   </section>
+
+  <!-- ===== Showpiece: tour the stack ===== -->
+  <StackTour />
 
   <!-- ===== Why it's accessible (honest-AI) ===== -->
   <section class="section section--band">
