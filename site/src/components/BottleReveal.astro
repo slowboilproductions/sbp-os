@@ -1,0 +1,135 @@
+---
+// IC SIGNATURE — "still becomes motion" scroll zoom-parallax (B-7; operator
+// 2026-06-15, Tag Heuer / golf-site pattern). As you scroll: one still ->
+// zooms in -> the subject comes alive (motion) -> release back to copy.
+// Demonstrates the Image Creation pitch (anchor still -> brought to life)
+// by doing it. PLACEHOLDER bottle (on-brand slow-boil bubbles) stands in for
+// the operator's real bottle still + AI motion clip, which swap in later.
+//
+// Progressive + accessible: continuous scroll-scrub (no discrete stages);
+// static still + caption under no-JS / prefers-reduced-motion.
+---
+<section class="reveal" aria-label="One still, brought to life">
+  <div class="reveal__live">
+    <div class="reveal__sticky">
+      <p class="reveal__cap reveal__cap--in">It starts as one perfect still.</p>
+      <div class="reveal__stage">
+        <div class="reveal__bottle">
+          <svg viewBox="0 0 140 300" role="img" aria-label="A bottle, brought to life">
+            <defs>
+              <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--gold)" />
+                <stop offset="0.55" stop-color="var(--orange)" />
+                <stop offset="1" stop-color="var(--brown)" />
+              </linearGradient>
+              <clipPath id="bottleClip">
+                <path d="M52 18 h36 v34 q22 10 22 40 v176 q0 16 -16 16 h-48 q-16 0 -16 -16 v-176 q0 -30 22 -40 z" />
+              </clipPath>
+            </defs>
+            <!-- glass -->
+            <path class="reveal__glass" d="M52 18 h36 v34 q22 10 22 40 v176 q0 16 -16 16 h-48 q-16 0 -16 -16 v-176 q0 -30 22 -40 z" />
+            <rect class="reveal__cap-top" x="54" y="6" width="32" height="16" rx="3" />
+            <!-- liquid + bubbles, clipped to the bottle -->
+            <g clip-path="url(#bottleClip)">
+              <rect class="reveal__liquid" x="18" y="120" width="104" height="170" fill="url(#liquid)" />
+              <g class="reveal__bubbles">
+                <circle class="bubble" cx="48" cy="250" r="4" style="animation-delay:0s" />
+                <circle class="bubble" cx="70" cy="250" r="6" style="animation-delay:0.5s" />
+                <circle class="bubble" cx="92" cy="250" r="3.5" style="animation-delay:1s" />
+                <circle class="bubble" cx="60" cy="250" r="5" style="animation-delay:1.4s" />
+                <circle class="bubble" cx="82" cy="250" r="4.5" style="animation-delay:0.8s" />
+              </g>
+            </g>
+            <!-- glass highlight -->
+            <path class="reveal__shine" d="M44 70 q-6 30 0 150" />
+          </svg>
+        </div>
+      </div>
+      <p class="reveal__cap reveal__cap--out">Then the same model brings it to life.</p>
+    </div>
+  </div>
+
+  <!-- fallback: no-JS / reduced motion -->
+  <div class="reveal__static">
+    <div class="wrap center">
+      <span class="eyebrow">// Still, meet motion</span>
+      <h2>One still. Brought to life.</h2>
+      <p class="mut reveal__static-p">We start from one perfect anchor image of your product — then the same brand-trained model brings it into motion. Same look, now moving.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reveal { position: relative; background: var(--bg-2); border-block: 1px solid var(--line); }
+  .reveal__live { display: none; }
+  .reveal.is-ready .reveal__live { display: block; height: 240vh; }
+  .reveal__static { display: block; padding-block: var(--s9); }
+  .reveal.is-ready .reveal__static { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal.is-ready .reveal__live { display: none; height: auto; }
+    .reveal.is-ready .reveal__static { display: block; }
+  }
+  .reveal__static-p { max-width: 48ch; margin: var(--s4) auto 0; }
+
+  .reveal__sticky { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); display: grid; place-items: center; overflow: hidden; text-align: center; }
+  .reveal__stage { display: grid; place-items: center; }
+  .reveal__bottle { width: clamp(120px, 22vh, 200px); will-change: transform; transform: scale(0.9); }
+  .reveal__bottle svg { width: 100%; height: auto; overflow: visible; }
+
+  .reveal__glass { fill: var(--panel); stroke: var(--line-2); stroke-width: 2; }
+  .reveal__cap-top { fill: var(--brown); }
+  .reveal__liquid { opacity: 0.96; }
+  .reveal__shine { fill: none; stroke: rgba(255,255,255,0.5); stroke-width: 3; stroke-linecap: round; opacity: 0.5; }
+
+  .bubble { fill: rgba(251, 248, 242, 0.85); opacity: 0; }
+  .reveal.is-live .bubble { animation: bubbleRise 2.4s ease-in infinite; }
+  @keyframes bubbleRise {
+    0% { transform: translateY(0); opacity: 0; }
+    18% { opacity: 0.85; }
+    100% { transform: translateY(-120px); opacity: 0; }
+  }
+
+  .reveal__cap { position: absolute; left: 0; right: 0; font-family: var(--font-display); font-size: var(--t-h3); font-weight: 500; color: var(--text); padding-inline: var(--s5); }
+  .reveal__cap--in { top: 16%; }
+  .reveal__cap--out { bottom: 16%; opacity: 0; color: var(--grn); }
+
+  @media (max-width: 760px) {
+    .reveal__bottle { width: clamp(100px, 26vw, 150px); }
+    .reveal__cap { font-size: var(--t-lg); }
+  }
+</style>
+
+<script>
+  function initReveal() {
+    const section = document.querySelector('.reveal');
+    if (!section || section.dataset.wired) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    section.dataset.wired = '1';
+    section.classList.add('is-ready');
+
+    const bottle = section.querySelector('.reveal__bottle');
+    const capIn = section.querySelector('.reveal__cap--in');
+    const capOut = section.querySelector('.reveal__cap--out');
+    let raf = 0;
+
+    function onScroll() {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const rect = section.getBoundingClientRect();
+        const scrollable = section.offsetHeight - window.innerHeight;
+        let p = scrollable > 0 ? -rect.top / scrollable : 0;
+        p = Math.max(0, Math.min(1, p));
+        if (bottle) bottle.style.transform = 'scale(' + (0.9 + p * 1.4).toFixed(3) + ')';
+        if (capIn) capIn.style.opacity = String(Math.max(0, 1 - p * 2.4));
+        if (capOut) capOut.style.opacity = String(Math.max(0, Math.min(1, (p - 0.55) * 2.8)));
+        section.classList.toggle('is-live', p > 0.5);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+  initReveal();
+  document.addEventListener('astro:after-swap', initReveal);
+</script>
