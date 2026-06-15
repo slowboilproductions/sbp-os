@@ -1,18 +1,18 @@
 ---
 // A-19 signature device — the 70s "sunset / desert-horizon" tricolor banner.
-// Harvest Gold / Burnt Orange / Chocolate Brown stripes that run across the
-// page and elbow UP at the right with a rounded bend (the reference's mid
-// "Stripes & Gradients" swatch). In-flow header break. STATIC by design —
-// the motion layer is a later, separate pass. Purely decorative (aria-hidden).
+// Harvest Gold / Burnt Orange / Chocolate Brown stripes run across the page,
+// do a quick S-jog (smooth ogee) as they approach the right margin, then
+// continue horizontal off the right edge. In-flow header break. STATIC by
+// design — the motion layer is a later, separate pass. Decorative (aria-hidden).
 //
-// The three stripes share one turn so they stay parallel and the corners
-// fan (outer stripe = wider sweep) — the classic nested racing-stripe bend.
+// All three share the same S (same x-window, same rise), so the band stays
+// parallel throughout — the jog just lifts the whole band, then it runs off.
 ---
 <div class="sb-banner" aria-hidden="true">
   <svg class="sb-banner__svg" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMid meet" role="presentation" focusable="false">
-    <path d="M -24 52  H 1180 Q 1204 52  1204 28 V -8" stroke="var(--gold)"   stroke-width="22" fill="none" />
-    <path d="M -24 76  H 1180 Q 1228 76  1228 28 V -8" stroke="var(--orange)" stroke-width="22" fill="none" />
-    <path d="M -24 100 H 1180 Q 1252 100 1252 28 V -8" stroke="var(--brown)"  stroke-width="22" fill="none" />
+    <path d="M -24 52  H 1180 C 1240 52  1240 22 1300 22 H 1480" stroke="var(--gold)"   stroke-width="22" fill="none" />
+    <path d="M -24 76  H 1180 C 1240 76  1240 46 1300 46 H 1480" stroke="var(--orange)" stroke-width="22" fill="none" />
+    <path d="M -24 100 H 1180 C 1240 100 1240 70 1300 70 H 1480" stroke="var(--brown)"  stroke-width="22" fill="none" />
   </svg>
 </div>
 
