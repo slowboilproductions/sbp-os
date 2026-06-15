@@ -1,17 +1,14 @@
 ---
-// SHOWPIECE — "Tour the stack" pinned scroll sequence (B-7 motion layer).
-// One dashboard frame, pinned, that cycles through the four units as you
-// scroll: Marketing -> CRM -> Operational Dashboard -> Image Creation, each
-// lighting up its own data (count-ups + the chart morphing). The stack shown
-// as one connected machine.
+// SHOWPIECE — "Tour the stack" (B-7 motion). TAB-DRIVEN (operator 2026-06-15:
+// the scroll-jacked version was ergonomically frustrating — multiple scrolls
+// per unit). No scroll-hijacking: this is a normal-height section; scrolling
+// flows straight past it. The four unit tabs switch the dashboard frame
+// (count-ups + chart morph). A one-time "boot up" fires when it enters view.
 //
-// Progressive + accessible by construction:
-//  - Default (no JS) and prefers-reduced-motion: the `.tour__static` stacked
-//    fallback renders; the tall pinned section is NOT engaged.
-//  - With JS + motion allowed: the script adds `.is-ready`, which switches on
-//    the tall scroll section + sticky frame and hides the static fallback.
-// Built on the 70s "Analog Console" skin (warm frame, sunset bars, black live
-// values) — palette-agnostic behavior.
+// Progressive + accessible:
+//  - no-JS: static stacked four-card fallback (.tour__static).
+//  - JS: the interactive tab panel (.tour__live); count-ups respect
+//    prefers-reduced-motion (values set instantly).
 const stages = [
   {
     key: 'marketing', label: 'Marketing',
@@ -60,52 +57,50 @@ const stages = [
 ];
 const s0 = stages[0];
 ---
-<section class="tour" aria-label="Tour the stack — one machine, four units">
-  <!-- enhanced, pinned scroll-tour (engaged only when .is-ready) -->
+<section class="tour section" aria-label="Tour the stack — one machine, four units">
+  <!-- interactive tab panel (shown when JS engages) -->
   <div class="tour__live">
-    <div class="tour__sticky">
-      <div class="wrap tour__inner">
-        <div class="tour__head">
-          <span class="eyebrow">// One machine, four units</span>
-          <h2>Watch the whole stack run.</h2>
-        </div>
-        <div class="tour__rail" role="tablist" aria-label="Stack units">
-          {stages.map((s, i) => (
-            <button class={`tour__tab${i === 0 ? ' is-active' : ''}`} data-i={i} type="button">{s.label}</button>
-          ))}
-        </div>
-        <div class="tour__stage">
-          <div class="tour-dp panel">
-            <div class="tour-dp__top">
-              <span class="tour-dp__dot" aria-hidden="true"></span>
-              <span class="tour-dp__dot" aria-hidden="true"></span>
-              <span class="tour-dp__dot" aria-hidden="true"></span>
-              <span class="tour-dp__title mono">{s0.title}</span>
-              <span class="live tour-dp__live">LIVE</span>
-            </div>
-            <div class="tour-dp__body">
-              <div class="tour-dp__stats">
-                {s0.stats.map((st) => (
-                  <div class="tour-stat">
-                    <div class="tour-stat__k mono">{st.k}</div>
-                    <div class={`tour-stat__v mono${st.accent ? ' is-accent' : ''}`}>{st.v}</div>
-                  </div>
-                ))}
-              </div>
-              <div class="tour-dp__chart">
-                {s0.bars.map((h) => <span class="tour-bar" style={`height:${h}%`}></span>)}
-              </div>
-              <div class="tour-dp__legend mono"><span>Q1</span><span>live feed</span><span>Q4</span></div>
-            </div>
+    <div class="wrap">
+      <div class="tour__head">
+        <span class="eyebrow">// One machine, four units</span>
+        <h2>Watch the whole stack run.</h2>
+        <p class="tour__lead mut">Same system, four units. Tap through and watch each one light up its own data.</p>
+      </div>
+      <div class="tour__rail" role="tablist" aria-label="Stack units">
+        {stages.map((s, i) => (
+          <button class={`tour__tab${i === 0 ? ' is-active' : ''}`} data-i={i} type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'}>{s.label}</button>
+        ))}
+      </div>
+      <div class="tour__stage">
+        <div class="tour-dp panel">
+          <div class="tour-dp__top">
+            <span class="tour-dp__dot" aria-hidden="true"></span>
+            <span class="tour-dp__dot" aria-hidden="true"></span>
+            <span class="tour-dp__dot" aria-hidden="true"></span>
+            <span class="tour-dp__title mono">{s0.title}</span>
+            <span class="live tour-dp__live">LIVE</span>
           </div>
-          <p class="tour__caption">{s0.caption}</p>
+          <div class="tour-dp__body">
+            <div class="tour-dp__stats">
+              {s0.stats.map((st) => (
+                <div class="tour-stat">
+                  <div class="tour-stat__k mono">{st.k}</div>
+                  <div class={`tour-stat__v mono${st.accent ? ' is-accent' : ''}`}>{st.v}</div>
+                </div>
+              ))}
+            </div>
+            <div class="tour-dp__chart">
+              {s0.bars.map((h) => <span class="tour-bar" style={`height:${h}%`}></span>)}
+            </div>
+            <div class="tour-dp__legend mono"><span>Q1</span><span>live feed</span><span>Q4</span></div>
+          </div>
         </div>
-        <div class="tour__progress" aria-hidden="true"><span class="tour__progress-bar"></span></div>
+        <p class="tour__caption">{s0.caption}</p>
       </div>
     </div>
   </div>
 
-  <!-- static fallback: default + no-JS + prefers-reduced-motion -->
+  <!-- static fallback: no-JS -->
   <div class="tour__static">
     <div class="wrap">
       <div class="tour__head">
@@ -128,37 +123,28 @@ const s0 = stages[0];
 </section>
 
 <style>
-  /* layout switch: static by default, pinned tour only when .is-ready -------- */
-  .tour { position: relative; }
-  .tour__live { display: none; }
-  /* the tall scroll length must live on the sticky's OWN parent so the frame
-     has room to pin across all four stages (not on .tour). */
-  .tour.is-ready .tour__live { display: block; height: 400vh; }
+  /* interactive panel by default hidden; JS reveals it, hides the static one */
+  .tour { padding-block: 0; }
+  .tour__live { display: none; padding-block: var(--s9); }
+  .tour.is-ready .tour__live { display: block; }
   .tour__static { display: block; padding-block: var(--s9); }
   .tour.is-ready .tour__static { display: none; }
-  /* never engage the pinned version under reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .tour.is-ready .tour__live { display: none; height: auto; }
-    .tour.is-ready .tour__static { display: block; }
-  }
 
   .tour__static-grid { margin-top: var(--s6); }
   .tour__static-card { display: flex; flex-direction: column; gap: 9px; min-height: 150px; }
   .tour__static-card .live { align-self: flex-start; }
 
-  /* pinned stage ------------------------------------------------------------ */
-  .tour__sticky { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); display: flex; align-items: center; overflow: hidden; }
+  .tour__head { max-width: 60ch; }
   .tour__head h2 { margin-top: var(--s2); }
+  .tour__lead { margin-top: var(--s4); font-size: var(--t-base); max-width: 52ch; }
+
   .tour__rail { display: flex; flex-wrap: wrap; gap: 9px; margin: var(--s6) 0; }
   .tour__tab { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--mut); padding: 8px 15px; border: 1px solid var(--line-2); border-radius: var(--r-pill); transition: color var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease); }
   .tour__tab:hover { color: var(--text); border-color: var(--mut); }
   .tour__tab.is-active { color: var(--grn-ink); background: var(--grn); border-color: var(--grn); }
 
   .tour__stage { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--s7); align-items: center; }
-  .tour__caption { font-family: var(--font-display); font-size: var(--t-lg); line-height: 1.4; color: var(--text-2); max-width: 34ch; transition: opacity var(--dur) var(--ease); }
-
-  .tour__progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: var(--s7); }
-  .tour__progress-bar { display: block; height: 100%; background: var(--grn); transform: scaleX(0); transform-origin: left; }
+  .tour__caption { font-family: var(--font-display); font-size: var(--t-lg); line-height: 1.4; color: var(--text-2); max-width: 34ch; }
 
   /* the dashboard frame (mirrors DashboardPanel; scoped styles don't cross) -- */
   .tour-dp { overflow: hidden; box-shadow: var(--shadow-panel); }
@@ -179,7 +165,6 @@ const s0 = stages[0];
   @media (max-width: 860px) {
     .tour__stage { grid-template-columns: 1fr; gap: var(--s5); }
     .tour__caption { max-width: none; }
-    .tour__sticky { height: auto; min-height: calc(100vh - var(--nav-h)); }
   }
 </style>
 
@@ -193,30 +178,27 @@ const s0 = stages[0];
     try { stages = JSON.parse(dataEl.textContent || '[]'); } catch { return; }
     if (!stages.length) return;
 
-    // Respect reduced motion: leave the static fallback in place.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     section.dataset.wired = '1';
     section.classList.add('is-ready');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const titleEl = section.querySelector('.tour-dp__title');
     const capEl = section.querySelector('.tour__caption');
     const statCells = Array.from(section.querySelectorAll('.tour-stat'));
     const bars = Array.from(section.querySelectorAll('.tour-bar'));
     const tabs = Array.from(section.querySelectorAll('.tour__tab'));
-    const progBar = section.querySelector('.tour__progress-bar');
     let current = -1;
 
     function countUp(el, to, opts) {
-      const dur = 650, start = performance.now();
       const prefix = opts.prefix || '', suffix = opts.suffix || '';
       const decimals = String(to).indexOf('.') !== -1 ? 1 : 0;
+      const fmt = (v) => prefix + (decimals ? v.toFixed(1) : Math.round(v).toLocaleString()) + suffix;
+      if (reduce) { el.textContent = fmt(to); return; }
+      const dur = 600, start = performance.now();
       function frame(now) {
         const t = Math.min(1, (now - start) / dur);
         const e = 1 - Math.pow(1 - t, 3);
-        const val = to * e;
-        const disp = decimals ? val.toFixed(1) : Math.round(val).toLocaleString();
-        el.textContent = prefix + disp + suffix;
+        el.textContent = fmt(to * e);
         if (t < 1) requestAnimationFrame(frame);
       }
       requestAnimationFrame(frame);
@@ -228,7 +210,11 @@ const s0 = stages[0];
       const s = stages[i];
       if (titleEl) titleEl.textContent = s.title;
       if (capEl) capEl.textContent = s.caption;
-      tabs.forEach((t, ti) => t.classList.toggle('is-active', ti === i));
+      tabs.forEach((t, ti) => {
+        const on = ti === i;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
       statCells.forEach((cell, ci) => {
         const st = s.stats[ci];
         if (!st) return;
@@ -240,32 +226,17 @@ const s0 = stages[0];
       s.bars.forEach((h, bi) => { if (bars[bi]) bars[bi].style.height = h + '%'; });
     }
 
-    function onScroll() {
-      const rect = section.getBoundingClientRect();
-      const scrollable = section.offsetHeight - window.innerHeight;
-      let p = scrollable > 0 ? -rect.top / scrollable : 0;
-      p = Math.max(0, Math.min(0.9999, p));
-      if (progBar) progBar.style.transform = 'scaleX(' + p + ')';
-      setStage(Math.min(stages.length - 1, Math.floor(p * stages.length)));
+    tabs.forEach((t, ti) => t.addEventListener('click', () => setStage(ti)));
+
+    // one-time "boot up" of the first unit when the panel enters view
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { setStage(0); io.disconnect(); } });
+      }, { threshold: 0.35 });
+      io.observe(section);
+    } else {
+      setStage(0);
     }
-
-    let ticking = false;
-    function onScrollRaf() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => { onScroll(); ticking = false; });
-    }
-    window.addEventListener('scroll', onScrollRaf, { passive: true });
-    window.addEventListener('resize', onScrollRaf, { passive: true });
-
-    tabs.forEach((t, ti) => t.addEventListener('click', () => {
-      const scrollable = section.offsetHeight - window.innerHeight;
-      const top = section.offsetTop + ((ti + 0.5) / stages.length) * scrollable;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }));
-
-    setStage(0);
-    onScroll();
   }
   initTour();
   document.addEventListener('astro:after-swap', initTour);
