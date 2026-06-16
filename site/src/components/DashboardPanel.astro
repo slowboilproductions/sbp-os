@@ -116,18 +116,46 @@ const { title = 'operational-dashboard / sell-through' } = Astro.props;
         onScroll();
       }
 
-      // ambient: one plain-integer stat quietly ticks every few seconds
-      if (!reduce) {
-        const cells = Array.from(panel.querySelectorAll('.dp__v[data-count]'));
+      const cells = Array.from(panel.querySelectorAll('.dp__v[data-count]'));
+
+      // boot-up count-up: numbers tick up from zero the first time the panel
+      // enters view (the dashboard "powering on"), then the ambient tick takes
+      // over. Off under reduced motion — values stay at their final text.
+      const startAmbient = () => {
+        if (reduce) return;
         const target = cells.find((c) => !c.dataset.suffix && !c.dataset.prefix);
-        if (target) {
-          const base = parseFloat(target.dataset.count);
-          setInterval(() => {
-            if (document.hidden) return;
-            const val = Math.max(0, base + Math.round(Math.random() * 4 - 2));
-            target.textContent = val.toLocaleString();
-          }, 3500);
-        }
+        if (!target) return;
+        const base = parseFloat(target.dataset.count);
+        setInterval(() => {
+          if (document.hidden) return;
+          const val = Math.max(0, base + Math.round(Math.random() * 4 - 2));
+          target.textContent = val.toLocaleString();
+        }, 3500);
+      };
+
+      if (!reduce && cells.length) {
+        const fmt = (c, v) => (c.dataset.prefix || '') +
+          (String(c.dataset.count).indexOf('.') !== -1 ? v.toFixed(1) : Math.round(v).toLocaleString()) +
+          (c.dataset.suffix || '');
+        cells.forEach((c) => { c.textContent = fmt(c, 0); });
+        const boot = () => {
+          const dur = 1000, start = performance.now();
+          const frame = (now) => {
+            const t = Math.min(1, (now - start) / dur);
+            const e = 1 - Math.pow(1 - t, 3);
+            cells.forEach((c) => { c.textContent = fmt(c, parseFloat(c.dataset.count) * e); });
+            if (t < 1) requestAnimationFrame(frame); else startAmbient();
+          };
+          requestAnimationFrame(frame);
+        };
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((en) => { if (en.isIntersecting) { boot(); io.disconnect(); } });
+          }, { threshold: 0.3 });
+          io.observe(panel);
+        } else { boot(); }
+      } else {
+        startAmbient();
       }
     });
   }

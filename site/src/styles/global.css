@@ -136,6 +136,45 @@ p { max-width: 62ch; }
 .skip-link { position: absolute; left: -9999px; top: 0; background: var(--grn); color: var(--grn-ink); padding: 0.6em 1em; border-radius: var(--r-sm); z-index: 100; }
 .skip-link:focus { left: var(--s4); top: var(--s4); }
 
+/* ---- motion layer (progressive) ------------------------------------- */
+/* These rules only bite once JS has confirmed motion is allowed and added
+   html.motion-ready. Under no-JS or prefers-reduced-motion the class is never
+   added, so tagged content renders fully visible and static. The reduced-motion
+   media query is a second belt on top of that. */
+html.motion-ready [data-reveal] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+  will-change: opacity, transform;
+}
+html.motion-ready [data-reveal].is-in { opacity: 1; transform: none; }
+html.motion-ready [data-reveal][data-reveal="up-sm"] { transform: translateY(12px); }
+/* staggered children: tag a container [data-reveal] and let its rows lag */
+html.motion-ready [data-reveal-stagger] > * { opacity: 0; transform: translateY(20px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+html.motion-ready [data-reveal-stagger].is-in > * { opacity: 1; transform: none; }
+html.motion-ready [data-reveal-stagger].is-in > *:nth-child(2) { transition-delay: 0.07s; }
+html.motion-ready [data-reveal-stagger].is-in > *:nth-child(3) { transition-delay: 0.14s; }
+html.motion-ready [data-reveal-stagger].is-in > *:nth-child(4) { transition-delay: 0.21s; }
+html.motion-ready [data-reveal-stagger].is-in > *:nth-child(5) { transition-delay: 0.28s; }
+html.motion-ready [data-reveal-stagger].is-in > *:nth-child(6) { transition-delay: 0.35s; }
+
+/* cursor-aware warm glow on cards (fine pointer; positions set by SiteMotion).
+   isolation makes .card its own stacking context, so the z-index:-1 glow paints
+   above the card's panel background but beneath all content — no need to touch
+   child positioning (keeps absolute chips like .sg__live intact). */
+html.motion-ready .card { --gx: 50%; --gy: 0%; isolation: isolate; }
+html.motion-ready .card::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
+  background: radial-gradient(220px circle at var(--gx) var(--gy), var(--grn-wash), transparent 62%);
+  opacity: 0; transition: opacity var(--dur) var(--ease); pointer-events: none;
+}
+html.motion-ready .card:hover::before { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready [data-reveal],
+  html.motion-ready [data-reveal-stagger] > * { opacity: 1; transform: none; transition: none; }
+  html.motion-ready .card::before { display: none; }
+}
+
 /* ---- product / subunit page shared pattern -------------------------- */
 .prod-hero { max-width: 54ch; }
 .prod-hero .lede { margin-top: var(--s5); }
