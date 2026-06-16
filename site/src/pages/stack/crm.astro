@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CrmPopulate from '../../components/CrmPopulate.astro';
 // CRM subunit (skeleton v0.3 §3.3), spirits/bev-alc-first, operator voice (A-15).
 // Public name "CRM" (A-6). Pricing → Contact only (A-8).
 // FLAG: capability claims drawn from the skeleton outline, kept conservative;
@@ -33,7 +34,7 @@ const feats = [
 
       <div class="prod-sec">
         <div class="prod-sec__head"><h2>Every account, distributor, and depletion in one place — and the ones slipping, flagged.</h2></div>
-        <div class="feats">
+        <div class="feats" data-reveal-stagger>
           {feats.map((f) => (
             <div class="feat card">
               <span class="feat__n">{f.n}</span>
@@ -43,8 +44,14 @@ const feats = [
           ))}
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="prod-sec">
+  <CrmPopulate />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-sec" style="margin-top:0; padding-top:0;">
         <div class="prod-sec__head">
           <span class="eyebrow">// Built for the category</span>
           <h2>Distributors, depletions, and SKUs are first-class — not customizations.</h2>
