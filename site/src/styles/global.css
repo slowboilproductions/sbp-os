@@ -147,8 +147,7 @@ html.motion-ready [data-reveal] {
   will-change: opacity, transform;
 }
 html.motion-ready [data-reveal].is-in { opacity: 1; transform: none; }
-html.motion-ready [data-reveal][data-reveal="up-sm"] { transform: translateY(12px); }
-/* staggered children: tag a container [data-reveal] and let its rows lag */
+/* staggered children: tag a container [data-reveal-stagger] and let its rows lag */
 html.motion-ready [data-reveal-stagger] > * { opacity: 0; transform: translateY(20px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
 html.motion-ready [data-reveal-stagger].is-in > * { opacity: 1; transform: none; }
 html.motion-ready [data-reveal-stagger].is-in > *:nth-child(2) { transition-delay: 0.07s; }
