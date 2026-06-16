@@ -100,7 +100,7 @@ p { max-width: 62ch; }
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); }
 .card {
   background: var(--panel); border: 1px solid var(--line); border-radius: var(--r);
-  padding: var(--s5); position: relative;
+  padding: var(--s5); position: relative; isolation: isolate;
   transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 .card:hover { border-color: var(--line-2); transform: translateY(-2px); background: var(--panel-2); }
@@ -203,7 +203,7 @@ html.motion .rec[data-reveal].is-in .rec__row { opacity: 1; transform: none; }
 /* cursor-reactive flourishes — fine pointer + motion only */
 @media (hover: hover) and (pointer: fine) {
   html.motion .card::after {
-    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
     pointer-events: none; opacity: 0; transition: opacity var(--dur) var(--ease);
     background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(224, 106, 44, 0.10), transparent 62%);
   }

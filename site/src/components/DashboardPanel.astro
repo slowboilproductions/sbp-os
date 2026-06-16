@@ -133,6 +133,7 @@ const { title = 'operational-dashboard / sell-through' } = Astro.props;
               const e = 1 - Math.pow(1 - t, 3);
               el.textContent = fmt(to * e);
               if (t < 1) requestAnimationFrame(frame);
+              else el.dataset.counted = '1';   // hand the cell off to the ambient ticker
             };
             requestAnimationFrame(frame);
           });
@@ -142,17 +143,22 @@ const { title = 'operational-dashboard / sell-through' } = Astro.props;
             entries.forEach((en) => { if (en.isIntersecting) { runCountUp(); io.disconnect(); } });
           }, { threshold: 0.4 });
           io.observe(panel);
+        } else {
+          // no IO → no entrance count-up, but release the cells to the ticker
+          counters.forEach((el) => (el.dataset.counted = '1'));
         }
       }
 
-      // ambient: one plain-integer stat quietly ticks every few seconds
+      // ambient: one plain-integer stat quietly ticks every few seconds —
+      // but only once the boot-up count-up has finished on that cell, so the
+      // two never fight over the same value mid-animation (audit nit W5-1).
       if (!reduce) {
         const cells = Array.from(panel.querySelectorAll('.dp__v[data-count]'));
         const target = cells.find((c) => !c.dataset.suffix && !c.dataset.prefix);
         if (target) {
           const base = parseFloat(target.dataset.count);
           setInterval(() => {
-            if (document.hidden) return;
+            if (document.hidden || !target.dataset.counted) return;
             const val = Math.max(0, base + Math.round(Math.random() * 4 - 2));
             target.textContent = val.toLocaleString();
           }, 3500);
