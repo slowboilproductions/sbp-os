@@ -8,19 +8,15 @@
 // All three share the same S (same x-window, same rise), so the band stays
 // parallel throughout — the jog just lifts the whole band, then it runs off.
 //
-// W7 "sunset drift" (B-7 polish menu): each band gently, slowly sways a few
-// user-units on its own phase/direction, so the bend elbows fan apart and
-// rejoin like a living desert sunset. Transform-only, very low amplitude,
-// long period — ambient, not attention-grabbing. The strokes overrun the
-// viewBox on both sides (start -24, end 1480 vs 0–1440), so the drift never
-// exposes a stroke end. STATIC under prefers-reduced-motion (the global reset
-// neutralizes the animation; an explicit guard below is the second belt).
+// STATIC by design — a W7 ambient "sunset drift" sway was tried and cut
+// (operator, 2026-06-16: liked the page-wipe, not the banner sway). The
+// banner stays a still signature device; motion lives in the page-wipe.
 ---
 <div class="sb-banner" aria-hidden="true">
   <svg class="sb-banner__svg" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMid meet" role="presentation" focusable="false">
-    <path class="sb-p1" d="M -24 52  H 1180 C 1240 52  1240 22 1300 22 H 1480" stroke="var(--gold)"   stroke-width="22" fill="none" />
-    <path class="sb-p2" d="M -24 76  H 1180 C 1240 76  1240 46 1300 46 H 1480" stroke="var(--orange)" stroke-width="22" fill="none" />
-    <path class="sb-p3" d="M -24 100 H 1180 C 1240 100 1240 70 1300 70 H 1480" stroke="var(--brown)"  stroke-width="22" fill="none" />
+    <path d="M -24 52  H 1180 C 1240 52  1240 22 1300 22 H 1480" stroke="var(--gold)"   stroke-width="22" fill="none" />
+    <path d="M -24 76  H 1180 C 1240 76  1240 46 1300 46 H 1480" stroke="var(--orange)" stroke-width="22" fill="none" />
+    <path d="M -24 100 H 1180 C 1240 100 1240 70 1300 70 H 1480" stroke="var(--brown)"  stroke-width="22" fill="none" />
   </svg>
 </div>
 
@@ -30,19 +26,5 @@
   @media (max-width: 760px) {
     /* keep the band slim on phones; the bend rides the right edge */
     .sb-banner__svg { max-height: 96px; }
-  }
-
-  /* ---- sunset drift (decorative; transform-only) ---------------------- */
-  .sb-banner__svg path { will-change: transform; }
-  .sb-p1 { animation: sb-drift1 23s ease-in-out infinite; }
-  .sb-p2 { animation: sb-drift2 27s ease-in-out infinite; }
-  .sb-p3 { animation: sb-drift3 31s ease-in-out infinite; }
-  /* counter-phased directions → the three bend elbows fan and rejoin */
-  @keyframes sb-drift1 { 0%, 100% { transform: translate(0, 0); }    50% { transform: translate(-13px, -2px); } }
-  @keyframes sb-drift2 { 0%, 100% { transform: translate(0, 0); }    50% { transform: translate(10px, 1.5px); } }
-  @keyframes sb-drift3 { 0%, 100% { transform: translate(0, 0); }    50% { transform: translate(-7px, 2.5px); } }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sb-p1, .sb-p2, .sb-p3 { animation: none; transform: none; }
   }
 </style>
