@@ -1,0 +1,198 @@
+---
+// IC SIGNATURE SHOWCASE — "studio shoot -> 360 -> a gallery of stills -> motion"
+// (B-7; operator 2026-06-15, Tag-Heuer-further). The IC value chain, told by
+// the page doing it: one studio bottle, orbited on scroll (object-360 frame
+// scrub), fanning into the stills generated from that one shoot, the last of
+// which comes alive. PLACEHOLDER bottle frames (`/ic-360/*`) are a stylized
+// stand-in for the operator's real studio turntable + generated stills + clip,
+// which drop into the same slots later.
+//
+// Progressive + accessible: continuous scroll-scrub (no discrete stages);
+// static stills gallery under no-JS / prefers-reduced-motion.
+const pad = (n) => String(n).padStart(2, '0');
+
+// ===========================================================================
+// ASSET SWAP — replace the placeholder art with the real Sunshine Punch shoot.
+// (See public/ic-360/README.md for the full spec.)
+//   PHASE A (360):  drop turntable frames into public/ic-360/ named
+//                   frame-00.png .. frame-NN.png, then set FRAMES to the count.
+//   PHASE B (stills): the LoRA-GENERATED images off the Phase-A studio shots
+//                   (the IC output itself — one shoot -> a library of new
+//                   on-brand images). Point `stills` at them; default = frames.
+//   PHASE C (motion): set `motionSrc` to a muted clip ('/ic-360/motion.mp4');
+//                   it autoplays muted in view. null -> bubble placeholder.
+// ===========================================================================
+const FRAMES = 24;                                   // turntable frame count
+const framePath = (i) => `/ic-360/frame-${pad(i)}.png`;
+const stillIdx = [0, 4, 8, 12, 16, 20];
+const stills = stillIdx.map(framePath);              // or: LoRA outputs, e.g. ['/ic-360/gen-1.jpg', ...]
+const motionSrc = null;                              // or: '/ic-360/motion.mp4'
+---
+<section class="studio" aria-label="One studio shoot, every angle, brought to life" data-frames={FRAMES}>
+  <div class="studio__live">
+    <div class="studio__sticky">
+      <p class="studio__cap" data-phase="a">One bottle. One studio shoot.</p>
+      <p class="studio__cap" data-phase="b">One shoot becomes a hundred images.</p>
+      <p class="studio__cap" data-phase="c">And the last one comes alive.</p>
+
+      <!-- phase A: the 360 orbit (scroll-scrubbed frames) -->
+      <div class="studio__orbit">
+        <img class="studio__frame" src={framePath(0)} alt="A bottle from the shoot, turned through every angle" width="500" height="760" />
+      </div>
+
+      <!-- phase B: the generated stills fan in -->
+      <div class="studio__gallery" aria-hidden="true">
+        {stills.map((src, i) => (
+          <div class={`studio__still st${i}`}>
+            <img src={src} alt="" width="500" height="760" loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+      <!-- phase C: the last still moves -->
+      <div class="studio__motion" aria-hidden="true">
+        {motionSrc ? (
+          <video class="studio__video" src={motionSrc} muted loop playsinline preload="none" width="500" height="760"></video>
+        ) : (
+          <div class="studio__motion-bottle">
+            <img src={framePath(0)} alt="" width="500" height="760" />
+            <span class="bubble" style="left:46%; animation-delay:0s"></span>
+            <span class="bubble" style="left:54%; animation-delay:0.5s"></span>
+            <span class="bubble" style="left:50%; animation-delay:1s"></span>
+            <span class="bubble" style="left:43%; animation-delay:1.4s"></span>
+            <span class="bubble" style="left:57%; animation-delay:0.8s"></span>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- fallback: no-JS / reduced motion -->
+  <div class="studio__static">
+    <div class="wrap center">
+      <span class="eyebrow">// One shoot, every angle, in motion</span>
+      <h2>One studio shoot becomes a hundred images. The last one moves.</h2>
+      <p class="mut studio__static-p">From a single anchor shoot, the brand-trained model generates a full library of on-model stills — then brings them into motion. Same look, every angle, now moving.</p>
+      <div class="grid grid--3 studio__static-grid">
+        {stillIdx.map((n) => (
+          <div class="studio__static-card"><img src={`/ic-360/frame-${pad(n)}.png`} alt="" width="500" height="760" loading="lazy" /></div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .studio { position: relative; background: var(--bg-2); border-block: 1px solid var(--line); }
+  .studio__live { display: none; }
+  .studio.is-ready .studio__live { display: block; height: 360vh; }
+  .studio__static { display: block; padding-block: var(--s9); }
+  .studio.is-ready .studio__static { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .studio.is-ready .studio__live { display: none; height: auto; }
+    .studio.is-ready .studio__static { display: block; }
+  }
+  .studio__static-p { max-width: 52ch; margin: var(--s4) auto var(--s7); }
+  .studio__static-grid { margin-top: var(--s5); }
+  .studio__static-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 8px; }
+  .studio__static-card img { width: 100%; height: auto; display: block; }
+
+  .studio__sticky { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow: hidden; display: grid; place-items: center; }
+
+  /* captions per phase */
+  .studio__cap { position: absolute; top: 9%; left: 0; right: 0; text-align: center; font-family: var(--font-display); font-size: var(--t-h3); font-weight: 500; padding-inline: var(--s5); opacity: 0; transition: opacity 0.45s var(--ease); pointer-events: none; }
+  .studio.is-a .studio__cap[data-phase="a"],
+  .studio.is-b .studio__cap[data-phase="b"],
+  .studio.is-c .studio__cap[data-phase="c"] { opacity: 1; }
+  .studio__cap[data-phase="c"] { color: var(--grn); }
+
+  /* phase A — orbit */
+  .studio__orbit { transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+  .studio__orbit img { height: min(62vh, 500px); width: auto; display: block; }
+  .studio.is-b .studio__orbit, .studio.is-c .studio__orbit { opacity: 0; transform: scale(0.7); }
+
+  /* phase B — gallery of stills */
+  .studio__gallery { position: absolute; inset: 0; display: grid; place-content: center; grid-template-columns: repeat(3, minmax(0, 26vh)); gap: var(--s4); opacity: 0; transition: opacity 0.4s var(--ease); pointer-events: none; }
+  .studio.is-b .studio__gallery, .studio.is-c .studio__gallery { opacity: 1; }
+  .studio__still { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 7px; box-shadow: var(--shadow-soft); opacity: 0; transform: translateY(28px) scale(0.9) rotate(var(--rot, 0deg)); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+  .studio.is-b .studio__still, .studio.is-c .studio__still { opacity: 1; transform: translateY(0) scale(1) rotate(var(--rot, 0deg)); }
+  .studio__still img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .studio__still.st0 { --rot: -6deg; transition-delay: 0.00s; }
+  .studio__still.st1 { --rot: 3deg;  transition-delay: 0.06s; }
+  .studio__still.st2 { --rot: -3deg; transition-delay: 0.12s; }
+  .studio__still.st3 { --rot: 5deg;  transition-delay: 0.18s; }
+  .studio__still.st4 { --rot: -4deg; transition-delay: 0.24s; }
+  .studio__still.st5 { --rot: 4deg;  transition-delay: 0.30s; }
+  /* phase C — dim the gallery behind the motion finale */
+  .studio.is-c .studio__gallery { opacity: 0.16; }
+
+  /* phase C — motion finale */
+  .studio__motion { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity 0.5s var(--ease); pointer-events: none; }
+  .studio.is-c .studio__motion { opacity: 1; }
+  .studio__video { height: min(62vh, 500px); width: auto; display: block; border-radius: var(--r); box-shadow: var(--shadow-panel); }
+  .studio__motion-bottle { position: relative; }
+  .studio__motion-bottle img { height: min(62vh, 500px); width: auto; display: block; }
+  .studio__motion-bottle .bubble { position: absolute; bottom: 26%; width: 12px; height: 12px; border-radius: 50%; background: rgba(251, 248, 242, 0.85); opacity: 0; transform: translateX(-50%); }
+  .studio.is-c .studio__motion-bottle .bubble { animation: studioBubble 2.4s ease-in infinite; }
+  @keyframes studioBubble {
+    0% { transform: translate(-50%, 0); opacity: 0; }
+    18% { opacity: 0.85; }
+    100% { transform: translate(-50%, -150px); opacity: 0; }
+  }
+
+  @media (max-width: 760px) {
+    .studio__cap { font-size: var(--t-lg); }
+    .studio__gallery { grid-template-columns: repeat(2, minmax(0, 30vw)); }
+  }
+</style>
+
+<script>
+  const pad = (n) => String(n).padStart(2, '0');
+
+  function initStudio() {
+    const section = document.querySelector('.studio');
+    if (!section || section.dataset.wired) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    section.dataset.wired = '1';
+    section.classList.add('is-ready');
+
+    const FRAMES = parseInt(section.dataset.frames || '24', 10);
+    const srcs = Array.from({ length: FRAMES }, (_, i) => '/ic-360/frame-' + pad(i) + '.png');
+    const frameImg = section.querySelector('.studio__frame');
+    const video = section.querySelector('.studio__video');
+    srcs.forEach((s) => { const im = new Image(); im.src = s; }); // preload for smooth scrub
+
+    let raf = 0, lastIdx = -1, phase = '';
+    function setPhase(p) {
+      if (p === phase) return;
+      phase = p;
+      section.classList.remove('is-a', 'is-b', 'is-c');
+      section.classList.add('is-' + p);
+      if (video) { if (p === 'c') { video.play().catch(() => {}); } else { video.pause(); } }
+    }
+    function onScroll() {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const rect = section.getBoundingClientRect();
+        const scrollable = section.offsetHeight - window.innerHeight;
+        let p = scrollable > 0 ? -rect.top / scrollable : 0;
+        p = Math.max(0, Math.min(1, p));
+        if (p < 0.5) {
+          setPhase('a');
+          const idx = Math.min(FRAMES - 1, Math.round((p / 0.5) * (FRAMES - 1)));
+          if (idx !== lastIdx && frameImg) { lastIdx = idx; frameImg.src = srcs[idx]; }
+        } else if (p < 0.78) {
+          setPhase('b');
+        } else {
+          setPhase('c');
+        }
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+  initStudio();
+  document.addEventListener('astro:after-swap', initStudio);
+</script>

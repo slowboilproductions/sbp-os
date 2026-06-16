@@ -1,0 +1,243 @@
+---
+// SHOWPIECE — "Tour the stack" (B-7 motion). TAB-DRIVEN (operator 2026-06-15:
+// the scroll-jacked version was ergonomically frustrating — multiple scrolls
+// per unit). No scroll-hijacking: this is a normal-height section; scrolling
+// flows straight past it. The four unit tabs switch the dashboard frame
+// (count-ups + chart morph). A one-time "boot up" fires when it enters view.
+//
+// Progressive + accessible:
+//  - no-JS: static stacked four-card fallback (.tour__static).
+//  - JS: the interactive tab panel (.tour__live); count-ups respect
+//    prefers-reduced-motion (values set instantly).
+const stages = [
+  {
+    key: 'marketing', label: 'Marketing',
+    title: 'marketing / campaign performance',
+    caption: 'Campaigns built, launched, and optimized — every channel in one view.',
+    stats: [
+      { k: 'Reach', v: '128K', count: 128, suffix: 'K' },
+      { k: 'CTR', v: '4.6%', count: 4.6, suffix: '%', accent: true },
+      { k: 'Bookings', v: '312', count: 312 },
+    ],
+    bars: [40, 52, 47, 61, 58, 72, 69, 80, 77, 90],
+  },
+  {
+    key: 'crm', label: 'CRM',
+    title: 'crm / accounts',
+    caption: 'Every account, distributor, and depletion — and the ones slipping, flagged.',
+    stats: [
+      { k: 'Accounts', v: '1,204', count: 1204 },
+      { k: 'Active reps', v: '18', count: 18 },
+      { k: 'At risk', v: '7', count: 7, accent: true },
+    ],
+    bars: [55, 50, 58, 54, 62, 60, 66, 63, 70, 68],
+  },
+  {
+    key: 'dashboard', label: 'Operational Dashboard',
+    title: 'operational-dashboard / sell-through',
+    caption: 'Sell-in vs sell-through truth — catch a lagging account before a stock-out.',
+    stats: [
+      { k: 'Depletions', v: '+18.4%', count: 18.4, prefix: '+', suffix: '%', accent: true },
+      { k: 'Accounts', v: '1,204', count: 1204 },
+      { k: 'Coverage', v: '92%', count: 92, suffix: '%' },
+    ],
+    bars: [42, 55, 48, 67, 60, 78, 71, 88, 82, 96],
+  },
+  {
+    key: 'image', label: 'Image Creation',
+    title: 'image-creation / asset pipeline',
+    caption: 'Stills and motion, brand-trained — every asset on-model, on your timeline.',
+    stats: [
+      { k: 'Assets', v: '640', count: 640 },
+      { k: 'On-brand', v: '99%', count: 99, suffix: '%', accent: true },
+      { k: 'Turnaround', v: '48h', count: 48, suffix: 'h' },
+    ],
+    bars: [60, 64, 58, 70, 66, 74, 72, 80, 78, 86],
+  },
+];
+const s0 = stages[0];
+---
+<section class="tour section" aria-label="Tour the stack — one machine, four units">
+  <!-- interactive tab panel (shown when JS engages) -->
+  <div class="tour__live">
+    <div class="wrap">
+      <div class="tour__head">
+        <span class="eyebrow">// One machine, four units</span>
+        <h2>Watch the whole stack run.</h2>
+        <p class="tour__lead mut">Same system, four units. Tap through and watch each one light up its own data.</p>
+      </div>
+      <div class="tour__rail" role="tablist" aria-label="Stack units">
+        {stages.map((s, i) => (
+          <button class={`tour__tab${i === 0 ? ' is-active' : ''}`} data-i={i} type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'}>{s.label}</button>
+        ))}
+      </div>
+      <div class="tour__stage">
+        <div class="tour-dp panel">
+          <div class="tour-dp__top">
+            <span class="tour-dp__dot" aria-hidden="true"></span>
+            <span class="tour-dp__dot" aria-hidden="true"></span>
+            <span class="tour-dp__dot" aria-hidden="true"></span>
+            <span class="tour-dp__title mono">{s0.title}</span>
+            <span class="live tour-dp__live">LIVE</span>
+          </div>
+          <div class="tour-dp__body">
+            <div class="tour-dp__stats">
+              {s0.stats.map((st) => (
+                <div class="tour-stat">
+                  <div class="tour-stat__k mono">{st.k}</div>
+                  <div class={`tour-stat__v mono${st.accent ? ' is-accent' : ''}`}>{st.v}</div>
+                </div>
+              ))}
+            </div>
+            <div class="tour-dp__chart">
+              {s0.bars.map((h) => <span class="tour-bar" style={`height:${h}%`}></span>)}
+            </div>
+            <div class="tour-dp__legend mono"><span>Q1</span><span>live feed</span><span>Q4</span></div>
+          </div>
+        </div>
+        <p class="tour__caption">{s0.caption}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- static fallback: no-JS -->
+  <div class="tour__static">
+    <div class="wrap">
+      <div class="tour__head">
+        <span class="eyebrow">// One machine, four units</span>
+        <h2>The whole stack, running.</h2>
+      </div>
+      <div class="grid grid--2 tour__static-grid">
+        {stages.map((s) => (
+          <div class="card tour__static-card">
+            <span class="live">LIVE</span>
+            <h3>{s.label}</h3>
+            <p class="mut">{s.caption}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" id="tour-data" set:html={JSON.stringify(stages)}></script>
+</section>
+
+<style>
+  /* interactive panel by default hidden; JS reveals it, hides the static one */
+  .tour { padding-block: 0; }
+  .tour__live { display: none; padding-block: var(--s9); }
+  .tour.is-ready .tour__live { display: block; }
+  .tour__static { display: block; padding-block: var(--s9); }
+  .tour.is-ready .tour__static { display: none; }
+
+  .tour__static-grid { margin-top: var(--s6); }
+  .tour__static-card { display: flex; flex-direction: column; gap: 9px; min-height: 150px; }
+  .tour__static-card .live { align-self: flex-start; }
+
+  .tour__head { max-width: 60ch; }
+  .tour__head h2 { margin-top: var(--s2); }
+  .tour__lead { margin-top: var(--s4); font-size: var(--t-base); max-width: 52ch; }
+
+  .tour__rail { display: flex; flex-wrap: wrap; gap: 9px; margin: var(--s6) 0; }
+  .tour__tab { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--mut); padding: 8px 15px; border: 1px solid var(--line-2); border-radius: var(--r-pill); transition: color var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+  .tour__tab:hover { color: var(--text); border-color: var(--mut); }
+  .tour__tab.is-active { color: var(--grn-ink); background: var(--grn); border-color: var(--grn); }
+
+  .tour__stage { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--s7); align-items: center; }
+  .tour__caption { font-family: var(--font-display); font-size: var(--t-lg); line-height: 1.4; color: var(--text-2); max-width: 34ch; }
+
+  /* the dashboard frame (mirrors DashboardPanel; scoped styles don't cross) -- */
+  .tour-dp { overflow: hidden; box-shadow: var(--shadow-panel); }
+  .tour-dp__top { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .tour-dp__dot { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+  .tour-dp__title { font-size: var(--t-eyebrow); color: var(--mut); margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tour-dp__live { margin-left: auto; font-size: 10px; }
+  .tour-dp__body { padding: 20px; }
+  .tour-dp__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+  .tour-stat { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+  .tour-stat__k { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mut); }
+  .tour-stat__v { font-weight: 600; font-size: 22px; margin-top: 6px; color: var(--text); }
+  .tour-stat__v.is-accent { color: #141414; }
+  .tour-dp__chart { height: 124px; display: flex; align-items: flex-end; gap: 7px; padding-top: 6px; }
+  .tour-bar { flex: 1; background: linear-gradient(180deg, var(--gold), var(--orange) 55%, var(--brown)); border-radius: 3px 3px 0 0; opacity: 0.92; transition: height var(--dur-slow) var(--ease); }
+  .tour-dp__legend { font-size: 10px; color: var(--mut); margin-top: 10px; display: flex; justify-content: space-between; }
+
+  @media (max-width: 860px) {
+    .tour__stage { grid-template-columns: 1fr; gap: var(--s5); }
+    .tour__caption { max-width: none; }
+  }
+</style>
+
+<script>
+  function initTour() {
+    const section = document.querySelector('.tour');
+    if (!section || section.dataset.wired) return;
+    const dataEl = document.getElementById('tour-data');
+    if (!dataEl) return;
+    let stages;
+    try { stages = JSON.parse(dataEl.textContent || '[]'); } catch { return; }
+    if (!stages.length) return;
+
+    section.dataset.wired = '1';
+    section.classList.add('is-ready');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const titleEl = section.querySelector('.tour-dp__title');
+    const capEl = section.querySelector('.tour__caption');
+    const statCells = Array.from(section.querySelectorAll('.tour-stat'));
+    const bars = Array.from(section.querySelectorAll('.tour-bar'));
+    const tabs = Array.from(section.querySelectorAll('.tour__tab'));
+    let current = -1;
+
+    function countUp(el, to, opts) {
+      const prefix = opts.prefix || '', suffix = opts.suffix || '';
+      const decimals = String(to).indexOf('.') !== -1 ? 1 : 0;
+      const fmt = (v) => prefix + (decimals ? v.toFixed(1) : Math.round(v).toLocaleString()) + suffix;
+      if (reduce) { el.textContent = fmt(to); return; }
+      const dur = 600, start = performance.now();
+      function frame(now) {
+        const t = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - t, 3);
+        el.textContent = fmt(to * e);
+        if (t < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function setStage(i) {
+      if (i === current) return;
+      current = i;
+      const s = stages[i];
+      if (titleEl) titleEl.textContent = s.title;
+      if (capEl) capEl.textContent = s.caption;
+      tabs.forEach((t, ti) => {
+        const on = ti === i;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      statCells.forEach((cell, ci) => {
+        const st = s.stats[ci];
+        if (!st) return;
+        const kEl = cell.querySelector('.tour-stat__k');
+        const vEl = cell.querySelector('.tour-stat__v');
+        if (kEl) kEl.textContent = st.k;
+        if (vEl) { vEl.classList.toggle('is-accent', !!st.accent); countUp(vEl, st.count, st); }
+      });
+      s.bars.forEach((h, bi) => { if (bars[bi]) bars[bi].style.height = h + '%'; });
+    }
+
+    tabs.forEach((t, ti) => t.addEventListener('click', () => setStage(ti)));
+
+    // one-time "boot up" of the first unit when the panel enters view
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { setStage(0); io.disconnect(); } });
+      }, { threshold: 0.35 });
+      io.observe(section);
+    } else {
+      setStage(0);
+    }
+  }
+  initTour();
+  document.addEventListener('astro:after-swap', initTour);
+</script>

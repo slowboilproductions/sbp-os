@@ -1,0 +1,26 @@
+---
+// A-19 signature device — the 70s "sunset / desert-horizon" tricolor banner.
+// Harvest Gold / Burnt Orange / Chocolate Brown stripes run across the page,
+// do a quick S-jog (smooth ogee) as they approach the right margin, then
+// continue horizontal off the right edge. In-flow header break. STATIC by
+// design — the motion layer is a later, separate pass. Decorative (aria-hidden).
+//
+// All three share the same S (same x-window, same rise), so the band stays
+// parallel throughout — the jog just lifts the whole band, then it runs off.
+---
+<div class="sb-banner" aria-hidden="true">
+  <svg class="sb-banner__svg" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMid meet" role="presentation" focusable="false">
+    <path d="M -24 52  H 1180 C 1240 52  1240 22 1300 22 H 1480" stroke="var(--gold)"   stroke-width="22" fill="none" />
+    <path d="M -24 76  H 1180 C 1240 76  1240 46 1300 46 H 1480" stroke="var(--orange)" stroke-width="22" fill="none" />
+    <path d="M -24 100 H 1180 C 1240 100 1240 70 1300 70 H 1480" stroke="var(--brown)"  stroke-width="22" fill="none" />
+  </svg>
+</div>
+
+<style>
+  .sb-banner { width: 100%; line-height: 0; overflow: hidden; background: transparent; }
+  .sb-banner__svg { width: 100%; height: auto; display: block; max-height: 150px; }
+  @media (max-width: 760px) {
+    /* keep the band slim on phones; the bend rides the right edge */
+    .sb-banner__svg { max-height: 96px; }
+  }
+</style>

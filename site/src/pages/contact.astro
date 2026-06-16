@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Contact = zero-friction demo request AND the single destination for every
+// pricing question (A-8; no pricing anywhere else). Charlotte, NC (A-10).
+//
+// FORM HANDLER IS DEFERRED TO STEP 3 (deploy gate, B-5): the submit wiring is
+// host-coupled (Netlify Forms attribute vs. a Vercel function) and must never
+// carry a secret in source (§O). The form markup below is host-agnostic and
+// ready; only the `action`/handler is wired once the host is chosen. Until
+// then it degrades to a clear mailto fallback — no dead form, no popups.
+//
+// A-10 WATCH-ITEM: Charlotte is correct sitewide. If the live Google-Ads
+// account lists Indian Trail, flag the mismatch to the operator before any
+// Ads-destination check — do not silently diverge.
+const interests = ['Marketing', 'CRM', 'Operational Dashboard', 'Image Creation', 'Not sure yet'];
+---
+<BaseLayout
+  title="Contact"
+  description="Tell us about your brand. Book a demo of the Slow Boil stack — CRM, the Operational Dashboard, marketing, and image creation. Based in Charlotte, NC.">
+  <section class="section">
+    <div class="wrap c-grid">
+      <!-- left: the pitch -->
+      <div class="c-intro">
+        <span class="eyebrow">// Get in touch</span>
+        <h1>Let’s get to work.</h1>
+        <p class="lede">Tell me about your brand — what you’ve built, where you’re stuck, what’s next. Want to see the CRM or the Operational Dashboard running? Ask for a demo. I respond within one business day.</p>
+
+        <div class="c-meta">
+          <div>
+            <h4 class="c-meta__h mono">Email</h4>
+            <a href="mailto:hello@slowboilproductions.com" class="c-email">hello@slowboilproductions.com</a>
+          </div>
+          <div>
+            <h4 class="c-meta__h mono">Where we are</h4>
+            <p class="mut">Slow Boil Productions LLC — Charlotte, North Carolina. I work with spirits and developing brands across the United States.</p>
+          </div>
+          <div>
+            <h4 class="c-meta__h mono">Pricing</h4>
+            <p class="mut">Every engagement is scoped to the brand. Tell me what you need and I’ll give you a real number — no rate card, no runaround.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- right: the form (UI ready; handler wired at deploy, see frontmatter) -->
+      <div class="c-form-wrap panel">
+        <form
+          class="c-form"
+          name="contact"
+          method="POST"
+          action="mailto:hello@slowboilproductions.com"
+          enctype="text/plain"
+          data-handler="deploy-wired">
+          <div class="c-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="c-row">
+            <div class="c-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="c-field">
+              <label for="brand">Brand / company</label>
+              <input id="brand" name="brand" type="text" autocomplete="organization" />
+            </div>
+          </div>
+          <div class="c-field">
+            <label for="interest">What are you most interested in?</label>
+            <div class="c-select">
+              <select id="interest" name="interest">
+                {interests.map((i) => <option value={i}>{i}</option>)}
+              </select>
+            </div>
+          </div>
+          <div class="c-field">
+            <label for="message">Tell us about your brand</label>
+            <textarea id="message" name="message" rows="5"
+              placeholder="Category, where you are (concept / pre-launch / in-market / scaling), what you're struggling with, what you've already tried."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary c-submit">Send it →</button>
+          <p class="c-fallback mut">Prefer email? Write us directly at
+            <a href="mailto:hello@slowboilproductions.com">hello@slowboilproductions.com</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: start; }
+    .c-intro h1 { margin: var(--s2) 0 var(--s4); }
+    .c-meta { display: grid; gap: var(--s5); margin-top: var(--s7); }
+    .c-meta__h { font-size: var(--t-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--grn); margin-bottom: var(--s2); }
+    .c-email { font-family: var(--font-mono); color: var(--text); font-size: var(--t-lg); border-bottom: 1px solid var(--grn-deep); padding-bottom: 2px; transition: color var(--dur) var(--ease); }
+    .c-email:hover { color: var(--grn); }
+
+    .c-form-wrap { padding: var(--s6); }
+    .c-form { display: grid; gap: var(--s4); }
+    .c-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+    .c-field { display: grid; gap: 7px; }
+    .c-field label { font-family: var(--font-mono); font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mut); }
+    .c-field input, .c-field textarea, .c-select select {
+      width: 100%; background: var(--bg); border: 1px solid var(--line-2); border-radius: var(--r-sm);
+      color: var(--text); font-family: var(--font-body); font-size: var(--t-base); padding: 12px 14px;
+      transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .c-field input:focus, .c-field textarea:focus, .c-select select:focus {
+      outline: none; border-color: var(--grn); box-shadow: 0 0 0 3px var(--grn-wash);
+    }
+    .c-field textarea { resize: vertical; line-height: var(--leading); }
+    .c-select { position: relative; }
+    .c-select::after { content: "▾"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--mut); pointer-events: none; }
+    .c-select select { appearance: none; }
+    .c-submit { margin-top: var(--s2); justify-content: center; }
+    .c-fallback { font-size: var(--t-sm); text-align: center; }
+    .c-fallback a { color: var(--grn); }
+
+    @media (max-width: 860px) {
+      .c-grid { grid-template-columns: 1fr; gap: var(--s7); }
+    }
+    @media (max-width: 560px) {
+      .c-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</BaseLayout>

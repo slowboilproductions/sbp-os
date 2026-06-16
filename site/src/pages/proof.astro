@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Proof (skeleton v0.3 §3.7 — REDEFINED per A-17): proof of CRAFT, not
+// commercial lift. The operator is not a commercial consultant and makes NO
+// assurance of revenue/lift. Proof = the work we can execute — a website, a
+// CRM, a dashboard, a video spot, a full Meta campaign — smarter, cheaper,
+// faster. No metrics/lift language anywhere.
+//
+// A-4 GUARDRAIL: brands named below are brands SBP works with / builds for —
+// NO ownership claim, no "our own brands."
+const work = [
+  { n: '01', h: 'A website that converts', p: 'Fast, age-gated, compliant, and built to turn a visitor into a contact. (You’re looking at one.)' },
+  { n: '02', h: 'A category-native CRM', p: 'Accounts, distributors, depletions, territories — a CRM that actually fits how beverage-alcohol sells.' },
+  { n: '03', h: 'A dashboard that gives you answers', p: 'Sell-in vs sell-through in one picture — actionable, not a stack of distributor PDFs.' },
+  { n: '04', h: 'Bottle & lifestyle photography', p: 'Imagery that looks like a $50,000 studio day — trained on your brand, not stock with a logo on it.' },
+  { n: '05', h: 'A video or motion spot', p: 'Scroll-stopping short-form motion from the same trained model — without a production crew on the calendar.' },
+  { n: '06', h: 'A full Meta & paid campaign', p: 'Built, age-gated, launched, and optimized — paid social and search that move cases.' },
+];
+const brands = ['SSP', 'DGT', 'MWC'];
+---
+<BaseLayout
+  title="Proof"
+  description="Proof, not promises. Not a revenue chart — the work itself: websites, CRMs, dashboards, photography, video, and paid campaigns built for beverage-alcohol brands, smarter, cheaper, and faster.">
+  <section class="section">
+    <div class="wrap">
+      <div class="p-hero" data-anim="hero">
+        <span class="eyebrow">// Proof</span>
+        <h1>Proof, not promises.</h1>
+        <p class="lede p-hero__sub">I’m not your commercial consultant, and I won’t hand you a revenue chart I can’t honestly promise. Proof is the work itself — built smarter, cheaper, and faster than the old way. Here’s what I ship.</p>
+      </div>
+
+      <div class="rule p-work">
+        <div class="feats p-feats">
+          {work.map((w) => (
+            <div class="feat card">
+              <span class="feat__n">{w.n}</span>
+              <h3>{w.h}</h3>
+              <p class="mut">{w.p}</p>
+              <div class="p-slot mono mut">Sample slot</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="p-brands">
+        <span class="eyebrow">// Built for</span>
+        <p class="mut">Work done with and for developing beverage-alcohol brands —</p>
+        <div class="p-brand-row">
+          {brands.map((b) => <span class="p-brand mono">{b}</span>)}
+          <span class="p-brand p-brand--more mono">+ more as the roster grows</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="wrap cta-band">
+      <h2>Want work like this for your brand?</h2>
+      <p class="mut">Tell me what you’re building and where you’re stuck. I’ll show you what I’d ship.</p>
+      <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Let’s get to work →</a>
+    </div>
+  </section>
+
+  <style>
+    .p-hero { max-width: 50ch; }
+    .p-hero__sub { margin-top: var(--s5); max-width: 60ch; }
+    .p-work { margin-top: var(--s8); padding-top: var(--s7); }
+    .p-feats .feat { display: flex; flex-direction: column; }
+    .p-slot { margin-top: var(--s4); border: 1px dashed var(--line-2); border-radius: var(--r-sm); padding: var(--s5); text-align: center; font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase;
+      background: repeating-linear-gradient(135deg, transparent, transparent 9px, rgba(255,255,255,0.012) 9px, rgba(255,255,255,0.012) 18px); }
+    .p-brands { margin-top: var(--s8); }
+    .p-brands p { margin-top: var(--s3); }
+    .p-brand-row { display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; margin-top: var(--s4); }
+    .p-brand { font-size: 28px; font-weight: 600; color: var(--text); letter-spacing: 0.04em; }
+    .p-brand--more { font-size: var(--t-sm); font-weight: 400; color: var(--mut); letter-spacing: 0.04em; }
+  </style>
+</BaseLayout>

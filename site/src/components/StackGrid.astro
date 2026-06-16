@@ -1,0 +1,46 @@
+---
+// The four EQUAL operational subunits (skeleton v0.3 §2 / A-12: same visual
+// weight, all shown live; no privileged product tier). Public names per A-6
+// — "Operational Dashboard", never "Dash". Used on Home and The Stack.
+const subunits = [
+  {
+    href: '/stack/marketing',
+    name: 'Marketing',
+    blurb: 'Strategy, content, web, and ads that move product. Same work a traditional agency does — without the agency wall.',
+  },
+  {
+    href: '/stack/crm',
+    name: 'CRM',
+    blurb: 'A CRM that knows what a depletion is. Accounts, reps, distributors, territories — built for how spirits actually sells.',
+  },
+  {
+    href: '/stack/operational-dashboard',
+    name: 'Operational Dashboard',
+    blurb: 'Sell-in vs sell-through truth. Everywhere you’re sold, in one picture — instead of five distributor reports a month late.',
+  },
+  {
+    href: '/stack/image-creation',
+    name: 'Image Creation',
+    blurb: 'Bottle shots and motion that look like a $50k studio day — from one model trained on your brand. Not a stock photo with your logo on it.',
+  },
+];
+---
+<div class="grid grid--4 sg" data-anim="stagger">
+  {subunits.map((s) => (
+    <a class="card sg__card" href={s.href} data-anim-item>
+      <span class="live sg__live">LIVE</span>
+      <h3>{s.name}</h3>
+      <p class="mut">{s.blurb}</p>
+      <span class="sg__arrow mono g" aria-hidden="true">→</span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .sg__card { display: flex; flex-direction: column; min-height: 200px; }
+  .sg__card h3 { padding-right: 52px; margin-bottom: 9px; }
+  .sg__card p { font-size: var(--t-sm); line-height: var(--leading); flex: 1; }
+  .sg__live { position: absolute; top: var(--s5); right: var(--s5); font-size: 10px; }
+  .sg__arrow { margin-top: var(--s4); font-size: var(--t-lg); transition: transform var(--dur) var(--ease); }
+  .sg__card:hover .sg__arrow { transform: translateX(5px); }
+</style>

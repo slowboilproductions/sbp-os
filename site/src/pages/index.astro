@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DashboardPanel from '../components/DashboardPanel.astro';
+import StackGrid from '../components/StackGrid.astro';
+import StackTour from '../components/StackTour.astro';
+// Home — the family storefront (skeleton v0.3 §3.1), rewritten spirits-first
+// in the operator's first-person voice (A-15). Lead audience: developing
+// spirits & bev-alc brand owners; CPG is the eventual expansion, not the
+// headline. Every subunit shown up and running (A-12). No pricing (A-8) —
+// cost routes to Contact. Headline/copy are voice-true to the first-pass
+// site + brand bible; operator may tweak.
+---
+<BaseLayout
+  title="Slow Boil Productions"
+  description="Built by a brand owner, for other brand owners. The marketing and the tools developing spirits brands need to compete — strategy, a category-native CRM, distribution analytics, and brand-true image creation. All of it, running.">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy" data-anim="hero">
+        <span class="eyebrow">// Marketing &amp; tools for beverage-alcohol brands</span>
+        <h1>Everything your spirits brand needs to compete,<br /><span class="g">but at a fraction of the cost.</span></h1>
+        <p class="lede hero__sub">Built by a brand owner, for brand owners like you. I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
+        <div class="hero__btns">
+          <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Let’s get to work →</a>
+          <a href="/stack" class="btn btn--ghost">See what’s running</a>
+        </div>
+      </div>
+      <div class="hero__panel" data-anim="hero-panel">
+        <DashboardPanel />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The wall ===== -->
+  <section class="section section--band">
+    <div class="wrap two-col">
+      <div>
+        <span class="eyebrow">// The wall</span>
+        <h2>The brands that deserve to win are losing because of capital resources and owner bandwidth, not merit.</h2>
+      </div>
+      <div class="two-col__body">
+        <p class="lede">You built something real — a product you believe in, a vision you’ve carried for years. Then you hit the place where passion meets budget, and budget usually wins.</p>
+        <p class="mut">The agencies want $20,000 a month. The freelancers disappear after two invoices. The DIY tools look simple until you’re three hours deep in a Canva template at midnight. I’ve been on both sides of that wall — so I built the way around it.</p>
+        <p class="mut">Wait it out and nothing changes: the brands with budget keep outspending the brands with the better bottle. The wall doesn’t move on its own — but it is beatable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The Stack, even ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head rule">
+        <h2>One stack. Every part of it running.</h2>
+        <span class="mono mut sec-head__tag">4 subunits · all operational</span>
+      </div>
+      <StackGrid />
+    </div>
+  </section>
+
+  <!-- ===== Showpiece: tour the stack ===== -->
+  <StackTour />
+
+  <!-- ===== Why it's accessible (honest-AI) ===== -->
+  <section class="section section--band">
+    <div class="wrap two-col">
+      <div>
+        <span class="eyebrow">// Why it’s within reach</span>
+        <h2>AI does the heavy lifting. The instincts are still earned.</h2>
+      </div>
+      <div class="two-col__body">
+        <p class="lede">I use AI the way a chef uses a sharp knife — not to replace the cook, but to make every cut cleaner and faster. The strategy is still human. The taste is still earned. The execution is where we close the gap.</p>
+        <p class="mut">That’s how real, professional marketing lands within reach for a developing brand instead of a Fortune-500 budget. Want to know what it costs? <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="ilink">Tell me about your brand.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Proof slot (proof of craft, not commercial lift) ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head rule">
+        <h2>Proof, not promises.</h2>
+        <a href="/proof" class="mono g sec-head__tag">See the work →</a>
+      </div>
+      <div class="grid grid--3 proof-grid">
+        {[
+          { k: 'Websites that convert', s: 'design + build' },
+          { k: 'A category-native CRM', s: 'live + running' },
+          { k: 'Operational dashboards', s: 'real data, real answers' },
+          { k: 'Bottle & lifestyle photography', s: '$50k-studio look' },
+          { k: 'Video & motion spots', s: 'scroll-stopping' },
+          { k: 'Full Meta & paid campaigns', s: 'built + optimized' },
+        ].map((m) => (
+          <div class="proof-cell card">
+            <span class="proof-cell__k">{m.k}</span>
+            <span class="proof-cell__s mut mono">{m.s}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Graduation promise ===== -->
+  <section class="section section--band grad">
+    <div class="wrap center">
+      <span class="eyebrow">// The promise</span>
+      <h2 class="grad__h">I want to grow you until you’re too big for me.</h2>
+      <p class="grad__p mut">And when that day comes, we’re going to celebrate it. That’s the slow boil — the moment right before everything changes. You didn’t come this far to fold.</p>
+      <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary grad__cta">Let’s get to work →</a>
+    </div>
+  </section>
+
+  <style>
+    /* hero */
+    .hero { padding-block: var(--s8) var(--s7); }
+    .hero__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--s8); align-items: center; }
+    .hero__sub { margin: var(--s5) 0 var(--s6); max-width: 46ch; }
+    .hero__btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* section heads */
+    .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s6); }
+    .sec-head__tag { font-size: var(--t-sm); white-space: nowrap; }
+
+    /* two-col explainer */
+    .two-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s8); align-items: start; }
+    .two-col__body p + p { margin-top: var(--s4); }
+    .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
+
+    /* proof-of-craft grid */
+    .proof-cell { display: flex; flex-direction: column; gap: var(--s2); min-height: 116px; justify-content: space-between; }
+    .proof-cell__k { font-family: var(--font-display); font-weight: 500; font-size: var(--t-h3); line-height: 1.2; }
+    .proof-cell__s { font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* metric grid */
+    .metric { text-align: left; }
+    .metric__v { font-size: 26px; font-weight: 600; min-height: 30px; display: flex; align-items: center; }
+    .metric__k { font-family: var(--font-display); font-size: var(--t-base); margin-top: var(--s3); }
+    .metric__s { font-size: var(--t-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+    .metric-note { font-size: var(--t-sm); margin-top: var(--s5); }
+
+    /* graduation */
+    .grad__h { margin: var(--s3) auto var(--s4); max-width: 20ch; }
+    .grad__p { margin: 0 auto; max-width: 52ch; }
+    .grad__cta { margin-top: var(--s6); }
+
+    @media (max-width: 860px) {
+      .hero__grid { grid-template-columns: 1fr; gap: var(--s6); }
+      .hero__panel { order: 3; }
+      .two-col { grid-template-columns: 1fr; gap: var(--s5); }
+      .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s2); }
+    }
+  </style>
+</BaseLayout>

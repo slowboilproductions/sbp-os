@@ -1,0 +1,136 @@
+---
+// The "instrument panel" — the live-ops hero object (design-directions v0.3:
+// UI-screenshot-as-hero, the stack shown *running*, A-12). Static + accessible
+// now; the Step-2 motion layer animates it (counters tick, chart draws in,
+// LIVE pulses) via a progressive-enhancement island — no dependency here.
+//
+// NOTE: figures are ILLUSTRATIVE placeholders (per the ratified mock README),
+// not real client data. Real metrics replace these only when they exist and
+// are cleared for publication.
+const bars = [42, 55, 48, 67, 60, 78, 71, 88, 82, 96];
+const { title = 'operational-dashboard / sell-through' } = Astro.props;
+---
+<div class="dp panel" data-anim="dashboard" aria-label="Illustration of the Operational Dashboard">
+  <div class="dp__top">
+    <span class="dp__dot" aria-hidden="true"></span>
+    <span class="dp__dot" aria-hidden="true"></span>
+    <span class="dp__dot" aria-hidden="true"></span>
+    <span class="dp__title mono">{title}</span>
+    <span class="live dp__live">LIVE</span>
+  </div>
+  <div class="dp__body">
+    <div class="dp__stats">
+      <div class="dp__stat">
+        <div class="dp__k mono">Depletions</div>
+        <div class="dp__v mono g" data-count="18.4" data-suffix="%" data-prefix="+">+18.4%</div>
+      </div>
+      <div class="dp__stat">
+        <div class="dp__k mono">Accounts</div>
+        <div class="dp__v mono" data-count="1204">1,204</div>
+      </div>
+      <div class="dp__stat">
+        <div class="dp__k mono">Coverage</div>
+        <div class="dp__v mono g" data-count="92" data-suffix="%">92%</div>
+      </div>
+    </div>
+    <div class="dp__chart" role="img" aria-label="Sell-in versus sell-through trending up across the year">
+      {bars.map((h) => <span class="dp__bar" style={`height:${h}%`}></span>)}
+    </div>
+    <div class="dp__legend mono">
+      <span>Q1</span><span>sell-in vs sell-through</span><span>Q4</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dp { overflow: hidden; box-shadow: var(--shadow-panel); transition: transform 0.3s var(--ease); will-change: transform; }
+  .dp__top { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .dp__dot { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+  /* live/positive values read avocado (the live-data state color) */
+  .dp .dp__v.g { color: var(--avocado); }
+  .dp__title { font-size: var(--t-eyebrow); color: var(--mut); margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dp__live { margin-left: auto; font-size: 10px; }
+  .dp__body { padding: 20px; }
+  .dp__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+  .dp__stat { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+  .dp__k { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mut); }
+  .dp__v { font-weight: 600; font-size: 22px; margin-top: 6px; }
+  .dp__chart { height: 118px; display: flex; align-items: flex-end; gap: 7px; padding-top: 6px; }
+  .dp__bar { flex: 1; background: linear-gradient(180deg, var(--gold), var(--orange) 55%, var(--brown)); border-radius: 3px 3px 0 0; opacity: 0.92; transform-origin: bottom; }
+  /* ambient life: the last bar quietly breathes (off under reduced motion) */
+  @media (prefers-reduced-motion: no-preference) {
+    .dp__bar:last-child { animation: dpBreathe 3.6s var(--ease) infinite; }
+  }
+  @keyframes dpBreathe { 0%, 100% { transform: scaleY(1); opacity: 0.92; } 50% { transform: scaleY(1.06); opacity: 1; } }
+  .dp__legend { font-size: 10px; color: var(--mut); margin-top: 10px; display: flex; justify-content: space-between; }
+  @media (max-width: 760px) {
+    .dp__v { font-size: 19px; }
+    .dp__chart { height: 96px; }
+  }
+</style>
+
+<script>
+  // Hero dashboard "alive": pointer-reactive tilt + ambient number tick.
+  // Guardrails: tilt only on a fine pointer (desktop) or a subtle scroll-driven
+  // tilt on touch; everything off under prefers-reduced-motion (the breathing
+  // bar is CSS, already gated by its media query).
+  function initDashboards() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    document.querySelectorAll('.dp[data-anim="dashboard"]').forEach((panel) => {
+      if (panel.dataset.alive) return;
+      panel.dataset.alive = '1';
+
+      if (!reduce && fine) {
+        // desktop: tilt toward the cursor, settle flat on leave / on scroll
+        const MAX = 5;
+        let raf = 0;
+        panel.addEventListener('mousemove', (e) => {
+          const r = panel.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            panel.style.transform = 'perspective(900px) rotateX(' + (-py * MAX).toFixed(2) + 'deg) rotateY(' + (px * MAX).toFixed(2) + 'deg)';
+          });
+        });
+        const reset = () => { panel.style.transform = ''; };
+        panel.addEventListener('mouseleave', reset);
+        window.addEventListener('scroll', reset, { passive: true });
+      } else if (!reduce && !fine) {
+        // touch: subtle scroll-driven tilt that eases to flat near center
+        let raf = 0;
+        const onScroll = () => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            const r = panel.getBoundingClientRect();
+            const center = r.top + r.height / 2;
+            let p = (window.innerHeight - center) / (window.innerHeight * 0.5);
+            p = Math.max(0, Math.min(1, p));
+            panel.style.transform = 'perspective(900px) rotateX(' + ((1 - p) * 4).toFixed(2) + 'deg)';
+          });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+
+      // ambient: one plain-integer stat quietly ticks every few seconds
+      if (!reduce) {
+        const cells = Array.from(panel.querySelectorAll('.dp__v[data-count]'));
+        const target = cells.find((c) => !c.dataset.suffix && !c.dataset.prefix);
+        if (target) {
+          const base = parseFloat(target.dataset.count);
+          setInterval(() => {
+            if (document.hidden) return;
+            const val = Math.max(0, base + Math.round(Math.random() * 4 - 2));
+            target.textContent = val.toLocaleString();
+          }, 3500);
+        }
+      }
+    });
+  }
+  initDashboards();
+  document.addEventListener('astro:after-swap', initDashboards);
+</script>

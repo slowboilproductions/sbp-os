@@ -1,0 +1,102 @@
+---
+// Primary navigation. Fixed nav per skeleton v0.3 (A-5):
+// The Stack · Proof · About · Contact. "The Stack" links to the umbrella
+// overview; the four subunits are reachable beneath it (overview cards +
+// this dropdown). Public name "Operational Dashboard" — never "Dash".
+const { path = '' } = Astro.props;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+
+const stackLinks = [
+  { href: '/stack/marketing', label: 'Marketing' },
+  { href: '/stack/crm', label: 'CRM' },
+  { href: '/stack/operational-dashboard', label: 'Operational Dashboard' },
+  { href: '/stack/image-creation', label: 'Image Creation' },
+];
+---
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a href="/" class="nav__logo" aria-label="Slow Boil Productions — home">
+      <img src="/logo-icon-dark.png" alt="" class="nav__icon" width="167" height="164" />
+      <span class="nav__name">Slow&nbsp;Boil&nbsp;Productions</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__group">
+        <a href="/stack" class={isActive('/stack') ? 'is-active' : ''} aria-haspopup="true">The Stack</a>
+        <div class="nav__menu" role="menu">
+          {stackLinks.map((l) => <a role="menuitem" href={l.href}>{l.label}</a>)}
+        </div>
+      </div>
+      <a href="/proof" class={isActive('/proof') ? 'is-active' : ''}>Proof</a>
+      <a href="/about" class={isActive('/about') ? 'is-active' : ''}>About</a>
+      <a href="/contact" class={isActive('/contact') ? 'is-active' : ''}>Contact</a>
+    </nav>
+
+    <div class="nav__right">
+      <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn--mono nav__cta">Email me</a>
+      <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="m-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div class="nav__mobile" id="m-menu" hidden>
+    <a href="/stack">The Stack</a>
+    {stackLinks.map((l) => <a class="nav__mobile-sub" href={l.href}>{l.label}</a>)}
+    <a href="/proof">Proof</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary nav__mobile-cta">Email me</a>
+  </div>
+</header>
+
+<style>
+  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
+  .nav__logo { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 16px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .nav__icon { height: 34px; width: auto; }
+  @media (max-width: 380px) { .nav__logo { font-size: 14px; } .nav__icon { height: 30px; } }
+  .nav__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--grn); box-shadow: 0 0 10px var(--grn); }
+  .nav__links { display: flex; gap: 30px; font-size: var(--t-sm); color: var(--mut); font-weight: 500; align-items: center; }
+  .nav__links a:hover, .nav__links a.is-active { color: var(--text); }
+  .nav__group { position: relative; }
+  .nav__menu { position: absolute; top: 100%; left: -16px; margin-top: 10px; min-width: 230px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 8px; display: grid; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur); box-shadow: var(--shadow-soft); }
+  .nav__group:hover .nav__menu, .nav__group:focus-within .nav__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav__menu a { padding: 9px 12px; border-radius: var(--r-sm); font-size: var(--t-sm); color: var(--text-2); }
+  .nav__menu a:hover { background: var(--panel-2); color: var(--grn); }
+  .nav__right { display: flex; align-items: center; gap: 16px; }
+  .nav__burger { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+  .nav__burger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
+  .nav__mobile { display: none; flex-direction: column; gap: 2px; padding: var(--s4) var(--s5) var(--s6); border-bottom: 1px solid var(--line); background: var(--bg); }
+  .nav__mobile a { padding: 13px 6px; font-size: var(--t-lg); border-bottom: 1px solid var(--line); }
+  .nav__mobile-sub { padding-left: 18px !important; font-size: var(--t-base) !important; color: var(--mut); }
+  .nav__mobile-cta { justify-content: center; border-bottom: 0; margin-top: var(--s4); }
+
+  @media (max-width: 860px) {
+    .nav__links, .nav__cta { display: none; }
+    .nav__burger { display: flex; }
+    .nav.is-open .nav__mobile { display: flex; }
+    .nav.is-open .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
+    .nav.is-open .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+</style>
+
+<script>
+  // Minimal, progressive: mobile menu toggle. No framework, no dependency.
+  function wireNav() {
+    const header = document.querySelector('.nav');
+    const burger = header?.querySelector('.nav__burger');
+    const menu = document.getElementById('m-menu');
+    if (!header || !burger || !menu) return;
+    burger.addEventListener('click', () => {
+      const open = header.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+    });
+  }
+  wireNav();
+  document.addEventListener('astro:after-swap', wireNav); // survive view transitions
+</script>
