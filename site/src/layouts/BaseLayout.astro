@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Banner from '../components/Banner.astro';
 import Footer from '../components/Footer.astro';
 import SiteMotion from '../components/SiteMotion.astro';
+import PageWipe from '../components/PageWipe.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -58,6 +59,7 @@ const fullTitle = title === 'Slow Boil Productions'
     <slot />
   </main>
   <Footer />
+  <PageWipe />
   <SiteMotion />
 </body>
 </html>

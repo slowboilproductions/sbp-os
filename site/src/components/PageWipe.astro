@@ -1,0 +1,80 @@
+---
+// PAGE WIPE — the 70s tricolor "sunset" wipe between pages (B-7 polish menu).
+// On every client-side navigation, a gold/orange/brown band sweeps diagonally
+// across the viewport — the signature banner, in motion, wiping one page to the
+// next. Layered ON TOP of Astro's default cross-fade as a flourish; it does not
+// need to perfectly hide the swap seam.
+//
+// Why JS-driven (not pure ::view-transition CSS): the native View Transition
+// API is Chromium-only. Driving the sweep off Astro's lifecycle events makes it
+// play identically in every browser, and lets prefers-reduced-motion skip it
+// cleanly. `transition:persist` keeps this one node alive across swaps, so the
+// running animation is never torn down mid-sweep.
+//
+// GUARDRAILS: aria-hidden + pointer-events:none (never traps focus or clicks);
+// the sweep is transient (~680ms) and transform-only — it never persistently
+// obscures the compliance chrome. Under prefers-reduced-motion the band stays
+// parked off-screen. Under no-JS there is no client-side nav at all (normal
+// full page loads), so the band simply never fires — content is unaffected.
+---
+<div id="sb-wipe" class="sb-wipe" aria-hidden="true" transition:persist></div>
+
+<style>
+  .sb-wipe {
+    position: fixed; inset: 0; z-index: 9000;
+    pointer-events: none;
+    transform: translateX(-120%);
+    will-change: transform;
+    background: linear-gradient(
+      180deg,
+      var(--gold)   0     33.34%,
+      var(--orange) 33.34% 66.67%,
+      var(--brown)  66.67% 100%
+    );
+  }
+  .sb-wipe.is-wiping {
+    animation: sb-wipe-sweep 680ms cubic-bezier(0.66, 0, 0.34, 1) forwards;
+  }
+  /* in from the left to fully cover, then off to the right — held on a slight
+     skew so the leading edge reads as a groovy diagonal, not a flat curtain. */
+  @keyframes sb-wipe-sweep {
+    0%   { transform: translateX(-120%) skewX(-9deg); }
+    48%  { transform: translateX(0)     skewX(-9deg); }
+    100% { transform: translateX(120%)  skewX(-9deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-wipe, .sb-wipe.is-wiping {
+      animation: none !important;
+      transform: translateX(-120%) !important;
+    }
+  }
+</style>
+
+<script>
+  // Bind once for the life of the document. Astro re-runs module scripts on each
+  // navigation, so guard against re-adding the lifecycle listeners.
+  (function () {
+    if ((window as any).__sbWipeBound) return;
+    (window as any).__sbWipeBound = true;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Fires the instant a client-side navigation begins (on the still-live old
+    // page), before Astro fetches/swaps — so the sweep starts in lockstep.
+    document.addEventListener('astro:before-preparation', () => {
+      if (reduce.matches) return;
+      const el = document.getElementById('sb-wipe');
+      if (!el) return;
+      el.classList.remove('is-wiping');
+      void (el as HTMLElement).offsetWidth; // reflow → restart the keyframes
+      el.classList.add('is-wiping');
+    });
+
+    // Clear the class when the sweep finishes so it can re-arm next navigation.
+    document.addEventListener('animationend', (e) => {
+      const t = e.target as HTMLElement | null;
+      if (t && t.id === 'sb-wipe') t.classList.remove('is-wiping');
+    });
+  })();
+</script>
