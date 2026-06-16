@@ -16,15 +16,16 @@ const pad = (n) => String(n).padStart(2, '0');
 // (See public/ic-360/README.md for the full spec.)
 //   PHASE A (360):  drop turntable frames into public/ic-360/ named
 //                   frame-00.png .. frame-NN.png, then set FRAMES to the count.
-//   PHASE B (stills): point `stills` at the real stills (any paths);
-//                   defaults to six turntable frames.
+//   PHASE B (stills): the LoRA-GENERATED images off the Phase-A studio shots
+//                   (the IC output itself — one shoot -> a library of new
+//                   on-brand images). Point `stills` at them; default = frames.
 //   PHASE C (motion): set `motionSrc` to a muted clip ('/ic-360/motion.mp4');
 //                   it autoplays muted in view. null -> bubble placeholder.
 // ===========================================================================
 const FRAMES = 24;                                   // turntable frame count
 const framePath = (i) => `/ic-360/frame-${pad(i)}.png`;
 const stillIdx = [0, 4, 8, 12, 16, 20];
-const stills = stillIdx.map(framePath);              // or: ['/ic-360/still-1.jpg', ...]
+const stills = stillIdx.map(framePath);              // or: LoRA outputs, e.g. ['/ic-360/gen-1.jpg', ...]
 const motionSrc = null;                              // or: '/ic-360/motion.mp4'
 ---
 <section class="studio" aria-label="One studio shoot, every angle, brought to life" data-frames={FRAMES}>

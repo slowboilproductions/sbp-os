@@ -14,13 +14,16 @@ changes, and only if your counts differ.
 - ~**24–36 frames** is smooth (every 10–15°). ~**600–900px** wide. PNG or WebP.
 - Then in `BottleStudio.astro` set `const FRAMES = <your count>`. Done.
 
-## Phase B — the gallery of stills
-- The "images generated from that one shoot." **Use real stills** — more angles,
-  crops, and setups from the same shoot (no generic AI; that contradicts the
-  page's own pitch).
-- Default pulls six of the turntable frames. To use real stills, set
-  `stills` in `BottleStudio.astro` to their paths, e.g.
-  `['/ic-360/still-1.jpg', '/ic-360/still-2.jpg', …]` (6 looks best).
+## Phase B — the gallery of LoRA-generated stills
+- This is the **product itself**: the images the **brand-trained LoRA generates
+  from the Phase-A studio shots** — one real shoot turned into a library of new,
+  on-brand images (new scenes/angles/setups the camera never shot).
+- **Not** more camera frames, and **not** generic Midjourney/Leonardo — those
+  aren't your brand's trained model, and this is the page that sells exactly
+  that distinction. These wait on the LoRA (worth the wait).
+- Export the LoRA outputs here and set `stills` in `BottleStudio.astro` to their
+  paths, e.g. `['/ic-360/gen-1.jpg', '/ic-360/gen-2.jpg', …]` (6 looks best).
+  Default pulls six turntable frames as a placeholder.
 
 ## Phase C — the motion finale (LoRA, worth the wait)
 - The still that **comes alive**. Until the LoRA motion is ready, a short **real
