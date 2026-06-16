@@ -4,6 +4,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 // Public name "CRM" (A-6). Pricing → Contact only (A-8).
 // FLAG: capability claims drawn from the skeleton outline, kept conservative;
 // verify against crm-os canon before live (out of this session's repo scope).
+// SIGNATURE — staggered data-rows: a "book" of accounts that slides in row by
+// row at different speeds when it enters view, like the system populating.
+// ILLUSTRATIVE category data, not real client records (mirrors the dashboard
+// mock convention). --ri = order, --rd = per-row speed (varied on purpose).
+const records = [
+  { acct: 'Eastside Bottle Co.',   type: 'Off-premise', state: 'NC', dep: '+12%', ri: 0, rd: '0.55s' },
+  { acct: 'Harbor & Vine',         type: 'On-premise',  state: 'SC', dep: '+6%',  ri: 1, rd: '0.85s' },
+  { acct: 'Ridgeline Distributing', type: 'Distributor', state: 'GA', dep: '+19%', ri: 2, rd: '0.6s' },
+  { acct: 'Magnolia Fine Wines',   type: 'Off-premise', state: 'NC', dep: '−4%',  ri: 3, rd: '0.95s', risk: true },
+  { acct: 'The Tasting Room',      type: 'On-premise',  state: 'TN', dep: '+8%',  ri: 4, rd: '0.7s' },
+  { acct: 'Coastal Spirits LLC',   type: 'Distributor', state: 'FL', dep: '−9%',  ri: 5, rd: '0.9s', risk: true },
+];
 const feats = [
   { n: '01', h: 'Accounts & contacts, the way spirits sells', p: 'Every retail outlet, on-premise account, distributor, and buyer in one place — keyed the way our world actually works, not bent out of a generic sales CRM.' },
   { n: '02', h: 'Depletion tracking', p: 'Track what’s actually moving through accounts, not just what shipped. The number your distributor’s report buries.' },
@@ -31,6 +43,32 @@ const feats = [
         <p class="lede">A generic CRM treats a liquor store and a SaaS lead the same way. Your reality — outlets, distributors, depletions, territories — gets crammed into fields that were never built for it. So the data’s a mess, and you stop trusting it.</p>
       </div>
 
+      <!-- SIGNATURE — the account book populating itself -->
+      <div class="prod-sec">
+        <div class="prod-sec__head">
+          <span class="eyebrow">// The book, populating</span>
+          <h2>Every account, in the language the category actually uses.</h2>
+        </div>
+        <div class="rec panel" data-reveal>
+          <div class="rec__top">
+            <span class="rec__h mono">Accounts</span>
+            <span class="live rec__live">LIVE</span>
+          </div>
+          <div class="rec__head rec__row mono" style="--ri:0; --rd:0.4s">
+            <span>Account</span><span>Type</span><span>St</span><span class="rec__num">Depletion</span>
+          </div>
+          {records.map((r) => (
+            <div class={`rec__row mono${r.risk ? ' is-risk' : ''}`} style={`--ri:${r.ri + 1}; --rd:${r.rd}`}>
+              <span class="rec__acct">{r.acct}</span>
+              <span class="rec__type mut">{r.type}</span>
+              <span class="mut">{r.state}</span>
+              <span class="rec__num">{r.dep}</span>
+            </div>
+          ))}
+        </div>
+        <p class="mut rec__note">Illustrative accounts — your book, keyed the way spirits actually sells.</p>
+      </div>
+
       <div class="prod-sec">
         <div class="prod-sec__head"><h2>Every account, distributor, and depletion in one place — and the ones slipping, flagged.</h2></div>
         <div class="feats">
@@ -55,10 +93,33 @@ const feats = [
   </section>
 
   <section class="section section--band">
-    <div class="wrap cta-band">
+    <div class="wrap cta-band" data-reveal>
       <h2>See it running on your accounts.</h2>
       <p class="mut">Demos are real — I’ll show you the system with category data that looks like yours. Pricing’s scoped to the brand; tell me what you need.</p>
       <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Book a demo →</a>
     </div>
   </section>
+
+  <style>
+    /* SIGNATURE — staggered data-rows ("the book, populating") */
+    .rec { overflow: hidden; box-shadow: var(--shadow-soft); }
+    .rec__top { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+    .rec__h { font-size: var(--t-eyebrow); color: var(--mut); letter-spacing: 0.08em; text-transform: uppercase; }
+    .rec__live { margin-left: auto; font-size: 10px; }
+    .rec__row {
+      display: grid; grid-template-columns: 1.6fr 1fr 0.4fr 0.8fr; gap: var(--s4);
+      align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line);
+      font-size: var(--t-sm);
+    }
+    .rec__row:last-child { border-bottom: 0; }
+    .rec__head { color: var(--mut); font-size: var(--t-eyebrow); letter-spacing: 0.06em; text-transform: uppercase; background: var(--bg); }
+    .rec__acct { color: var(--text); font-weight: 500; }
+    .rec__num { text-align: right; color: var(--avocado); font-weight: 600; }
+    .rec__row.is-risk .rec__num { color: var(--grn); }
+    .rec__note { margin-top: var(--s3); font-size: var(--t-sm); }
+    @media (max-width: 600px) {
+      .rec__row { grid-template-columns: 1.5fr 0.5fr 0.8fr; }
+      .rec__type { display: none; }
+    }
+  </style>
 </BaseLayout>

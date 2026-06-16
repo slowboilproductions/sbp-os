@@ -136,6 +136,80 @@ p { max-width: 62ch; }
 .skip-link { position: absolute; left: -9999px; top: 0; background: var(--grn); color: var(--grn-ink); padding: 0.6em 1em; border-radius: var(--r-sm); z-index: 100; }
 .skip-link:focus { left: var(--s4); top: var(--s4); }
 
+/* =====================================================================
+   MOTION LAYER (B-7) — progressive enhancement, opt-IN by class.
+   All initial-hidden states sit behind `html.motion`, which the inline
+   head boot-script adds ONLY when JS is on AND prefers-reduced-motion is
+   NOT set. So: no-JS → fully visible; reduced-motion → fully visible;
+   motion-OK → these reveal as they enter view (Motion island adds .is-in).
+   Transform/opacity only; the island rAF-throttles all scroll work.
+   ===================================================================== */
+
+/* generic scroll reveal (the page spine) */
+html.motion [data-reveal] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: calc(var(--ri, 0) * 80ms);
+}
+html.motion [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* hero "boot up" — children rise in sequence */
+html.motion [data-anim="hero"] > * {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+html.motion [data-anim="hero"].is-in > * { opacity: 1; transform: none; }
+html.motion [data-anim="hero"].is-in > *:nth-child(1) { transition-delay: 0.04s; }
+html.motion [data-anim="hero"].is-in > *:nth-child(2) { transition-delay: 0.12s; }
+html.motion [data-anim="hero"].is-in > *:nth-child(3) { transition-delay: 0.22s; }
+html.motion [data-anim="hero"].is-in > *:nth-child(4) { transition-delay: 0.32s; }
+
+/* staggered grids (StackGrid: the four subunits populate in) */
+html.motion [data-anim="stagger"] [data-anim-item] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+html.motion [data-anim="stagger"].is-in [data-anim-item] { opacity: 1; transform: none; }
+html.motion [data-anim="stagger"].is-in [data-anim-item]:nth-child(1) { transition-delay: 0.04s; }
+html.motion [data-anim="stagger"].is-in [data-anim-item]:nth-child(2) { transition-delay: 0.12s; }
+html.motion [data-anim="stagger"].is-in [data-anim-item]:nth-child(3) { transition-delay: 0.20s; }
+html.motion [data-anim="stagger"].is-in [data-anim-item]:nth-child(4) { transition-delay: 0.28s; }
+
+/* SIGNATURE — Operational Dashboard: z-axis push (panel comes forward) */
+html.motion [data-zpush] {
+  opacity: 0;
+  transform: perspective(1100px) translateY(48px) translateZ(-90px) scale(0.93);
+  transform-origin: center;
+  transition: opacity 0.8s var(--ease), transform 0.9s var(--ease);
+  will-change: transform;
+}
+html.motion [data-zpush].is-in {
+  opacity: 1;
+  transform: perspective(1100px) translateY(0) translateZ(0) scale(1);
+}
+
+/* SIGNATURE — CRM: staggered data-rows (records populate at different speeds) */
+html.motion .rec[data-reveal] .rec__row {
+  opacity: 0; transform: translateX(-16px);
+  transition: opacity var(--rd, 0.6s) var(--ease), transform var(--rd, 0.6s) var(--ease);
+  transition-delay: calc(var(--ri, 0) * 70ms);
+}
+html.motion .rec[data-reveal].is-in .rec__row { opacity: 1; transform: none; }
+
+/* SIGNATURE — Marketing: multi-layer drift (parallax backdrop) */
+[data-drift] { position: relative; isolation: isolate; }
+[data-drift-layer] { will-change: transform; }
+
+/* cursor-reactive flourishes — fine pointer + motion only */
+@media (hover: hover) and (pointer: fine) {
+  html.motion .card::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    pointer-events: none; opacity: 0; transition: opacity var(--dur) var(--ease);
+    background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(224, 106, 44, 0.10), transparent 62%);
+  }
+  html.motion .card:hover::after { opacity: 1; }
+}
+
 /* ---- product / subunit page shared pattern -------------------------- */
 .prod-hero { max-width: 54ch; }
 .prod-hero .lede { margin-top: var(--s5); }

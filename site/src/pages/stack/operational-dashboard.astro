@@ -26,7 +26,8 @@ const feats = [
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
         </div>
       </div>
-      <div class="od-hero__panel" data-anim="hero-panel">
+      <!-- SIGNATURE — z-axis push: the panel scales up / comes forward -->
+      <div class="od-hero__panel" data-anim="hero-panel" data-zpush>
         <DashboardPanel title="operational-dashboard / summary" />
       </div>
     </div>
@@ -61,13 +62,13 @@ const feats = [
           <h2>It eats the feeds you already get.</h2>
           <p class="mut od-note">Distributor drops, market data, the spreadsheets in your inbox — normalized into one picture instead of one more thing to reconcile by hand.</p>
         </div>
-        <div class="shot"><span class="shot__label">Operational Dashboard — screenshot slot (the strongest single asset on the site)</span></div>
+        <div class="shot" data-zpush><span class="shot__label">Operational Dashboard — screenshot slot (the strongest single asset on the site)</span></div>
       </div>
     </div>
   </section>
 
   <section class="section section--band">
-    <div class="wrap cta-band">
+    <div class="wrap cta-band" data-reveal>
       <h2>See your distribution in one picture.</h2>
       <p class="mut">I’ll walk you through it live. Pricing’s scoped to the brand — tell me what you’re working with.</p>
       <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Book a demo →</a>

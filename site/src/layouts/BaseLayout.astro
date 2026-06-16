@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Banner from '../components/Banner.astro';
 import Footer from '../components/Footer.astro';
+import Motion from '../components/Motion.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -47,6 +48,24 @@ const fullTitle = title === 'Slow Boil Productions'
   />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Motion boot: enable the reveal layer only when motion is welcome. Runs
+       before paint (no flash). Under prefers-reduced-motion or no-JS, `motion`
+       is never set → every reveal state is inert and content shows in full.
+       Watchdog: if the Motion island never boots, reveal everything anyway. -->
+  <script is:inline>
+    (function () {
+      var d = document.documentElement;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      d.classList.add('motion');
+      setTimeout(function () {
+        if (!d.dataset.motionReady) {
+          d.querySelectorAll('[data-reveal],[data-anim="hero"],[data-anim="stagger"],[data-zpush]')
+            .forEach(function (el) { el.classList.add('is-in'); });
+        }
+      }, 1800);
+    })();
+  </script>
   <ViewTransitions />
 </head>
 <body>
@@ -57,5 +76,6 @@ const fullTitle = title === 'Slow Boil Productions'
     <slot />
   </main>
   <Footer />
+  <Motion />
 </body>
 </html>

@@ -116,6 +116,35 @@ const { title = 'operational-dashboard / sell-through' } = Astro.props;
         onScroll();
       }
 
+      // boot-up count-up: the stats tally up once when the panel enters view
+      // (reduced motion → values are left at their final, server-rendered text)
+      if (!reduce) {
+        const counters = Array.from(panel.querySelectorAll('.dp__v[data-count]'));
+        const runCountUp = () => {
+          counters.forEach((el) => {
+            const to = parseFloat(el.dataset.count);
+            if (isNaN(to)) return;
+            const prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+            const decimals = String(el.dataset.count).indexOf('.') !== -1 ? 1 : 0;
+            const fmt = (v) => prefix + (decimals ? v.toFixed(1) : Math.round(v).toLocaleString()) + suffix;
+            const dur = 900, start = performance.now();
+            const frame = (now) => {
+              const t = Math.min(1, (now - start) / dur);
+              const e = 1 - Math.pow(1 - t, 3);
+              el.textContent = fmt(to * e);
+              if (t < 1) requestAnimationFrame(frame);
+            };
+            requestAnimationFrame(frame);
+          });
+        };
+        if ('IntersectionObserver' in window && counters.length) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((en) => { if (en.isIntersecting) { runCountUp(); io.disconnect(); } });
+          }, { threshold: 0.4 });
+          io.observe(panel);
+        }
+      }
+
       // ambient: one plain-integer stat quietly ticks every few seconds
       if (!reduce) {
         const cells = Array.from(panel.querySelectorAll('.dp__v[data-count]'));

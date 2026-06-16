@@ -1,0 +1,107 @@
+---
+// MOTION ISLAND (B-7) — the single progressive-enhancement engine for the
+// site's motion layer. Included once in BaseLayout. Drives, by data-attribute:
+//   • [data-reveal] / [data-anim="hero"] / [data-anim="stagger"] — scroll reveals
+//   • [data-zpush] ............ Operational Dashboard signature (z-axis push)
+//   • [data-drift] + [data-drift-layer][data-rate] — Marketing signature (parallax)
+//   • .rec[data-reveal] ....... CRM signature (staggered data-rows; CSS-driven)
+//   • .btn--primary ........... magnetic CTAs (fine pointer)
+//   • .card ................... cursor-aware glow (fine pointer)
+// Per-unit IC signature lives in BottleStudio.astro; the hero dashboard's
+// boot-up count-up + tilt live in DashboardPanel.astro (self-contained).
+//
+// GUARDRAILS: bails entirely under prefers-reduced-motion (the inline head
+// boot-script never adds `html.motion`, so all initial-hidden CSS is inert and
+// content shows in full). Transform/opacity only; every scroll handler is
+// rAF-throttled and registered once. Re-inits after Astro View Transitions.
+---
+<script>
+  const REVEAL_SEL = '[data-reveal],[data-anim="hero"],[data-anim="stagger"],[data-zpush]';
+  let driftRaf = 0;
+  let driftLayers = [];
+
+  function reveal(items) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+      items.forEach((el) => io.observe(el));
+    } else {
+      items.forEach((el) => el.classList.add('is-in'));
+    }
+  }
+
+  function runDrift() {
+    if (driftRaf) return;
+    driftRaf = requestAnimationFrame(() => {
+      driftRaf = 0;
+      const vh = window.innerHeight;
+      driftLayers.forEach((el) => {
+        const host = el.closest('[data-drift]') || el;
+        const r = host.getBoundingClientRect();
+        const mid = r.top + r.height / 2;
+        const delta = (vh / 2 - mid);          // +ve once the band scrolls up past center
+        const rate = parseFloat(el.dataset.rate || '0.1');
+        // clamp so the decorative wash never flies far off a tall section
+        const offset = Math.max(-130, Math.min(130, delta * rate));
+        el.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
+      });
+    });
+  }
+
+  function initMotion() {
+    const d = document.documentElement;
+    if (!d.classList.contains('motion')) return;   // reduced-motion / no boot → leave static
+    d.dataset.motionReady = '1';
+
+    // reveals (wire each element once)
+    const fresh = Array.from(document.querySelectorAll(REVEAL_SEL)).filter((el) => !el.dataset.revWired);
+    fresh.forEach((el) => (el.dataset.revWired = '1'));
+    if (fresh.length) reveal(fresh);
+
+    // Marketing drift parallax — refresh the live layer set; bind scroll once
+    driftLayers = Array.from(document.querySelectorAll('[data-drift-layer]'));
+    if (driftLayers.length && !window.__sbDrift) {
+      window.__sbDrift = true;
+      window.addEventListener('scroll', runDrift, { passive: true });
+      window.addEventListener('resize', runDrift, { passive: true });
+    }
+    if (driftLayers.length) runDrift();
+
+    // cursor flourishes — fine pointer only
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine) return;
+
+    document.querySelectorAll('.btn--primary').forEach((btn) => {
+      if (btn.dataset.magWired) return;
+      btn.dataset.magWired = '1';
+      let raf = 0;
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          btn.style.transform = 'translate(' + (x * 0.18).toFixed(1) + 'px,' + (y * 0.3 - 1).toFixed(1) + 'px)';
+        });
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+
+    document.querySelectorAll('.card').forEach((card) => {
+      if (card.dataset.glowWired) return;
+      card.dataset.glowWired = '1';
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+      });
+    });
+  }
+
+  initMotion();
+  document.addEventListener('astro:after-swap', initMotion);
+</script>

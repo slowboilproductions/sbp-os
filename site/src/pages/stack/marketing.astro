@@ -30,7 +30,13 @@ const rhythm = [
 <BaseLayout
   title="Marketing"
   description="Agency-grade marketing for beverage-alcohol brands — websites, $50k-studio photography, content, paid, and email, plus strategy work that takes consultancies four weeks, delivered in two hours.">
-  <section class="section">
+  <section class="section m-hero-sec" data-drift>
+    <!-- SIGNATURE — multi-layer drift: the sunset wash + grid scroll slower
+         than the foreground copy (parallax). Decorative; motion-gated. -->
+    <div class="m-drift" aria-hidden="true">
+      <span class="m-drift__sun" data-drift-layer data-rate="0.16"></span>
+      <span class="m-drift__grid" data-drift-layer data-rate="0.06"></span>
+    </div>
     <div class="wrap">
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — Marketing</span>
@@ -110,7 +116,7 @@ const rhythm = [
   </section>
 
   <section class="section section--band">
-    <div class="wrap cta-band">
+    <div class="wrap cta-band" data-reveal>
       <h2>Marketing that respects the brand and the budget.</h2>
       <p class="mut">No rate card, no runaround — just a real answer once I know what you’re building.</p>
       <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Start a conversation →</a>
@@ -118,6 +124,24 @@ const rhythm = [
   </section>
 
   <style>
+    /* SIGNATURE — multi-layer drift backdrop */
+    .m-hero-sec { position: relative; overflow: clip; }
+    .m-hero-sec .wrap { position: relative; z-index: 1; }
+    .m-drift { position: absolute; inset: -12% 0 auto 0; height: 130%; z-index: 0; pointer-events: none; }
+    .m-drift__sun {
+      position: absolute; top: -6%; right: -6%; width: min(58vw, 620px); aspect-ratio: 1; border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(226, 179, 74, 0.34), rgba(224, 106, 44, 0.14) 46%, transparent 68%);
+      display: block; filter: blur(2px);
+    }
+    .m-drift__grid {
+      position: absolute; inset: 0; display: block; opacity: 0.5;
+      background-image:
+        linear-gradient(to right, rgba(75, 46, 32, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(75, 46, 32, 0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: radial-gradient(120% 80% at 70% 6%, #000, transparent 72%);
+      mask-image: radial-gradient(120% 80% at 70% 6%, #000, transparent 72%);
+    }
     .ilink { color: var(--grn); border-bottom: 1px solid var(--grn-deep); }
     .od-note { margin-top: var(--s4); }
     .m-tag { margin-top: var(--s3); }
