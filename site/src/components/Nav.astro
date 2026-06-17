@@ -28,6 +28,7 @@ const stackLinks = [
           {stackLinks.map((l) => <a role="menuitem" href={l.href}>{l.label}</a>)}
         </div>
       </div>
+      <a href="/ai" class={isActive('/ai') ? 'is-active' : ''}>AI</a>
       <a href="/proof" class={isActive('/proof') ? 'is-active' : ''}>Proof</a>
       <a href="/about" class={isActive('/about') ? 'is-active' : ''}>About</a>
       <a href="/contact" class={isActive('/contact') ? 'is-active' : ''}>Contact</a>
@@ -45,6 +46,7 @@ const stackLinks = [
   <div class="nav__mobile" id="m-menu" hidden>
     <a href="/stack">The Stack</a>
     {stackLinks.map((l) => <a class="nav__mobile-sub" href={l.href}>{l.label}</a>)}
+    <a href="/ai">AI</a>
     <a href="/proof">Proof</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
