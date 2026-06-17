@@ -63,6 +63,18 @@ const jitter = (i) => {
         <span class="crm-chaos__bar"><i></i><i></i><i></i></span>
         <span class="crm-chaos__hublabel">CRM</span>
       </div>
+
+      <!-- intelligence pipeline OUT of the CRM — draws only once the noise starts
+           funneling away (gated on funnel progress in the script). -->
+      <svg class="crm-chaos__pipes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path class="cpipe cpipe--trunk" pathLength="1" d="M50 62 L50 70" />
+        <path class="cpipe cpipe--l" pathLength="1" d="M50 70 C 50 80 18 78 18 83" />
+        <path class="cpipe cpipe--m" pathLength="1" d="M50 70 L50 83" />
+        <path class="cpipe cpipe--r" pathLength="1" d="M50 70 C 50 80 82 78 82 83" />
+      </svg>
+      <div class="ibucket ibucket--l"><span class="ibucket__dot"></span>Catch stockouts</div>
+      <div class="ibucket ibucket--m"><span class="ibucket__dot"></span>Measure lift</div>
+      <div class="ibucket ibucket--r"><span class="ibucket__dot"></span>Replicate success</div>
       {nuggets.map((n, i) => {
         const j = jitter(i);
         return (
@@ -76,8 +88,8 @@ const jitter = (i) => {
       })}
     </div>
 
-    <p class="crm-chaos__zen">The noise funnels into one place — and goes quiet.</p>
-    <p class="sr-only">Everything a sales rep juggles in the field — accounts, visits, orders, reorders, even the buyer’s favorite team — funneled into one CRM, so it becomes street-level intelligence instead of scattered notes.</p>
+    <p class="crm-chaos__zen">The chaos becomes street-level intelligence.</p>
+    <p class="sr-only">Everything a sales rep juggles in the field — accounts, visits, orders, reorders, even the buyer’s favorite team — funnels into one CRM and streams back out as street-level intelligence: catch stockouts before they happen, measure lift, and replicate what works.</p>
   </div>
 </section>
 
@@ -138,6 +150,27 @@ const jitter = (i) => {
     to   { transform: translate(var(--jx, 8px), var(--jy, 6px)) rotate(1.4deg); }
   }
 
+  /* intelligence pipeline out of the CRM */
+  .crm-chaos__pipes { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+  .cpipe {
+    fill: none; stroke: var(--grn); stroke-width: 2.4; stroke-linecap: round;
+    vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 0;
+  }
+  .ibucket {
+    position: absolute; top: 88%; transform: translate(-50%, -50%); z-index: 2;
+    display: flex; align-items: center; gap: 7px; white-space: nowrap;
+    background: var(--bg); border: 1px solid var(--grn-deep); border-radius: var(--r);
+    padding: 7px 12px; box-shadow: 0 6px 18px rgba(75, 46, 32, 0.14);
+    font-family: var(--font-mono); font-size: 12px; color: var(--text);
+  }
+  .ibucket--l { left: 18%; } .ibucket--m { left: 50%; } .ibucket--r { left: 82%; }
+  .ibucket__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grn); flex: none; }
+
+  /* under motion the pipeline starts hidden and the script draws/reveals it;
+     without JS / under reduced motion it renders fully drawn + buckets visible. */
+  .crm-chaos.is-motion .cpipe { stroke-dashoffset: 1; }
+  .crm-chaos.is-motion .ibucket { opacity: 0; }
+
   .crm-chaos__zen {
     text-align: center; margin-top: var(--s5);
     font-family: var(--font-display); font-size: var(--t-lg); color: var(--text-2);
@@ -151,13 +184,16 @@ const jitter = (i) => {
   }
 
   @media (max-width: 680px) {
-    .crm-chaos__stage { height: 500px; }
+    .crm-chaos__stage { height: 520px; }
     .cnug__v { font-size: 12px; }
     /* thin the field on small screens so it reads as chaos, not a wall */
     .cnug:nth-child(n+15) { display: none; }
+    /* pull the outer buckets in and shrink labels so they don't run off-edge */
+    .ibucket { font-size: 10.5px; padding: 6px 9px; }
+    .ibucket--l { left: 24%; } .ibucket--r { left: 76%; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .cnug__in { animation: none; }
+    .cnug__in { animation: none; opacity: 0.55; }
   }
 </style>
 
@@ -169,6 +205,9 @@ const jitter = (i) => {
     const stage = sec.querySelector('.crm-chaos__stage') as HTMLElement;
     const zen = sec.querySelector('.crm-chaos__zen') as HTMLElement | null;
     const nugs = Array.from(sec.querySelectorAll('.cnug')) as HTMLElement[];
+    const trunk = sec.querySelector('.cpipe--trunk') as SVGPathElement | null;
+    const branches = Array.from(sec.querySelectorAll('.cpipe--l, .cpipe--m, .cpipe--r')) as SVGPathElement[];
+    const buckets = Array.from(sec.querySelectorAll('.ibucket')) as HTMLElement[];
 
     // reduced motion: leave the field static (jitter off via CSS) and show the
     // zen takeaway as-is — no funnel.
@@ -199,6 +238,19 @@ const jitter = (i) => {
         // stay readable most of the way in; only fade out as they reach the hub
         n.style.opacity = (1 - clamp((funnel - 0.55) / 0.4)).toFixed(3);
       });
+      // intelligence pipeline OUT — only begins once the noise is clearly
+      // funneling away; trunk draws first, then branches, then buckets reveal.
+      const pipe = clamp((funnel - 0.35) / 0.6);
+      const trunkDrawn = clamp(pipe / 0.4);
+      const branchDrawn = clamp((pipe - 0.3) / 0.7);
+      const bucketReveal = clamp((pipe - 0.6) / 0.4);
+      if (trunk) trunk.style.strokeDashoffset = (1 - trunkDrawn).toFixed(3);
+      branches.forEach((b) => { b.style.strokeDashoffset = (1 - branchDrawn).toFixed(3); });
+      buckets.forEach((b) => {
+        b.style.opacity = bucketReveal.toFixed(3);
+        b.style.transform = `translate(-50%,-50%) scale(${(0.85 + 0.15 * bucketReveal).toFixed(3)})`;
+      });
+
       if (zen) zen.style.opacity = clamp((p - 0.82) / 0.15).toFixed(3);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
