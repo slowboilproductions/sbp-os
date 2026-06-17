@@ -17,29 +17,40 @@
 // funnel early-returns under reduced motion, leaving a static scattered field
 // with the zen takeaway shown. Nothing here is compliance chrome.
 const nuggets = [
-  { k: 'Account',      v: 'Eastside Wine & Spirits',     x: 10, y: 16 },
-  { k: 'Last visit',   v: '12 days ago',                 x: 68, y: 9  },
-  { k: 'Reorder due',  v: 'Harbor Beverage',             x: 39, y: 7  },
-  { k: 'New buyer',    v: 'Midtown Bottle Co.',          x: 80, y: 30 },
-  { k: 'Last order',   v: '9 cases · Aug 2',             x: 7,  y: 44 },
-  { k: 'Buyer',        v: 'die-hard Panthers fan',       x: 58, y: 38 },
-  { k: 'Event',        v: 'Tasting @ Eastside — Fri 6p', x: 28, y: 60 },
-  { k: 'Address',      v: '1420 Central Ave',            x: 77, y: 63 },
-  { k: 'Depletion',    v: '↓ 8% MoM',                    x: 13, y: 74 },
-  { k: 'Distributor',  v: 're-up pending',               x: 45, y: 80 },
-  { k: 'Note',         v: 'comps the bartender',         x: 86, y: 49 },
-  { k: 'Today',        v: '3 stops logged',              x: 23, y: 32 },
-  { k: 'Stockout risk',v: 'Uptown Cellars',              x: 63, y: 72 },
-  { k: 'Reminder',     v: 'buyer’s birthday next week',  x: 34, y: 25 },
+  { k: 'Account',       v: 'Eastside Wine & Spirits',     x: 8,  y: 12 },
+  { k: 'Last visit',    v: '12 days ago',                 x: 66, y: 8  },
+  { k: 'Reorder due',   v: 'Harbor Beverage',             x: 37, y: 6  },
+  { k: 'New buyer',     v: 'Midtown Bottle Co.',          x: 82, y: 20 },
+  { k: 'Last order',    v: '9 cases · Aug 2',             x: 5,  y: 36 },
+  { k: 'Buyer',         v: 'die-hard Panthers fan',       x: 60, y: 30 },
+  { k: 'Event',         v: 'Tasting @ Eastside — Fri 6p', x: 24, y: 52 },
+  { k: 'Address',       v: '1420 Central Ave',            x: 78, y: 56 },
+  { k: 'Depletion',     v: '↓ 8% MoM',                    x: 11, y: 66 },
+  { k: 'Distributor',   v: 're-up pending',               x: 44, y: 74 },
+  { k: 'Note',          v: 'comps the bartender',         x: 87, y: 42 },
+  { k: 'Today',         v: '3 stops logged',              x: 20, y: 26 },
+  { k: 'Stockout risk', v: 'Uptown Cellars',              x: 64, y: 64 },
+  { k: 'Reminder',      v: 'buyer’s birthday next week',  x: 32, y: 18 },
+  { k: 'Phone',         v: '(704) 555-0148',              x: 89, y: 8  },
+  { k: 'Open invoice',  v: '$1,240',                      x: 50, y: 86 },
+  { k: 'Sample drop',   v: '2 bottles, Uptown',           x: 13, y: 50 },
+  { k: 'Follow-up',     v: 'call Thursday',               x: 72, y: 38 },
+  { k: 'Rep',           v: 'Dana — West territory',       x: 6,  y: 80 },
+  { k: 'Promo',         v: 'BOGO ends Sun',               x: 85, y: 72 },
+  { k: 'New SKU',       v: 'barrel-proof rye',            x: 29, y: 86 },
+  { k: 'Cases on hand', v: '14',                          x: 70, y: 84 },
+  { k: 'Prefers',       v: 'text over email',             x: 30, y: 40 },
+  { k: 'Visit goal',    v: '5 stops/day',                 x: 90, y: 54 },
 ];
-// deterministic jitter params per nugget (so the chaos looks organic, not uniform)
+// deterministic jitter params per nugget (so the chaos looks organic, not uniform).
+// Wider amplitude than v1 (more movement) but the same slow periods (stays readable).
 const jitter = (i) => {
   const sx = i % 2 ? 1 : -1, sy = i % 3 === 0 ? -1 : 1;
   return {
-    jx: sx * (7 + (i % 3) * 5),
-    jy: sy * (6 + (i % 4) * 4),
-    dur: (3.1 + (i % 5) * 0.55).toFixed(2),
-    delay: (-(i * 0.43)).toFixed(2),
+    jx: sx * (12 + (i % 4) * 7),
+    jy: sy * (10 + (i % 3) * 8),
+    dur: (3.8 + (i % 6) * 0.5).toFixed(2),
+    delay: (-(i * 0.41)).toFixed(2),
   };
 };
 ---
@@ -75,7 +86,7 @@ const jitter = (i) => {
   .crm-chaos__eyebrow { display: block; text-align: center; }
 
   .crm-chaos__stage {
-    position: relative; width: 100%; height: 540px; margin: var(--s5) auto 0;
+    position: relative; width: 100%; height: 620px; margin: var(--s5) auto 0;
     overflow: hidden;
   }
 
@@ -140,10 +151,10 @@ const jitter = (i) => {
   }
 
   @media (max-width: 680px) {
-    .crm-chaos__stage { height: 460px; }
+    .crm-chaos__stage { height: 500px; }
     .cnug__v { font-size: 12px; }
     /* thin the field on small screens so it reads as chaos, not a wall */
-    .cnug:nth-child(odd):nth-child(n+10) { display: none; }
+    .cnug:nth-child(n+15) { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .cnug__in { animation: none; }
@@ -171,9 +182,11 @@ const jitter = (i) => {
       const r = sec.getBoundingClientRect();
       const vh = window.innerHeight || 800;
       const center = r.top + r.height / 2;
-      const startY = vh * 0.95, endY = vh * 0.42;
+      // Wider progress window than v1 (almost a full viewport of scroll for
+      // p:0->1) so the funnel reads slow, not snappy.
+      const startY = vh * 1.0, endY = vh * 0.2;
       const p = clamp((startY - center) / (startY - endY));
-      const funnel = clamp((p - 0.4) / 0.5);   // chaos until ~40%, fully funneled by ~90%
+      const funnel = clamp((p - 0.3) / 0.62);   // chaos until ~30%, fully funneled by ~92%
       stage.style.setProperty('--funnel', funnel.toFixed(3));
       const cw = stage.clientWidth / 2, ch = stage.clientHeight / 2;
       nugs.forEach((n) => {
@@ -181,11 +194,12 @@ const jitter = (i) => {
         const hx = n.offsetLeft + n.offsetWidth / 2;
         const hy = n.offsetTop + n.offsetHeight / 2;
         const dx = (cw - hx) * funnel, dy = (ch - hy) * funnel;
-        const s = 1 - 0.78 * funnel;
+        const s = 1 - 0.7 * funnel;
         n.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${s.toFixed(3)})`;
-        n.style.opacity = (1 - clamp((funnel - 0.15) / 0.7)).toFixed(3);
+        // stay readable most of the way in; only fade out as they reach the hub
+        n.style.opacity = (1 - clamp((funnel - 0.55) / 0.4)).toFixed(3);
       });
-      if (zen) zen.style.opacity = clamp((p - 0.72) / 0.22).toFixed(3);
+      if (zen) zen.style.opacity = clamp((p - 0.82) / 0.15).toFixed(3);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     window.addEventListener('scroll', onScroll, { passive: true });
