@@ -74,6 +74,15 @@ const legend = [...segs, hub];
 
   <div class="ams-wheel__stage">
     <svg class="ams-wheel__svg" viewBox="0 0 600 600" role="presentation" focusable="false" aria-hidden="true">
+      <defs>
+        <!-- "sharp steel" hub fill — deliberately a cool, non-earth tone so the
+             Think Tank brain stands apart from the warm gold/orange/brown slices. -->
+        <linearGradient id="aw-steel" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#97A4AD" />
+          <stop offset="0.55" stop-color="#6E7B84" />
+          <stop offset="1" stop-color="#515D65" />
+        </linearGradient>
+      </defs>
       <g class="ams-wheel__group">
         {segs.map((s) => (
           <g class="aw-slice" data-key={s.key} style={`--dx:${s.ux};--dy:${s.uy}`}>
@@ -152,7 +161,7 @@ const legend = [...segs, hub];
   .aw-slice__lbl { font-size: 19px; }
   .aw-hub__l { font-size: 25px; fill: var(--grn-ink); }
   .aw-center__l { font-size: 27px; fill: var(--text); }
-  .ams-wheel__hub circle { fill: var(--grn); }
+  .ams-wheel__hub circle { fill: url(#aw-steel); stroke: #B7C2C8; stroke-width: 1.5; }
 
   /* active / hover pop — on the inner shape only, so it never fights --ex */
   .ams-wheel.is-interactive .aw-slice.is-active path,
@@ -185,17 +194,13 @@ const legend = [...segs, hub];
   .aw-leg__name { display: block; font-family: var(--font-display); font-weight: 600; color: var(--text); }
   .aw-leg__desc { display: block; margin-top: var(--s2); font-size: var(--t-sm); color: var(--text-2); }
 
+  /* Once JS is on, the wheel + caption carry everything, so the legend chips are
+     redundant clutter (operator). Visually remove them but KEEP them in the DOM:
+     they stay the screen-reader representation of the aria-hidden wheel and the
+     data source for the caption. (Under no-JS they render as the visible list.) */
   .ams-wheel.is-interactive .ams-wheel__legend {
-    grid-template-columns: repeat(4, 1fr); gap: var(--s3); max-width: 100%;
-  }
-  .ams-wheel.is-interactive .aw-leg__desc { display: none; }
-  .ams-wheel.is-interactive .aw-leg {
-    text-align: center; border-left: 1px solid var(--line-2);
-    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
-  }
-  .ams-wheel.is-interactive .aw-leg.is-active,
-  .ams-wheel.is-interactive .aw-leg:hover {
-    border-color: var(--grn); background: var(--grn-wash);
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
 
   @media (max-width: 720px) {
