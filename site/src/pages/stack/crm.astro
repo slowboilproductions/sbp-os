@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CrmPopulate from '../../components/CrmPopulate.astro';
 import CrmChaos from '../../components/CrmChaos.astro';
+import ScreenShots from '../../components/ScreenShots.astro';
 // CRM subunit (skeleton v0.3 §3.3), spirits/bev-alc-first, operator voice (A-15).
 // Public name "CRM" (A-6). Pricing → Contact only (A-8).
 // FLAG: capability claims drawn from the skeleton outline, kept conservative;
@@ -64,7 +65,11 @@ const feats = [
           <span class="eyebrow">// Built for the category</span>
           <h2>Distributors, depletions, and SKUs are first-class — not customizations.</h2>
         </div>
-        <div class="shot"><span class="shot__label">CRM walkthrough — screenshot slot</span></div>
+        <ScreenShots
+          unit="crm"
+          label="CRM walkthrough — screenshot slot (swap-ready)"
+          alt="Slow Boil CRM"
+          caption="Illustrative demo data — not a real account, outlet, or distributor." />
       </div>
     </div>
   </section>
