@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CrmPopulate from '../../components/CrmPopulate.astro';
+import CrmChaos from '../../components/CrmChaos.astro';
 // CRM subunit (skeleton v0.3 §3.3), spirits/bev-alc-first, operator voice (A-15).
 // Public name "CRM" (A-6). Pricing → Contact only (A-8).
 // FLAG: capability claims drawn from the skeleton outline, kept conservative;
@@ -31,8 +32,14 @@ const feats = [
         <span class="eyebrow">// The problem</span>
         <p class="lede">A generic CRM treats a liquor store and a SaaS lead the same way. Your reality — outlets, distributors, depletions, territories — gets crammed into fields that were never built for it. So the data’s a mess, and you stop trusting it.</p>
       </div>
+    </div>
+  </section>
 
-      <div class="prod-sec">
+  <CrmChaos />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-sec" style="margin-top:0;">
         <div class="prod-sec__head"><h2>Every account, distributor, and depletion in one place — and the ones slipping, flagged.</h2></div>
         <div class="feats" data-reveal-stagger>
           {feats.map((f) => (
