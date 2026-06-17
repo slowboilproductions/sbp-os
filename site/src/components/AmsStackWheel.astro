@@ -1,0 +1,286 @@
+---
+// AMS STACK WHEEL — the Marketing subunit signature (B-7 per-unit motion).
+// Operator-designed (chat 2026-06-16): scroll in and a "Marketing Stack" circle
+// forms; as it reaches viewport center it soft-explodes into a pie — the slices
+// scoot outward a little — and the center resolves into a THINK TANK hub that
+// feeds off the slices to produce strategy. Hover/tap a slice for a one-line
+// description.
+//
+// 7 slices in three colour families + a Think Tank center hub:
+//   Paid (gold):        Meta · Google Ads · TikTok
+//   Owned & Social (orange): Website · Social Manager
+//   Discovery & Creative (brown): Search + AI · Image Ideation
+//   Center hub (rust):  Think Tank
+//
+// CAPTURE NOTE: "Social Manager" folds the social-competitor scrubbing in — that
+// is DISTINCT from the parked B-12 control-state competitor intel (Dash-side,
+// still blocked). Two different "competitor intels"; only B-12 is blocked.
+//
+// GUARDRAILS: transform/opacity-only, one small rAF-throttled scroll island, no
+// scroll-jacking (the wheel animates as it passes through center, scrolling is
+// never trapped). The SVG is aria-hidden decoration; the accessible + no-JS +
+// reduced-motion content is the real <ul> legend below (every name + full
+// description, always in the DOM). Under no-JS / reduced-motion the wheel simply
+// renders in its resolved exploded state (no assemble animation). On touch,
+// hover → tap. Nothing here is compliance chrome.
+const slices = [
+  { key: 'meta',   label: 'Meta',           family: 'paid',
+    desc: 'Meta campaigns that deploy and report themselves — wired into the platform with Meta MCP, no agency middleman.' },
+  { key: 'google', label: 'Google Ads',     family: 'paid',
+    desc: 'Search and Performance Max, built and optimized — age-gated for the category.' },
+  { key: 'tiktok', label: 'TikTok',         family: 'paid',
+    desc: 'Short-form deployed and measured where your buyers already scroll.' },
+  { key: 'web',    label: 'Website',        family: 'owned',
+    desc: 'Fast, conversion-built, age-gated sites you actually own — with Find It Now automation so buyers can actually find your bottle.' },
+  { key: 'smm',    label: 'Social Manager', family: 'owned',
+    desc: 'A built-in social media manager: ships your posts, watches the comments, and scrubs what your competitors are running — one place, always on.' },
+  { key: 'search', label: 'Search + AI',    family: 'discovery',
+    desc: 'Everybody knows SEO. Do you know how to get found when buyers ask AI? We do both.' },
+  { key: 'image',  label: 'Image Ideation', family: 'discovery',
+    desc: 'We ideate the shots and concepts, then hand them to Image Creation to produce.' },
+];
+const hub = { key: 'hub', label: 'Think Tank',
+  desc: 'The brain in the middle. It feeds off everything the stack is running and turns it into your next move — positioning, audience, and where to spend.' };
+
+// ---- geometry (computed once, server-side) --------------------------------
+const C = 300, rO = 276, rI = 106, LBLr = 191, GAP = 2.6;
+const N = slices.length, step = 360 / N;
+const polar = (r, deg) => {
+  const a = (deg - 90) * Math.PI / 180;
+  return [C + r * Math.cos(a), C + r * Math.sin(a)];
+};
+const segs = slices.map((s, i) => {
+  const a0 = i * step + GAP / 2, a1 = (i + 1) * step - GAP / 2, bis = (a0 + a1) / 2;
+  const [x1, y1] = polar(rO, a0), [x2, y2] = polar(rO, a1);
+  const [x3, y3] = polar(rI, a1), [x4, y4] = polar(rI, a0);
+  const large = (a1 - a0) > 180 ? 1 : 0;
+  const d = `M${x1.toFixed(1)} ${y1.toFixed(1)} A${rO} ${rO} 0 ${large} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} `
+          + `L${x3.toFixed(1)} ${y3.toFixed(1)} A${rI} ${rI} 0 ${large} 0 ${x4.toFixed(1)} ${y4.toFixed(1)} Z`;
+  const ua = (bis - 90) * Math.PI / 180;
+  const [lx, ly] = polar(LBLr, bis);
+  return { ...s, d, ux: +Math.cos(ua).toFixed(3), uy: +Math.sin(ua).toFixed(3),
+           lx: +lx.toFixed(1), ly: +ly.toFixed(1) };
+});
+const fill = { paid: 'var(--gold)', owned: 'var(--orange)', discovery: 'var(--brown)' };
+const ink  = { paid: '#3A2418', owned: '#FBF8F2', discovery: '#FBF8F2' };
+const legend = [...segs, hub];
+---
+<div class="ams-wheel" id="ams-wheel" data-default="hub">
+  <div class="ams-wheel__head">
+    <span class="eyebrow">// The Marketing Stack</span>
+    <h2>One stack. Every piece of your marketing.</h2>
+    <p class="mut ams-wheel__hint">Scroll in — then hover a piece to see what it does.</p>
+  </div>
+
+  <div class="ams-wheel__stage">
+    <svg class="ams-wheel__svg" viewBox="0 0 600 600" role="presentation" focusable="false" aria-hidden="true">
+      <g class="ams-wheel__group">
+        {segs.map((s) => (
+          <g class="aw-slice" data-key={s.key} style={`--dx:${s.ux};--dy:${s.uy}`}>
+            <path d={s.d} style={`fill:${fill[s.family]}`} />
+            <text class="aw-slice__lbl" x={s.lx} y={s.ly} style={`fill:${ink[s.family]}`}>{s.label}</text>
+          </g>
+        ))}
+      </g>
+
+      <!-- pre-explode label: the whole circle reads as "The Marketing Stack" -->
+      <g class="ams-wheel__center" style="opacity:var(--lbl-op)">
+        <text class="aw-center__l" x="300" y="293">The Marketing</text>
+        <text class="aw-center__l" x="300" y="324">Stack</text>
+      </g>
+
+      <!-- the hub the slices feed: Think Tank, resolved after the explode -->
+      <g class="ams-wheel__hub aw-slice" data-key="hub" style="opacity:var(--hub-op)">
+        <circle cx="300" cy="300" r="94" />
+        <text class="aw-hub__l" x="300" y="293">Think</text>
+        <text class="aw-hub__l" x="300" y="326">Tank</text>
+      </g>
+    </svg>
+
+    <p class="ams-wheel__caption" aria-hidden="true">
+      <span class="aw-cap__name">{hub.label}</span>
+      <span class="aw-cap__desc">{hub.desc}</span>
+    </p>
+  </div>
+
+  <!-- Accessible / no-JS / reduced-motion content: the canonical stack list. -->
+  <ul class="ams-wheel__legend">
+    {legend.map((s) => (
+      <li>
+        <button type="button" class="aw-leg" data-key={s.key} data-fam={'family' in s ? s.family : 'hub'}>
+          <span class="aw-leg__name">{s.label}</span>
+          <span class="aw-leg__desc">{s.desc}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .ams-wheel {
+    --ex: 16; --grp-op: 1; --grp-scale: 1; --lbl-op: 0; --hub-op: 1;
+    margin-top: var(--s8); padding: var(--s7) 0 var(--s6);
+    text-align: center;
+  }
+  .ams-wheel__head { max-width: 54ch; margin: 0 auto var(--s6); }
+  .ams-wheel__head .eyebrow { display: block; }
+  .ams-wheel__head h2 { margin-top: var(--s3); }
+  .ams-wheel__hint { margin-top: var(--s3); }
+
+  .ams-wheel__stage { display: grid; place-items: center; gap: var(--s5); }
+  .ams-wheel__svg { width: min(86vw, 540px); height: auto; display: block; overflow: visible; }
+
+  .ams-wheel__group {
+    transform: scale(var(--grp-scale)); transform-origin: 300px 300px;
+    opacity: var(--grp-op);
+  }
+
+  /* each slice nudges out along its own bisector by the scroll-driven --ex */
+  .aw-slice {
+    transform: translate(calc(var(--dx) * var(--ex) * 1px), calc(var(--dy) * var(--ex) * 1px));
+  }
+  .aw-slice path, .ams-wheel__hub circle {
+    transform-box: fill-box; transform-origin: center;
+    transition: transform var(--dur) var(--ease), filter var(--dur) var(--ease);
+    cursor: pointer;
+  }
+  .aw-slice__lbl, .aw-hub__l, .aw-center__l {
+    font-family: var(--font-display); font-weight: 600;
+    text-anchor: middle; dominant-baseline: middle;
+    pointer-events: none; user-select: none;
+  }
+  .aw-slice__lbl { font-size: 19px; }
+  .aw-hub__l { font-size: 25px; fill: var(--grn-ink); }
+  .aw-center__l { font-size: 27px; fill: var(--text); }
+  .ams-wheel__hub circle { fill: var(--grn); }
+
+  /* active / hover pop — on the inner shape only, so it never fights --ex */
+  .ams-wheel.is-interactive .aw-slice.is-active path,
+  .ams-wheel.is-interactive .aw-slice:hover path {
+    transform: scale(1.05); filter: brightness(1.07) drop-shadow(0 3px 9px rgba(75,46,32,0.30));
+  }
+  .ams-wheel.is-interactive .ams-wheel__hub.is-active circle,
+  .ams-wheel.is-interactive .ams-wheel__hub:hover circle {
+    transform: scale(1.05); filter: brightness(1.06) drop-shadow(0 3px 9px rgba(75,46,32,0.30));
+  }
+
+  /* caption (interactive only; mirrors the hovered slice) */
+  .ams-wheel__caption { display: none; max-width: 46ch; min-height: 4.5em; }
+  .ams-wheel.is-interactive .ams-wheel__caption { display: block; }
+  .aw-cap__name { display: block; font-family: var(--font-display); font-size: var(--t-lg); color: var(--grn); }
+  .aw-cap__desc { display: block; margin-top: var(--s2); color: var(--text-2); }
+
+  /* legend = the canonical content. Visible (with descriptions) under no-JS /
+     reduced-motion; collapses to clickable chips once JS marks .is-interactive. */
+  .ams-wheel__legend {
+    list-style: none; margin: var(--s6) auto 0; max-width: 70ch;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s4); text-align: left;
+  }
+  .aw-leg {
+    width: 100%; text-align: left; background: var(--bg-2);
+    border: 1px solid var(--line-2); border-radius: var(--r-lg);
+    padding: var(--s4); cursor: pointer; color: inherit; font: inherit;
+    border-left: 3px solid var(--grn);
+  }
+  .aw-leg__name { display: block; font-family: var(--font-display); font-weight: 600; color: var(--text); }
+  .aw-leg__desc { display: block; margin-top: var(--s2); font-size: var(--t-sm); color: var(--text-2); }
+
+  .ams-wheel.is-interactive .ams-wheel__legend {
+    grid-template-columns: repeat(4, 1fr); gap: var(--s3); max-width: 100%;
+  }
+  .ams-wheel.is-interactive .aw-leg__desc { display: none; }
+  .ams-wheel.is-interactive .aw-leg {
+    text-align: center; border-left: 1px solid var(--line-2);
+    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  }
+  .ams-wheel.is-interactive .aw-leg.is-active,
+  .ams-wheel.is-interactive .aw-leg:hover {
+    border-color: var(--grn); background: var(--grn-wash);
+  }
+
+  @media (max-width: 720px) {
+    .ams-wheel__legend, .ams-wheel.is-interactive .ams-wheel__legend { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .ams-wheel__legend, .ams-wheel.is-interactive .ams-wheel__legend { grid-template-columns: 1fr; }
+  }
+
+  /* reduced motion: never assemble/explode-animate; show the resolved wheel and
+     keep the legend fully readable. (JS also early-returns from the scroll loop.) */
+  @media (prefers-reduced-motion: reduce) {
+    .ams-wheel { --grp-op: 1; --grp-scale: 1; --lbl-op: 0; --hub-op: 1; }
+    .aw-slice path, .ams-wheel__hub circle { transition: none; }
+  }
+</style>
+
+<script>
+  // One island: (1) interaction (hover/tap/keyboard → caption + highlight),
+  // always on; (2) scroll assemble/explode, gated by prefers-reduced-motion.
+  function initAmsWheel() {
+    const el = document.getElementById('ams-wheel');
+    if (!el || (el as HTMLElement).dataset.wired) return;
+    (el as HTMLElement).dataset.wired = '1';
+
+    const root = el as HTMLElement;
+    const data: Record<string, { name: string; desc: string }> = {};
+    root.querySelectorAll('.aw-leg').forEach((b) => {
+      const k = (b as HTMLElement).dataset.key!;
+      data[k] = {
+        name: (b.querySelector('.aw-leg__name') as HTMLElement).textContent || '',
+        desc: (b.querySelector('.aw-leg__desc') as HTMLElement).textContent || '',
+      };
+    });
+
+    const capName = root.querySelector('.aw-cap__name') as HTMLElement;
+    const capDesc = root.querySelector('.aw-cap__desc') as HTMLElement;
+    const slices = Array.from(root.querySelectorAll('.aw-slice')) as HTMLElement[];
+    const legs = Array.from(root.querySelectorAll('.aw-leg')) as HTMLElement[];
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const def = root.dataset.default || 'hub';
+
+    // ---- interaction (info reveal — runs regardless of reduced motion) ----
+    root.classList.add('is-interactive');
+    const activate = (key: string) => {
+      const d = data[key];
+      if (d && capName && capDesc) { capName.textContent = d.name; capDesc.textContent = d.desc; }
+      slices.forEach((s) => s.classList.toggle('is-active', s.dataset.key === key));
+      legs.forEach((b) => b.classList.toggle('is-active', b.dataset.key === key));
+    };
+    const wire = (node: HTMLElement) => {
+      const key = node.dataset.key!;
+      node.addEventListener('pointerenter', () => activate(key));
+      node.addEventListener('click', () => activate(key));
+      node.addEventListener('focus', () => activate(key));
+    };
+    slices.forEach(wire);
+    legs.forEach(wire);
+    if (fine) root.addEventListener('pointerleave', () => activate(def));
+    activate(def);
+
+    // ---- scroll assemble + explode (motion only) -------------------------
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const clamp = (v: number) => Math.max(0, Math.min(1, v));
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = root.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const center = r.top + r.height / 2;
+      const startY = vh * 0.92, endY = vh * 0.46;
+      const p = clamp((startY - center) / (startY - endY));
+      const asm = clamp(p / 0.45);
+      const exp = clamp((p - 0.45) / 0.45);
+      root.style.setProperty('--grp-op', (0.18 + 0.82 * asm).toFixed(3));
+      root.style.setProperty('--grp-scale', (0.74 + 0.26 * asm).toFixed(3));
+      root.style.setProperty('--ex', (exp * 24).toFixed(1));
+      root.style.setProperty('--lbl-op', (1 - clamp((p - 0.42) / 0.18)).toFixed(3));
+      root.style.setProperty('--hub-op', clamp((p - 0.52) / 0.2).toFixed(3));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+  initAmsWheel();
+  document.addEventListener('astro:after-swap', initAmsWheel);
+</script>
