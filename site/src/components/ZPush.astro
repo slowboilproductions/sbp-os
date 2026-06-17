@@ -1,0 +1,56 @@
+---
+// Z-AXIS PUSH wrapper (the Operational Dashboard motion signature; B-7).
+// As the wrapped content scrolls up into view it scales and translates forward
+// on the z-axis — the summary panel "coming forward" at you, the whole business
+// arriving on one screen. Transform-only, rAF-throttled, scroll-driven.
+//
+// Progressive + accessible: under no-JS / prefers-reduced-motion the slot sits
+// at its natural rest state (full size, flat) — no dependency on the script.
+const { label = 'Panel coming forward on scroll' } = Astro.props;
+---
+<div class="zpush" data-zpush aria-label={label}>
+  <div class="zpush__inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .zpush { perspective: 1300px; }
+  .zpush__inner { will-change: transform, opacity; transform-style: preserve-3d; }
+  /* rest state for no-JS / reduced motion = flat, full size, fully opaque */
+</style>
+
+<script>
+  function initZPush() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-zpush]').forEach((wrap) => {
+      if (wrap.dataset.wired) return;
+      wrap.dataset.wired = '1';
+      if (reduce) return;
+      const inner = wrap.querySelector('.zpush__inner');
+      if (!inner) return;
+      let raf = 0;
+      const apply = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          const r = wrap.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+          // 0 when the wrapper's top is at the viewport bottom, ~1 once it has
+          // risen near the top — the panel pushes forward as it arrives.
+          let p = (vh - r.top) / (vh * 0.85);
+          p = Math.max(0, Math.min(1, p));
+          const scale = (0.9 + 0.1 * p).toFixed(3);
+          const z = (-110 * (1 - p)).toFixed(1);
+          inner.style.transform = 'translateZ(' + z + 'px) scale(' + scale + ')';
+          inner.style.opacity = (0.72 + 0.28 * p).toFixed(3);
+        });
+      };
+      window.addEventListener('scroll', apply, { passive: true });
+      window.addEventListener('resize', apply, { passive: true });
+      apply();
+    });
+  }
+  initZPush();
+  document.addEventListener('astro:after-swap', initZPush);
+</script>

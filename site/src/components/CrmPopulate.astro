@@ -1,0 +1,126 @@
+---
+// CRM SIGNATURE — "the system populating" (B-7; operator: each unit a distinct
+// scroll signature). As the CRM section scrolls into view, the records slide in
+// from the left at staggered speeds — the database filling itself in, the way
+// the CRM ingests a book of accounts. Demonstrates the unit's value (accounts,
+// distributors, depletions, the slipping ones flagged) instead of a static slot.
+//
+// Progressive + accessible: a real, readable table by default (no-JS / reduced
+// motion shows every row in place); JS adds the staggered slide-in on enter.
+//
+// NOTE: rows are ILLUSTRATIVE placeholders — neutral outlet names, not real
+// client data (mirrors the DashboardPanel illustrative-data discipline). No
+// real brand/account data ships here.
+const rows = [
+  { acct: 'Eastside Wine & Spirits', dist: 'Republic National', dep: '+12.4%', status: 'on',     note: 'On pace' },
+  { acct: 'Harbor Beverage Co.',     dist: 'Breakthru',         dep: '+6.1%',  status: 'on',     note: 'On pace' },
+  { acct: 'Midtown Bottle Shop',     dist: 'Southern Glazer’s', dep: '−3.8%',  status: 'risk',   note: 'At risk' },
+  { acct: 'Ridgeline Package',       dist: 'Johnson Brothers',  dep: '+21.0%', status: 'on',     note: 'On pace' },
+  { acct: 'County Line Liquors',     dist: 'Republic National', dep: '−9.2%',  status: 'flag',   note: 'Stock-out risk' },
+  { acct: 'Crestview Fine Wine',     dist: 'Breakthru',         dep: '+4.7%',  status: 'on',     note: 'On pace' },
+];
+---
+<section class="crmp" aria-label="Illustration: accounts, distributors, and depletions populating in the CRM">
+  <div class="wrap">
+    <div class="crmp__head">
+      <span class="eyebrow">// The book of accounts, populating</span>
+      <h2>Every account, distributor, and depletion — loaded in and watched.</h2>
+      <p class="mut crmp__lead">Import your book once and the system fills in. Depletions update, territories sort, and the accounts slipping get flagged before they stock out.</p>
+    </div>
+
+    <div class="crmp__panel panel" data-crmp>
+      <div class="crmp__bar">
+        <span class="crmp__dot" aria-hidden="true"></span>
+        <span class="crmp__dot" aria-hidden="true"></span>
+        <span class="crmp__dot" aria-hidden="true"></span>
+        <span class="crmp__file mono">accounts / all-territories.crm</span>
+        <span class="live crmp__live">LIVE</span>
+      </div>
+      <table class="crmp__table">
+        <thead>
+          <tr class="mono">
+            <th scope="col">Account</th>
+            <th scope="col">Distributor</th>
+            <th scope="col" class="crmp__num">Depletions</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr class="crmp__row" style={`--i:${i}`}>
+              <td class="crmp__acct">{r.acct}</td>
+              <td class="mut">{r.dist}</td>
+              <td class={`crmp__num mono${r.status === 'on' ? ' is-up' : ' is-down'}`}>{r.dep}</td>
+              <td><span class={`crmp__chip crmp__chip--${r.status}`}>{r.note}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .crmp { padding-block: var(--s9); background: var(--bg-2); border-block: 1px solid var(--line); }
+  .crmp__head { max-width: 60ch; margin-bottom: var(--s6); }
+  .crmp__head h2 { margin-top: var(--s2); }
+  .crmp__lead { margin-top: var(--s4); max-width: 56ch; }
+
+  .crmp__panel { overflow: hidden; box-shadow: var(--shadow-panel); }
+  .crmp__bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .crmp__dot { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+  .crmp__file { font-size: var(--t-eyebrow); color: var(--mut); margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .crmp__live { margin-left: auto; font-size: 10px; }
+
+  .crmp__table { width: 100%; border-collapse: collapse; font-size: var(--t-sm); }
+  .crmp__table th, .crmp__table td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+  .crmp__table thead th { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mut); font-weight: 500; }
+  .crmp__table tbody tr:last-child td { border-bottom: 0; }
+  .crmp__acct { font-weight: 600; color: var(--text); }
+  .crmp__num { text-align: right; font-variant-numeric: tabular-nums; }
+  .crmp__num.is-up { color: #141414; }
+  .crmp__num.is-down { color: var(--grn); }
+  th.crmp__num { text-align: right; }
+
+  .crmp__chip { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; padding: 4px 9px; border-radius: var(--r-pill); border: 1px solid var(--line-2); color: var(--text-2); white-space: nowrap; }
+  .crmp__chip--risk { border-color: var(--gold); color: #6a4e12; background: rgba(226,179,74,0.16); }
+  .crmp__chip--flag { border-color: var(--grn-deep); color: var(--grn); background: var(--grn-wash); }
+
+  /* the populating animation — armed only when JS marks the panel ready */
+  .crmp__panel[data-crmp].is-ready .crmp__row {
+    opacity: 0; transform: translateX(-26px);
+    transition: opacity 0.5s var(--ease), transform 0.6s var(--ease);
+    /* staggered speeds: each row lags AND eases at its own rate */
+    transition-delay: calc(var(--i) * 0.09s);
+    transition-duration: calc(0.42s + var(--i) * 0.05s);
+  }
+  .crmp__panel[data-crmp].is-ready.is-in .crmp__row { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .crmp__panel[data-crmp].is-ready .crmp__row { opacity: 1; transform: none; transition: none; }
+  }
+  @media (max-width: 680px) {
+    .crmp__table { font-size: 12px; }
+    .crmp__table th, .crmp__table td { padding: 11px 10px; }
+    .crmp__file { display: none; }
+  }
+</style>
+
+<script>
+  function initCrmPopulate() {
+    const panel = document.querySelector('[data-crmp]');
+    if (!panel || panel.dataset.wired) return;
+    panel.dataset.wired = '1';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    panel.classList.add('is-ready');
+    const reveal = () => panel.classList.add('is-in');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { reveal(); io.disconnect(); } });
+      }, { threshold: 0.3 });
+      io.observe(panel);
+    } else { reveal(); }
+  }
+  initCrmPopulate();
+  document.addEventListener('astro:after-swap', initCrmPopulate);
+</script>

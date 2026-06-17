@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DashboardPanel from '../../components/DashboardPanel.astro';
+import ZPush from '../../components/ZPush.astro';
+import DashConverge from '../../components/DashConverge.astro';
 // Operational Dashboard subunit (skeleton v0.3 §3.4), spirits-first, operator
 // voice (A-15). PUBLIC NAME "Operational Dashboard" ONLY — internal "Dash"
 // never appears (A-6). Pricing → Contact (A-8). FLAG: verify claims against
@@ -19,8 +21,10 @@ const feats = [
     <div class="wrap od-hero">
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — Operational Dashboard</span>
-        <h1>Catch a lagging account <span class="g">before a stock-out.</span></h1>
-        <p class="lede">You’re pulling data from a hundred different sources — distributor reports, spreadsheets, market feeds — and trying to make sense of it by hand. This is the dashboard I built to run my own brands. It turns all of those sources into one clean source of informational truth.</p>
+        <h1>Right now, someone in your distillery has made a career out of <span class="g">Excel spreadsheet jockeying.</span></h1>
+        <p class="lede">That person is either going to love this — or hate it. Hot take: there’s no longer any value-add in synthesizing operational data in Excel.</p>
+        <p class="od-hp">And trust me, I get it. This industry has so many unconnected data sources: Park Street, VIP, multiple distributor warehouses, NABCA, Encompass, QuickBooks, your CRM, Meta campaigns.</p>
+        <p class="od-hp">Our Operational Dashboard fixes all of it — hands-free (no more Excel), and built for the spirits industry.</p>
         <div class="prod-cta">
           <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Book a demo →</a>
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
@@ -31,6 +35,8 @@ const feats = [
       </div>
     </div>
   </section>
+
+  <DashConverge />
 
   <section class="section">
     <div class="wrap">
@@ -44,7 +50,7 @@ const feats = [
           <h2>No more Excel spreadsheets telling you what the weather is outside.</h2>
           <p class="mut od-note">Real information that creates value by cutting across sources — and gives you <strong>actionable</strong> outputs to move your business forward.</p>
         </div>
-        <div class="feats">
+        <div class="feats" data-reveal-stagger>
           {feats.map((f) => (
             <div class="feat card">
               <span class="feat__n">{f.n}</span>
@@ -54,8 +60,27 @@ const feats = [
           ))}
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="prod-sec">
+  <!-- OD motion signature: z-axis push — the summary front page comes forward
+       as you scroll into it (the whole business arriving on one screen). -->
+  <section class="section section--band od-zsec">
+    <div class="wrap">
+      <div class="prod-sec__head center od-zhead">
+        <span class="eyebrow">// One screen, 7am</span>
+        <h2>The whole business, coming forward on one screen.</h2>
+        <p class="mut od-note od-zlead">Depletions, load-in, AR, open orders, inventory — the summary front page you check before coffee. Drill in when a number looks wrong; otherwise, just know.</p>
+      </div>
+      <ZPush label="Operational Dashboard summary panel scaling forward as you scroll">
+        <DashboardPanel title="operational-dashboard / summary front page" />
+      </ZPush>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-sec" style="margin-top:0; padding-top:0;">
         <div class="prod-sec__head">
           <span class="eyebrow">// Data in, answers out</span>
           <h2>It eats the feeds you already get.</h2>
@@ -78,6 +103,12 @@ const feats = [
     .od-hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--s8); align-items: center; }
     .od-hero__panel { width: 100%; }
     .od-note { margin-top: var(--s4); max-width: 52ch; }
+    .od-hp { margin-top: var(--s4); max-width: 54ch; }
+
+    /* z-push showcase */
+    .od-zhead { margin-inline: auto; }
+    .od-zhead .od-zlead { margin-inline: auto; }
+    .od-zsec .zpush { max-width: 760px; margin: var(--s7) auto 0; }
     @media (max-width: 860px) {
       .od-hero { grid-template-columns: 1fr; gap: var(--s6); }
       .od-hero__panel { order: 3; }

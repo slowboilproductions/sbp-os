@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AmsStackWheel from '../../components/AmsStackWheel.astro';
 // Marketing subunit (skeleton v0.3 §3.5), rebuilt on the operator's first-pass
 // two-pillar structure (A-18): Infrastructure + Tailored Strategy + the weekly
 // rhythm, operator's own copy, bev/alc-framed. Pricing analogies allowed
@@ -35,17 +36,19 @@ const rhythm = [
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — Marketing</span>
         <h1>Agency-grade marketing,<br /><span class="g">built for beverage alcohol.</span></h1>
-        <p class="lede">Real, professional marketing at a price point that won’t drain your tank before you ever get to market — run by someone who’s actually carried inventory, chased a distributor, and navigated three-tier.</p>
+        <p class="lede">Real, professional marketing at a price point that won’t drain your tank before you ever get to market — run by someone who’s actually carried inventory, chased a distributor, and fought for the reorder.</p>
         <div class="prod-cta">
           <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Start a conversation →</a>
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
         </div>
       </div>
 
+      <AmsStackWheel />
+
       <div class="prod-sec rule problem">
-        <span class="eyebrow">// Built for a regulated category</span>
-        <p class="lede">Most marketers don’t know you can’t ship into a dry county, can’t make a health claim, and live or die by the distributor relationship. I do. Age-gating, three-tier, on- vs off-premise, trade marketing — it’s built into the work, not bolted on after legal flags it.</p>
-        <p class="mut m-stakes">Hire a marketer who doesn’t know the category and you pay for their education — in flagged ads, compliance do-overs, and missed distributor windows. That’s the expensive way to learn what I already know.</p>
+        <span class="eyebrow">// Built for how brands actually sell</span>
+        <p class="lede">You can buy your way on shelf, but no amount of money will make a consumer buy your bottle or order you at the bar. That is done with brand awareness. Most marketers think the job is getting you placed in a bar or retail store. It isn’t. Your distributor moves boxes — they don’t sell your brand. That’s on you. The bottle collects dust on the shelf until your marketing makes someone reach for it: pull-through, depletion, the accounts that reorder and the ones that quietly don’t. That’s the real game, and it’s built into the work — not bolted on after.</p>
+        <p class="mut m-stakes">Hire a marketer who doesn’t know the category and you pay for their education — in wasted spend, campaigns that look nice but don’t move product, and months you don’t get back. I learned the expensive way. Let me show you how to do it right.</p>
       </div>
 
       <!-- Pillar 01 -->
@@ -55,7 +58,7 @@ const rhythm = [
           <h2>Same services as a traditional agency. Half the cost.</h2>
           <p class="mut m-tag">Faster turnarounds. No 6-week kickoffs.</p>
         </div>
-        <div class="m-grid">
+        <div class="m-grid" data-reveal-stagger>
           {infra.map((b) => (
             <div class="feat card">
               <span class="feat__n">{b.label}</span>
@@ -72,7 +75,7 @@ const rhythm = [
           <span class="eyebrow">// Pillar 02 — Tailored Strategy</span>
           <h2>Strategy that takes consultancies four weeks. Delivered in two hours.</h2>
         </div>
-        <div class="m-grid">
+        <div class="m-grid" data-reveal-stagger>
           {strategy.map((b) => (
             <div class="feat card">
               <span class="feat__n">{b.label}</span>
@@ -90,7 +93,7 @@ const rhythm = [
           <span class="eyebrow">// How we work</span>
           <h2>A weekly rhythm.</h2>
         </div>
-        <div class="grid grid--3">
+        <div class="grid grid--3" data-reveal-stagger>
           {rhythm.map((r) => (
             <div class="feat card">
               <span class="feat__n">{r.day}</span>

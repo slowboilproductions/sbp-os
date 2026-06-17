@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CrmPopulate from '../../components/CrmPopulate.astro';
+import CrmChaos from '../../components/CrmChaos.astro';
 // CRM subunit (skeleton v0.3 §3.3), spirits/bev-alc-first, operator voice (A-15).
 // Public name "CRM" (A-6). Pricing → Contact only (A-8).
 // FLAG: capability claims drawn from the skeleton outline, kept conservative;
@@ -18,8 +20,8 @@ const feats = [
     <div class="wrap">
       <div class="prod-hero" data-anim="hero">
         <span class="eyebrow">// The Stack — CRM</span>
-        <h1>A CRM that knows what a <span class="g">depletion</span> is.</h1>
-        <p class="lede">You’re running accounts out of spreadsheets and a CRM built for software reps. It doesn’t know what a distributor is, what a depletion is, or that you can’t ship into a dry county. This one does — because I run my own brands on it.</p>
+        <h1>There is nothing sexy about a <span class="g">CRM</span>.</h1>
+        <p class="lede">They are necessary evils and I assure you that the manager hates reviewing them as much as the sales person hates updating them. So my goal in creating ours was to make it less of a pain in the ass to update AND to make it feed the rest of the stack to create street level intelligence.</p>
         <div class="prod-cta">
           <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Book a demo →</a>
           <a href="/stack" class="btn btn--ghost">Back to the Stack</a>
@@ -30,10 +32,16 @@ const feats = [
         <span class="eyebrow">// The problem</span>
         <p class="lede">A generic CRM treats a liquor store and a SaaS lead the same way. Your reality — outlets, distributors, depletions, territories — gets crammed into fields that were never built for it. So the data’s a mess, and you stop trusting it.</p>
       </div>
+    </div>
+  </section>
 
-      <div class="prod-sec">
+  <CrmChaos />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-sec" style="margin-top:0;">
         <div class="prod-sec__head"><h2>Every account, distributor, and depletion in one place — and the ones slipping, flagged.</h2></div>
-        <div class="feats">
+        <div class="feats" data-reveal-stagger>
           {feats.map((f) => (
             <div class="feat card">
               <span class="feat__n">{f.n}</span>
@@ -43,8 +51,14 @@ const feats = [
           ))}
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="prod-sec">
+  <CrmPopulate />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-sec" style="margin-top:0; padding-top:0;">
         <div class="prod-sec__head">
           <span class="eyebrow">// Built for the category</span>
           <h2>Distributors, depletions, and SKUs are first-class — not customizations.</h2>

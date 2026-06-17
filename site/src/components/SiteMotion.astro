@@ -1,0 +1,110 @@
+---
+// SITE MOTION — the cross-cutting "core polish" island (B-7 core set).
+// One tiny progressive-enhancement island, loaded once from BaseLayout. It
+// wires four things, all opt-in / non-destructive and all OFF under
+// prefers-reduced-motion or no-JS:
+//   1. scroll reveals   — elements marked [data-reveal] fade/rise in on enter.
+//   2. count-ups        — numbers marked [data-countup] tick up on enter view.
+//   3. magnetic CTAs    — .btn--primary eases toward the cursor (fine pointer).
+//   4. card glow        — .card carries a cursor-tracking warm glow on hover.
+//
+// GUARDRAILS: the reveal hide-rule only applies once JS adds html.motion-ready
+// (so no-JS shows everything), and is force-disabled under reduced motion.
+// Compliance chrome (nav / banner / footer / legal prose) is never tagged
+// [data-reveal] and is excluded from the card/CTA effects, so the required
+// pages and business details are never animated or obscured.
+---
+<script>
+  function initSiteMotion() {
+    const root = document.documentElement;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (reduce) return;                  // honor reduced motion: leave everything static
+    root.classList.add('motion-ready');  // arms the reveal CSS (hidden -> revealed)
+
+    // ---- 1 + 2: scroll reveals & count-ups (IntersectionObserver) ----------
+    const countUp = (el) => {
+      const to = parseFloat(el.dataset.countup || '0');
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = (el.dataset.countup || '').indexOf('.') !== -1 ? 1 : 0;
+      const fmt = (v) => prefix + (decimals ? v.toFixed(1) : Math.round(v).toLocaleString()) + suffix;
+      const dur = 900, start = performance.now();
+      const frame = (now) => {
+        const t = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - t, 3);
+        el.textContent = fmt(to * e);
+        if (t < 1) requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target;
+          if (el.hasAttribute('data-reveal') || el.hasAttribute('data-reveal-stagger')) el.classList.add('is-in');
+          if (el.hasAttribute('data-countup')) countUp(el);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll('[data-reveal]:not(.is-in), [data-reveal-stagger]:not(.is-in), [data-countup]').forEach((el) => {
+        if (el.dataset.motionWired) return;
+        el.dataset.motionWired = '1';
+        io.observe(el);
+      });
+    } else {
+      // no IO: just show everything, fill final numbers
+      document.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach((el) => el.classList.add('is-in'));
+      document.querySelectorAll('[data-countup]').forEach((el) => {
+        const s = el.dataset.prefix || '', x = el.dataset.suffix || '';
+        el.textContent = s + parseFloat(el.dataset.countup || '0').toLocaleString() + x;
+      });
+    }
+
+    // ---- 3: magnetic CTAs (fine pointer only) ------------------------------
+    if (fine) {
+      document.querySelectorAll('.btn--primary').forEach((btn) => {
+        if (btn.dataset.magWired) return;
+        btn.dataset.magWired = '1';
+        const PULL = 0.28, MAX = 7;
+        let raf = 0;
+        btn.addEventListener('pointermove', (ev) => {
+          const r = btn.getBoundingClientRect();
+          const dx = ev.clientX - (r.left + r.width / 2);
+          const dy = ev.clientY - (r.top + r.height / 2);
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            const x = Math.max(-MAX, Math.min(MAX, dx * PULL));
+            const y = Math.max(-MAX, Math.min(MAX, dy * PULL));
+            btn.style.transform = 'translate(' + x.toFixed(1) + 'px,' + (y - 1).toFixed(1) + 'px)';
+          });
+        });
+        btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+      });
+    }
+
+    // ---- 4: cursor-aware card glow (fine pointer only) ---------------------
+    if (fine) {
+      document.querySelectorAll('.card').forEach((card) => {
+        if (card.dataset.glowWired) return;
+        card.dataset.glowWired = '1';
+        let raf = 0;
+        card.addEventListener('pointermove', (ev) => {
+          const r = card.getBoundingClientRect();
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            card.style.setProperty('--gx', ((ev.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+            card.style.setProperty('--gy', ((ev.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+          });
+        });
+      });
+    }
+  }
+  initSiteMotion();
+  document.addEventListener('astro:after-swap', initSiteMotion);
+</script>
