@@ -71,7 +71,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- buried easter egg: meet the founders (one human, one not) -->
       <div class="a-egg center">
-        <a href="/founders" class="a-egg__btn mono">Meet the founders →</a>
+        <a href="/founders" class="btn btn--primary">Meet the founders →</a>
       </div>
     </div>
   </section>
@@ -90,15 +90,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .a-close { font-family: var(--font-display); font-size: var(--t-lg); font-style: italic; color: var(--text); margin-top: var(--s5); }
     .a-cta { margin-top: var(--s6); width: fit-content; }
 
-    /* easter-egg button — understated, sits quietly under the foot logo */
+    /* easter-egg button — same format as "Get in touch", centered under the foot logo */
     .a-egg { margin-top: var(--s6); }
-    .a-egg__btn {
-      display: inline-block; font-size: var(--t-eyebrow); letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--mut);
-      border: 1px solid var(--line); border-radius: var(--r-pill);
-      padding: 0.6em 1.2em;
-      transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
-    }
-    .a-egg__btn:hover { color: var(--grn); border-color: var(--grn); background: var(--grn-wash); }
   </style>
 </BaseLayout>
