@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// The "AI" page (SBP-W8) — the full How-We-Use-AI walk. New top-level nav item,
+// placed between "The Stack" and "Proof". Operator first-person voice (A-15),
+// present tense (operator ruling W8(a): market it as live/embedded today —
+// overrides the build-vs-building caution). WALLED/PRIVATE framing leads
+// (W8(b)): your AI reasons over your OWN data, walled to you, and never trains
+// anyone else's model — the trust unlock. Honesty line A-17: describe the
+// capability; never promise the client guaranteed results/lift. This is the
+// B-13 memory-engine differentiation story, built in (operator: "I am going to
+// build it in"). The architecture itself is owned Brain-side; this page is the
+// site follow-up only. Black Company appears NOWHERE.
+//
+// Four node anchors match the stack slugs exactly so the per-stack-page deep
+// links land: #marketing · #crm · #operational-dashboard · #image-creation.
+// #brain is the climax, right after the four. Each node has a back-link to its
+// stack page. New IA — skeleton/nav carry a DRAFT amendment (captured A-24);
+// Doer does not self-ratify.
+const nodes = [
+  {
+    id: 'marketing',
+    stack: '/stack/marketing',
+    stackName: 'Marketing',
+    eyebrow: '// AI in Marketing',
+    h: 'Ask your marketing what’s working — and it actually knows.',
+    body: [
+      'The marketing stack doesn’t just run your campaigns — it reasons over them. It reads everything you’ve shipped across Meta, Google, your site, and your social, and it tells you in plain language where the money’s going and what to do next. No exporting six dashboards and squinting at them on a Sunday.',
+      'It drafts in your brand voice because it has read everything your brand has ever said. It watches the competitive set you point it at. Ask it a question — “what should I push this week?” — and it answers from your numbers, not from a generic playbook.',
+    ],
+  },
+  {
+    id: 'crm',
+    stack: '/stack/crm',
+    stackName: 'CRM',
+    eyebrow: '// AI in the CRM',
+    h: 'A CRM you can talk to about your own accounts.',
+    body: [
+      'The CRM stores the data the way spirits actually sells — accounts, distributors, depletions, reps, territory. The AI sits on top of that and reasons over it. Ask which accounts are going quiet, which distributor is dragging, where a reorder should have happened and quietly didn’t.',
+      'It reads the street-level picture your field team feeds it and answers the question, instead of handing you a CSV to figure out yourself. The CRM stops being the chore everybody hates updating and starts being the thing that tells you where to spend your day.',
+    ],
+  },
+  {
+    id: 'operational-dashboard',
+    stack: '/stack/operational-dashboard',
+    stackName: 'Operational Dashboard',
+    eyebrow: '// AI in the Operational Dashboard',
+    h: 'It cross-cuts every feed and explains the number.',
+    body: [
+      'The dashboard already pulls eight disconnected feeds — Park Street, VIP, NABCA, distributor warehouses, QuickBooks, your CRM, your campaigns — into one operational truth. The AI sits on that truth and talks to you about it.',
+      'Ask why a state is down, what’s aging in AR, where sell-through is lagging sell-in, what moved this week and what didn’t. It reads across all the sources at once and answers — instead of leaving you to reconcile it by hand in a spreadsheet at 7am. The value isn’t the chart. It’s that you can ask it why.',
+    ],
+  },
+  {
+    id: 'image-creation',
+    stack: '/stack/image-creation',
+    stackName: 'Image Creation',
+    eyebrow: '// AI in Image Creation',
+    h: 'A model that reasons in your brand’s visual language.',
+    body: [
+      'The image model is trained on your brand — your bottle, your palette, your world — so it doesn’t guess. Tell it what you’re launching and it generates stills and motion that come out inside your guardrails, every time. Not a stock photo with your logo dropped on it.',
+      'And it learns your look the more you make. Every shoot, every approved frame, deepens what it knows about how your brand is supposed to look — so the work gets more on-brand over time, not less.',
+    ],
+  },
+];
+---
+<BaseLayout
+  title="AI"
+  description="AI embedded across the whole stack — an intelligence that reasons and converses over your own data, walled to you, and never trains anyone else's model. Marketing, CRM, dashboard, imagery, and a Brain that reasons across all of it.">
+
+  <!-- ===== Intro / thesis ===== -->
+  <section class="section ai-intro">
+    <div class="wrap">
+      <div class="prod-hero ai-hero" data-anim="hero">
+        <span class="eyebrow">// How we use AI</span>
+        <h1>I didn’t bolt AI on. <span class="g">I built it into every corner of the stack.</span></h1>
+        <p class="lede">Not a chatbot stapled to a login screen. A working intelligence inside every tool you use here — it reads your accounts, your depletions, your campaigns, your imagery, and it answers you in plain language. It learns your business. And it gets sharper every month you run on it.</p>
+      </div>
+
+      <!-- The trust unlock, led up front (W8(b)) -->
+      <div class="ai-walled problem" data-reveal>
+        <span class="eyebrow">// The part that matters</span>
+        <p class="lede">Your AI reasons over your <strong>own</strong> data — walled to you. It never trains anyone else’s model, and no other brand’s AI ever touches yours. The intelligence compounds inside your four walls, for you. That’s the difference between a tool you rent and an edge you own.</p>
+      </div>
+
+      <!-- jump-to the nodes -->
+      <nav class="ai-jump" aria-label="Jump to a part of the stack" data-reveal>
+        <span class="ai-jump__label mono mut">Where it lives:</span>
+        <a href="#marketing">Marketing</a>
+        <a href="#crm">CRM</a>
+        <a href="#operational-dashboard">Operational Dashboard</a>
+        <a href="#image-creation">Image Creation</a>
+        <a href="#brain" class="ai-jump__brain">The Brain →</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== Four node sections (anchors match the stack slugs) ===== -->
+  {nodes.map((n) => (
+    <section class="section ai-node" id={n.id}>
+      <div class="wrap">
+        <div class="ai-node__head">
+          <span class="eyebrow">{n.eyebrow}</span>
+          <h2>{n.h}</h2>
+        </div>
+        <div class="ai-node__body" data-reveal>
+          {n.body.map((p) => <p class="lede">{p}</p>)}
+          <a href={n.stack} class="ai-back mono">← {n.stackName} in the stack</a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ===== The Brain node — the climax ===== -->
+  <section class="section section--band ai-brain" id="brain">
+    <div class="wrap">
+      <div class="ai-brain__head center" data-reveal>
+        <span class="eyebrow">// The Brain — where it gets unfair</span>
+        <h2>Run more than one node, and an intelligence reasons <span class="g">across all of them.</span></h2>
+      </div>
+      <div class="ai-brain__body" data-reveal>
+        <p class="lede">Run one node and you get an AI that’s brilliant about one thing — your marketing, or your accounts, or your numbers. Run more than one, and something a point solution structurally cannot do starts to happen: a <strong>Brain</strong> reasons across all of them at once.</p>
+        <p class="lede">Your marketing spend against your depletions. Your AR against your open orders. Your imagery against the campaign it’s for. One intelligence holding the whole business at the same time — the CRM knows what the dashboard knows knows what marketing knows. Ask it a question that crosses the whole company and it answers, because it can see the whole company.</p>
+        <p class="mut ai-brain__kicker">You can’t buy that off a shelf. A single SaaS tool only ever sees its own slice. This sees across the seams — and that only happens when the whole stack is yours and every part of it talks to every other part.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Trust — not a ChatGPT wrapper ===== -->
+  <section class="section ai-trust">
+    <div class="wrap">
+      <div class="prod-sec__head" data-reveal>
+        <span class="eyebrow">// Why you can trust it</span>
+        <h2>This is not a ChatGPT wrapper.</h2>
+        <p class="mut ai-trust__lead">A general chatbot is a stranger guessing from the open internet. This is the opposite — and four things make it so.</p>
+      </div>
+      <div class="feats ai-trust__grid" data-reveal-stagger>
+        <div class="feat card">
+          <span class="feat__n">01 — Grounded</span>
+          <h3>It answers from your data, not the internet.</h3>
+          <p class="mut">Your accounts, your numbers, your brand. When it tells you something, it’s reading your reality — not a plausible-sounding guess scraped from somewhere else.</p>
+        </div>
+        <div class="feat card">
+          <span class="feat__n">02 — Walled</span>
+          <h3>Private to you. It never trains anyone else’s model.</h3>
+          <p class="mut">It reasons over your data only. No other brand’s AI touches yours, and yours feeds no one else’s. Your edge stays your edge.</p>
+        </div>
+        <div class="feat card">
+          <span class="feat__n">03 — Auditable</span>
+          <h3>You can see how it got there.</h3>
+          <p class="mut">It points back at what it looked at to reach an answer. No black box, no “just trust me” — the work shows its sources.</p>
+        </div>
+        <div class="feat card">
+          <span class="feat__n">04 — It compounds</span>
+          <h3>It gets smarter every month you run on it.</h3>
+          <p class="mut">The model is the commodity — everyone can rent the same one. What compounds is the memory of <em>your</em> business, and that belongs to you. The longer you’re here, the better it knows you.</p>
+        </div>
+      </div>
+
+      <div class="ai-chef problem" data-reveal>
+        <p class="lede">I use AI the way a chef uses a sharp knife — to make every cut cleaner and faster, not to replace the cook. The strategy is still human. The taste is still earned. The AI just closes the gap between what you can imagine and what you can actually ship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA band ===== -->
+  <section class="section section--band">
+    <div class="wrap cta-band">
+      <h2>Want to see it reason over your own numbers?</h2>
+      <p class="mut">No rate card, no runaround — I’ll show you the stack thinking on category data that looks like yours.</p>
+      <a href="mailto:hello@slowboilproductions.com?subject=Slow%20Boil%20inquiry" class="btn btn--primary">Book a demo →</a>
+    </div>
+  </section>
+
+  <style>
+    /* anchors clear the sticky nav (--nav-h) when deep-linked */
+    .ai-node, #brain { scroll-margin-top: calc(var(--nav-h) + var(--s5)); }
+
+    .ai-hero { max-width: 62ch; }
+    .ai-walled { margin-top: var(--s7); max-width: 64ch; }
+    .ai-walled .lede { max-width: 60ch; }
+
+    /* jump-to row */
+    .ai-jump { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4); margin-top: var(--s7); padding-top: var(--s6); border-top: 1px solid var(--line); }
+    .ai-jump__label { font-size: var(--t-eyebrow); letter-spacing: 0.1em; text-transform: uppercase; }
+    .ai-jump a { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--text-2); border-bottom: 1px solid var(--line-2); padding-bottom: 2px; transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+    .ai-jump a:hover { color: var(--grn); border-color: var(--grn); }
+    .ai-jump__brain { color: var(--grn) !important; border-color: var(--grn-deep) !important; font-weight: 600; }
+
+    /* node sections */
+    .ai-node__head { max-width: 50ch; margin-bottom: var(--s5); }
+    .ai-node__head h2 { margin-top: var(--s2); }
+    .ai-node__body { max-width: 64ch; }
+    .ai-node__body .lede + .lede { margin-top: var(--s4); }
+    .ai-back { display: inline-block; margin-top: var(--s5); font-size: var(--t-sm); color: var(--grn); border-bottom: 1px solid var(--grn-deep); padding-bottom: 2px; }
+    .ai-back:hover { color: var(--grn-deep); }
+
+    /* the Brain climax */
+    .ai-brain__head { max-width: 30ch; margin-inline: auto; }
+    .ai-brain__head h2 { margin-top: var(--s3); }
+    .ai-brain__body { max-width: 64ch; margin: var(--s7) auto 0; }
+    .ai-brain__body .lede + .lede { margin-top: var(--s4); }
+    .ai-brain__kicker { margin-top: var(--s5); font-family: var(--font-display); font-size: var(--t-lg); line-height: 1.4; color: var(--text-2); padding-left: var(--s5); border-left: 2px solid var(--grn); max-width: 60ch; }
+
+    /* trust */
+    .ai-trust__lead { margin-top: var(--s3); max-width: 56ch; }
+    .ai-trust__grid { margin-top: var(--s2); }
+    .ai-trust__grid .feat h3 { margin: var(--s3) 0 var(--s2); }
+    .ai-trust__grid .feat p { font-size: var(--t-sm); }
+    .ai-chef { margin-top: var(--s7); max-width: 64ch; }
+
+    @media (max-width: 760px) {
+      .ai-brain__kicker { padding-left: var(--s4); }
+    }
+  </style>
+</BaseLayout>

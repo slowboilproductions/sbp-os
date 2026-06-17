@@ -68,6 +68,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="a-logo-block a-logo-block--foot">
         <img src="/logo-dark.png" alt="" class="a-logo" width="232" height="229" />
       </div>
+
+      <!-- buried easter egg: meet the founders (one human, one not) -->
+      <div class="a-egg center">
+        <a href="/founders" class="btn btn--primary">Meet the founders →</a>
+      </div>
     </div>
   </section>
 
@@ -84,5 +89,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .a-body h2 { font-family: var(--font-display); font-size: var(--t-h3); font-weight: 600; margin-bottom: var(--s4); }
     .a-close { font-family: var(--font-display); font-size: var(--t-lg); font-style: italic; color: var(--text); margin-top: var(--s5); }
     .a-cta { margin-top: var(--s6); width: fit-content; }
+
+    /* easter-egg button — same format as "Get in touch", centered under the foot logo */
+    .a-egg { margin-top: var(--s6); }
   </style>
 </BaseLayout>

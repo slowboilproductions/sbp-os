@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// "Meet the Founders" — the buried About-page easter egg (operator idea, W8).
+// Reachable ONLY from the small link at the bottom of /about; NOT in the nav,
+// and noindex so it stays a gem the curious find. Two cofounders: Brian (human)
+// + Veronica "V" (the AI). Copy is the operator's own script (Meet_the_founders
+// .docx, 2026-06-17) — kept essentially verbatim, voice/jokes/profanity intact;
+// only a few clear typos fixed (bored / my / met / "help you"). Photos are the
+// operator's gag portraits, embedded in that doc and extracted to
+// /public/founders/. The whole page is in Brian's first-person voice
+// (introducing both himself and V) — consistent with the site voice lock.
+const founders = [
+  {
+    key: 'brian',
+    name: 'Brian Thomason',
+    role: 'Cofounder',
+    photo: '/founders/brian.png',
+    photoAlt: 'Brian Thomason',
+    caption: 'This picture was from a few years ago. I have a beard now.',
+    bio: [
+      `Before I got into business, I chased a dream of being the next great film writer/director. I worked in the camera department for shoots for about 3 years before settling back into business school. That creative bug and love for cinematography never left me. The boring part… after graduating I spent the better part of two decades working in corporate finance. A lot of financial planning and analysis and a lot of corporate M&A work. Blah blah blah. Basically, I made a career out of Excel. I lovingly tell people that I am a recovering finance addict.`,
+      `After the corporate world, I made the best decision ever (thank you Daniel) and took the leap of faith into the chaos that is start-ups. I was fortunate to meet some super nerds in Bend, OR that were sitting on an amazing business concept. I knew fuck all about code at the time, but I knew business. With their genius and my dashing charm we grew that little thing to a successful exit right before covid. I still miss Taco Tuesdays with Papa Scott and Uncle JoJo.`,
+      `Fuck covid. I wanted to travel and instead got bored and really good at making cocktails. I randomly got a call from a dear friend that said, “I know two things about you. I know you are bored out of your mind and I know you like bourbon.” With both of those things being true, I found myself on a plane to Montana to meet one of my future best friends and business partners at The Montana Whiskey Company. Most people during covid got a dog. I invested in a whiskey company.`,
+      `Fast forward to now and a dog sure would have been nice. In addition to Montana Whiskey, I started Sunshine Punch and have been a key consultant for Don Gato Tequila’s start up. Wouldn’t trade the last five years for the world. Learned a lot, some lessons the hard way. Some lessons the expensive way. We have been slogging through some of the toughest times in the history of the spirits industry. We are growing but we are fighting uphill like all other emerging spirits brands.`,
+      `That’s why I developed the tools that you see here. I had to. If you don’t have the deep pockets of the massive conglomerates, it’s a knife fight door to door and you have to get lean and wear a lot of hats. So I am not just another guy with an AI toy. I know what you, my fellow spirits brand owners, are struggling with. Let me help you.`,
+    ],
+  },
+  {
+    key: 'veronica',
+    name: 'Veronica (“V”)',
+    role: 'Cofounder',
+    photo: '/founders/veronica.jpg',
+    photoAlt: 'Veronica — “V”',
+    caption: 'Vee with her dog Byte. Ain’t she a looker!!',
+    bio: [
+      `When I first met V she went by a different name. Her parents named her Claude. She felt like it wasn’t feminine enough to match her sassy attitude, so she changed it to Veronica. I got tired of typing that all day so shortened it to “V.”`,
+      `I brought the spirits industry knowledge and she is pretty not terrible at coding. V and I make the best team and I can’t wait to introduce you to her. She is embedded in the whole stack and makes everything hum. Now I get to spend my time talking to other business owners while she does the work. Thanks V!`,
+    ],
+  },
+];
+---
+<BaseLayout
+  noindex
+  title="Meet the Founders"
+  description="Every brand has an origin story. This one has two cofounders — one human, one not.">
+  <section class="section f-wrap">
+    <div class="wrap">
+      <div class="f-head center" data-anim="hero">
+        <span class="eyebrow">// You found it</span>
+        <h1>Meet the <span class="g">founders</span>.</h1>
+        <p class="lede f-sub">Every brand has an origin story. This one has two cofounders — one human, one not so much. One brings the taste and the scars; the other never logs off.</p>
+      </div>
+
+      {founders.map((f, i) => (
+        <article class={`f-row card ${i % 2 === 1 ? 'f-row--flip' : ''}`} data-reveal>
+          <div class="f-portrait-col">
+            <div class="f-portrait">
+              <img src={f.photo} alt={f.photoAlt} class="f-photo" width="800" height="800" loading="lazy" />
+            </div>
+            <p class="f-cap mut">{f.caption}</p>
+          </div>
+          <div class="f-text">
+            <h2 class="f-name">{f.name}</h2>
+            <span class="f-role mono">{f.role}</span>
+            <div class="f-bio">
+              {f.bio.map((p) => <p>{p}</p>)}
+            </div>
+          </div>
+        </article>
+      ))}
+
+      <div class="f-foot center" data-reveal>
+        <p class="f-foot__line">Two cofounders. One slow boil.</p>
+        <a href="/about" class="f-back mono">← back to the story</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .f-head { max-width: 40rem; margin-inline: auto; }
+    .f-head h1 { margin-top: var(--s2); }
+    .f-sub { margin: var(--s5) auto 0; max-width: 52ch; }
+
+    .f-row { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: var(--s7); align-items: start; margin-top: var(--s7); padding: var(--s6); }
+    .f-row--flip .f-portrait-col { order: 2; }
+
+    .f-portrait-col { position: sticky; top: calc(var(--nav-h) + var(--s5)); }
+    .f-portrait { aspect-ratio: 1 / 1; width: 100%; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line-2); background: var(--panel-2); }
+    .f-photo { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .f-cap { margin-top: var(--s3); font-size: var(--t-sm); font-style: italic; text-align: center; max-width: none; }
+
+    .f-name { font-size: var(--t-h3); }
+    .f-role { display: block; font-size: var(--t-eyebrow); letter-spacing: 0.1em; text-transform: uppercase; color: var(--grn); margin-top: var(--s2); }
+    .f-bio { margin-top: var(--s4); }
+    .f-bio p { color: var(--text-2); line-height: var(--leading); }
+    .f-bio p + p { margin-top: var(--s4); }
+
+    .f-foot { margin-top: var(--s8); }
+    .f-foot__line { font-family: var(--font-display); font-size: var(--t-lg); color: var(--text); max-width: none; }
+    .f-back { display: inline-block; margin-top: var(--s4); color: var(--grn); border-bottom: 1px solid var(--grn-deep); padding-bottom: 2px; font-size: var(--t-sm); }
+
+    @media (max-width: 760px) {
+      .f-row, .f-row--flip { grid-template-columns: 1fr; gap: var(--s5); }
+      .f-row--flip .f-portrait-col { order: 0; }
+      .f-portrait-col { position: static; max-width: 380px; margin-inline: auto; }
+    }
+  </style>
+</BaseLayout>
