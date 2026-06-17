@@ -1,0 +1,194 @@
+---
+// DASH CONVERGE — the Operational Dashboard signature motion (W7).
+// Visualizes the page's hero: the spirits industry's disconnected data sources
+// (Park Street, VIP, NABCA, Encompass, QuickBooks, CRM, Meta, distributor feeds)
+// sit scattered and unwired; as you scroll, clean wires draw from each source
+// INTO a central Operational Dashboard, which lights up and goes "live." Pays
+// off "fixes all of it, hands-free." Distinct from the CRM funnel: the sources
+// persist and get connected (not funneled away), and the hub powers on.
+//
+// PUBLIC NAME "Operational Dashboard" only (A-6). Source/metric values are
+// ILLUSTRATIVE placeholders, not real figures.
+//
+// GUARDRAILS: source chips are real text (the named feeds); the wires + hub are
+// aria-hidden decoration; the meaning is also carried by the eyebrow + caption +
+// an sr-only sentence. transform/opacity-only, one rAF-throttled scroll island,
+// no scroll-jack. Under no-JS / reduced motion it renders the resolved state
+// (all wired, hub lit). Nothing here is compliance chrome.
+const sources = [
+  { name: 'Park Street',        fmt: 'API'  },
+  { name: 'VIP',                fmt: 'CSV'  },
+  { name: 'NABCA',              fmt: 'XLSX' },
+  { name: 'Encompass',          fmt: 'API'  },
+  { name: 'QuickBooks',         fmt: 'API'  },
+  { name: 'Distributor feeds',  fmt: 'EDI'  },
+  { name: 'Your CRM',           fmt: 'DB'   },
+  { name: 'Meta campaigns',     fmt: 'API'  },
+];
+const N = sources.length, cx = 50, cy = 50, rx = 43, ry = 40;
+const place = sources.map((s, i) => {
+  const ang = (-90 + i * (360 / N)) * Math.PI / 180;
+  return { ...s, x: +(cx + rx * Math.cos(ang)).toFixed(2), y: +(cy + ry * Math.sin(ang)).toFixed(2) };
+});
+const tiles = [
+  { k: 'Depletions',  v: '4,812' },
+  { k: 'AR aging',    v: '$18.4k' },
+  { k: 'Open orders', v: '27' },
+];
+---
+<section class="dash-conv section" id="dash-conv">
+  <div class="wrap">
+    <div class="prod-sec__head center dash-conv__head">
+      <span class="eyebrow">// Every feed, one picture</span>
+      <h2>Eight disconnected sources. One operational truth.</h2>
+    </div>
+
+    <div class="dash-conv__stage">
+      <svg class="dash-conv__wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        {place.map((s, i) => (<line class="dwire" data-i={i} x1={s.x} y1={s.y} x2="50" y2="50" />))}
+      </svg>
+
+      {place.map((s, i) => (
+        <div class="dsrc" data-i={i} style={`left:${s.x}%;top:${s.y}%`}>
+          <span class="dsrc__fmt">{s.fmt}</span>
+          <span class="dsrc__name">{s.name}</span>
+        </div>
+      ))}
+
+      <div class="dash-conv__hub" aria-hidden="true">
+        <span class="dhub__bar"><i></i><i></i><i></i><span class="dhub__title">Operational Dashboard</span></span>
+        <div class="dhub__tiles">
+          {tiles.map((t) => (
+            <div class="dtile"><span class="dtile__k">{t.k}</span><span class="dtile__v">{t.v}</span></div>
+          ))}
+        </div>
+        <span class="dhub__live"><i></i> live</span>
+      </div>
+    </div>
+
+    <p class="dash-conv__cap">No exports. No reconciling. It just stays current.</p>
+    <p class="sr-only">The Operational Dashboard pulls every disconnected feed — Park Street, VIP, NABCA, Encompass, QuickBooks, distributor feeds, your CRM, Meta campaigns — and normalizes them into one always-current picture, hands-free.</p>
+  </div>
+</section>
+
+<style>
+  .dash-conv { padding-top: var(--s7); padding-bottom: var(--s7); }
+  .dash-conv__head { margin-inline: auto; }
+  .dash-conv__stage { position: relative; width: 100%; max-width: 900px; height: 540px; margin: var(--s6) auto 0; }
+
+  /* wires from each source into the hub */
+  .dash-conv__wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+  .dwire {
+    stroke: var(--grn); stroke-width: 1.8; vector-effect: non-scaling-stroke;
+    stroke-dasharray: 4 6; animation: dwire-flow 1.05s linear infinite;   /* data feeding inward */
+  }
+  @keyframes dwire-flow { to { stroke-dashoffset: -10; } }
+
+  /* source chips (real, readable feed names + a format badge) */
+  .dsrc {
+    position: absolute; transform: translate(-50%, -50%); z-index: 2;
+    display: flex; align-items: center; gap: 7px; white-space: nowrap;
+    background: var(--bg); border: 1px solid var(--line-2); border-radius: var(--r);
+    padding: 6px 11px; box-shadow: 0 5px 16px rgba(75, 46, 32, 0.10);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .dsrc.is-on { border-color: var(--grn); box-shadow: 0 6px 20px rgba(168, 68, 26, 0.18); }
+  .dsrc__fmt {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-2);
+    border: 1px solid var(--line-2); border-radius: 4px; padding: 1px 5px; flex: none;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .dsrc.is-on .dsrc__fmt { color: var(--grn-ink); background: var(--grn); border-color: var(--grn); }
+  .dsrc__name { font-size: 13px; font-weight: 500; color: var(--text); }
+
+  /* central dashboard hub */
+  .dash-conv__hub {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3;
+    width: 256px; border-radius: var(--r-lg); background: var(--bg-2);
+    border: 1px solid var(--line-2); box-shadow: 0 14px 40px rgba(75, 46, 32, 0.18);
+    --lit: 1; overflow: hidden;
+  }
+  .dash-conv__hub::after {
+    content: ""; position: absolute; inset: -2px; border-radius: var(--r-lg);
+    border: 2px solid var(--grn); opacity: calc(0.85 * var(--lit)); pointer-events: none;
+  }
+  .dhub__bar { display: flex; align-items: center; gap: 5px; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+  .dhub__bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); }
+  .dhub__bar i:first-child { background: var(--orange); }
+  .dhub__bar i:nth-child(2) { background: var(--gold); }
+  .dhub__title { margin-left: 6px; font-family: var(--font-mono); font-size: 10.5px; color: var(--text-2); letter-spacing: 0.04em; }
+  .dhub__tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-2); }
+  .dtile { background: var(--bg-2); padding: 12px 10px; text-align: center; opacity: calc(0.35 + 0.65 * var(--lit)); transition: opacity var(--dur) var(--ease); }
+  .dtile__k { display: block; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-2); }
+  .dtile__v { display: block; margin-top: 4px; font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--text); }
+  .dhub__live {
+    display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--grn); opacity: var(--lit);
+  }
+  .dhub__live i { width: 7px; height: 7px; border-radius: 50%; background: var(--grn); animation: dhub-pulse 1.8s ease-in-out infinite; }
+  @keyframes dhub-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .dash-conv__cap { text-align: center; margin-top: var(--s5); font-family: var(--font-display); font-size: var(--t-lg); color: var(--text-2); }
+
+  /* under motion: wires/hub start dark and the script wires them up; without JS /
+     reduced motion the resolved state (all wired, hub lit) renders statically. */
+  .dash-conv.is-motion .dwire { opacity: 0; }
+  .dash-conv.is-motion .dash-conv__hub { --lit: 0; }
+  .dash-conv.is-motion .dash-conv__cap { opacity: 0; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  @media (max-width: 680px) {
+    .dash-conv__stage { height: 440px; max-width: 420px; }
+    .dash-conv__hub { width: 200px; }
+    .dsrc { padding: 5px 8px; }
+    .dsrc__name { font-size: 11px; }
+    .dtile__v { font-size: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dwire { animation: none; }
+    .dhub__live i { animation: none; }
+  }
+</style>
+
+<script>
+  function initDashConverge() {
+    const sec = document.getElementById('dash-conv') as HTMLElement | null;
+    if (!sec || sec.dataset.wired) return;
+    sec.dataset.wired = '1';
+    const wires = Array.from(sec.querySelectorAll('.dwire')) as SVGLineElement[];
+    const srcs = Array.from(sec.querySelectorAll('.dsrc')) as HTMLElement[];
+    const hub = sec.querySelector('.dash-conv__hub') as HTMLElement | null;
+    const cap = sec.querySelector('.dash-conv__cap') as HTMLElement | null;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    sec.classList.add('is-motion');
+
+    const clamp = (v: number) => Math.max(0, Math.min(1, v));
+    const n = wires.length;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = sec.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const center = r.top + r.height / 2;
+      const startY = vh * 0.96, endY = vh * 0.34;
+      const p = clamp((startY - center) / (startY - endY));
+      const connect = clamp((p - 0.18) / 0.62);
+      if (hub) hub.style.setProperty('--lit', connect.toFixed(3));
+      wires.forEach((w, i) => {
+        const o = clamp(connect * n - i);   // wire them up one at a time
+        w.style.opacity = o.toFixed(3);
+        if (srcs[i]) srcs[i].classList.toggle('is-on', o > 0.6);
+      });
+      if (cap) cap.style.opacity = clamp((p - 0.8) / 0.16).toFixed(3);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+  initDashConverge();
+  document.addEventListener('astro:after-swap', initDashConverge);
+</script>

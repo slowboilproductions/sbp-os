@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DashboardPanel from '../../components/DashboardPanel.astro';
 import ZPush from '../../components/ZPush.astro';
+import DashConverge from '../../components/DashConverge.astro';
 // Operational Dashboard subunit (skeleton v0.3 §3.4), spirits-first, operator
 // voice (A-15). PUBLIC NAME "Operational Dashboard" ONLY — internal "Dash"
 // never appears (A-6). Pricing → Contact (A-8). FLAG: verify claims against
@@ -59,6 +60,8 @@ const feats = [
       </div>
     </div>
   </section>
+
+  <DashConverge />
 
   <!-- OD motion signature: z-axis push — the summary front page comes forward
        as you scroll into it (the whole business arriving on one screen). -->
