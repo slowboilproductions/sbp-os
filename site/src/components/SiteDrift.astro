@@ -1,0 +1,82 @@
+---
+// SITE DRIFT — the warm 70s ambient backdrop, now site-wide (operator, W7:
+// "I like it like it is. place it everywhere"). Promoted verbatim from the
+// Marketing per-unit signature — same three faint decorative layers (a blurred
+// gold/orange blob, a masked grid, diagonal sunset stripes) at the same
+// intensity — now that the AMS wheel is Marketing's signature and this is freed
+// up to be shared. Anchored behind the top of every page; the layers parallax
+// gently as you scroll in.
+//
+// GUARDRAILS: aria-hidden decoration, transform-only, one rAF-throttled scroll
+// island; STATIC (no parallax) under prefers-reduced-motion / no-JS, where it
+// reads as a warm static backdrop. Sits behind content (z-index 0; BaseLayout
+// lifts the page content to z-index 1) and is clipped to a top band, so it never
+// overlaps or obscures the compliance text lower on any page.
+---
+<div class="sdrift" aria-hidden="true">
+  <span class="sdrift__layer sdrift__blob" data-drift="0.30"></span>
+  <span class="sdrift__layer sdrift__grid" data-drift="0.16"></span>
+  <span class="sdrift__layer sdrift__stripes" data-drift="0.46"></span>
+</div>
+
+<style>
+  .sdrift { position: absolute; inset: 0 0 auto 0; height: 760px; z-index: 0; pointer-events: none; overflow: hidden; }
+  .sdrift__layer { position: absolute; display: block; will-change: transform; }
+  .sdrift__blob {
+    top: -14%; right: -12%; width: 64%; height: 620px;
+    background: radial-gradient(50% 50% at 60% 40%, rgba(226,179,74,0.34), rgba(224,106,44,0.14) 55%, transparent 72%);
+    filter: blur(6px);
+  }
+  .sdrift__grid {
+    inset: 0; opacity: 0.5;
+    background-image:
+      linear-gradient(to right, rgba(75,46,32,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(75,46,32,0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 82%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 82%);
+  }
+  .sdrift__stripes {
+    left: -18%; top: 38%; width: 56%; height: 220px; transform: rotate(-8deg);
+    background: linear-gradient(180deg,
+      rgba(226,179,74,0.20) 0 33%, rgba(224,106,44,0.18) 33% 66%, rgba(75,46,32,0.16) 66% 100%);
+    border-radius: 0 var(--r-lg) var(--r-lg) 0;
+    filter: blur(2px);
+    mask-image: linear-gradient(to right, #000, transparent);
+    -webkit-mask-image: linear-gradient(to right, #000, transparent);
+  }
+  @media (max-width: 760px) { .sdrift { height: 560px; } .sdrift__blob { width: 90%; } }
+</style>
+
+<script>
+  // Parallax the layers off the drift band's own viewport position — each at its
+  // own fraction of scroll, all slower than the foreground. rAF-throttled,
+  // transform-only. Skipped under reduced motion (left as a static backdrop).
+  function initSiteDrift() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const drift = document.querySelector('.sdrift') as HTMLElement | null;
+    if (!drift || drift.dataset.driftWired) return;
+    const layers = Array.from(drift.querySelectorAll('[data-drift]')) as HTMLElement[];
+    if (!layers.length) return;
+    drift.dataset.driftWired = '1';
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const top = drift.getBoundingClientRect().top;
+        if (top < -900) return;            // only drift while the top band is near the viewport
+        layers.forEach((l) => {
+          const f = parseFloat(l.dataset.drift || '0.2') || 0.2;
+          l.style.transform = (l.classList.contains('sdrift__stripes') ? 'rotate(-8deg) ' : '') +
+            'translate3d(0,' + (-top * f).toFixed(1) + 'px,0)';
+        });
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+  initSiteDrift();
+  document.addEventListener('astro:after-swap', initSiteDrift);
+</script>

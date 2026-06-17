@@ -5,6 +5,7 @@ import Banner from '../components/Banner.astro';
 import Footer from '../components/Footer.astro';
 import SiteMotion from '../components/SiteMotion.astro';
 import PageWipe from '../components/PageWipe.astro';
+import SiteDrift from '../components/SiteDrift.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -56,10 +57,20 @@ const fullTitle = title === 'Slow Boil Productions'
   <Nav path={path} />
   <Banner />
   <main id="main">
-    <slot />
+    <SiteDrift />
+    <div class="main-content">
+      <slot />
+    </div>
   </main>
   <Footer />
   <PageWipe />
   <SiteMotion />
 </body>
 </html>
+
+<style>
+  /* The SiteDrift backdrop is absolutely positioned at the top of <main>; lift
+     the page content above it so the drift only ever paints behind. */
+  #main { position: relative; }
+  .main-content { position: relative; z-index: 1; }
+</style>
