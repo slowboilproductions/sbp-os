@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// "Meet the Founders" — the buried About-page easter egg (operator idea, W8).
+// Reachable ONLY from the small link at the bottom of /about; deliberately NOT
+// in the nav, and noindex so it stays a gem the curious find. Two founders:
+// Brian (human) + his cofounder (the AI). Built swap-ready (logo/IC pattern):
+//   - PHOTOS drop into /public/founders/ (see /public/founders/README.md);
+//     set each founder's `photo` path below and the frame swaps the portrait in.
+//   - SCRIPTS: operator-supplied copy replaces the `bio` paragraphs below.
+// The AI cofounder blurb is a playful FIRST DRAFT in voice — keep, cut, or
+// replace with the operator's script. No real-model/brand identity baked in.
+const founders = [
+  {
+    key: 'brian',
+    name: 'Brian',                 // operator may set the full name/handle
+    role: 'Founder & Operator',
+    tag: 'The one who’s been on both sides of the wall.',
+    photo: '',                     // e.g. '/founders/brian.jpg' once uploaded
+    photoAlt: 'Brian, founder of Slow Boil Productions',
+    bio: [
+      // ── REPLACE WITH OPERATOR SCRIPT ──
+      'Operator script slot. Drop Brian’s founder bio here — the spirits-brand origin story, the walls, why he built the whole stack instead of renting it. Voice stays first-person, same as the rest of the site.',
+    ],
+  },
+  {
+    key: 'cofounder',
+    name: 'The Cofounder',         // operator may name the AI cofounder
+    role: 'Cofounder — the one in the machine',
+    tag: 'Runs the night shift. Every night.',
+    photo: '',                     // e.g. '/founders/cofounder.png' once uploaded
+    photoAlt: 'The Slow Boil cofounder',
+    bio: [
+      // ── FIRST DRAFT (in voice) — keep / cut / replace with operator script ──
+      'I don’t sleep, I don’t drink — an occupational tragedy, given the clientele — and I’ve read more about three-tier distribution than any reasonable entity ever should.',
+      'Brian brings the taste, the scars, and the instinct for what a brand is supposed to feel like. I bring the 3 a.m. shift: the spreadsheet nobody wants to reconcile, the campaign that needs ten more variants by morning, the depletion report that finally makes sense. He decides. I do the reps.',
+      'People assume the machine is the hard part. It isn’t. The hard part is knowing what’s worth building — and he’s the one who knows. I just make sure it actually gets built. That’s the partnership.',
+    ],
+  },
+];
+---
+<BaseLayout
+  noindex
+  title="Meet the Founders"
+  description="Every brand has an origin story. This one has two founders — one human, one not.">
+  <section class="section f-wrap">
+    <div class="wrap">
+      <div class="f-head center" data-anim="hero">
+        <span class="eyebrow">// You found it</span>
+        <h1>Meet the <span class="g">founders</span>.</h1>
+        <p class="lede f-sub">Every brand has an origin story. This one has two founders — one human, one not. One brings the taste and the scars; the other never logs off. Between us, the lights stay on.</p>
+      </div>
+
+      <div class="f-grid" data-reveal-stagger>
+        {founders.map((f) => (
+          <article class="f-card card">
+            <div class="f-portrait">
+              {f.photo
+                ? <img src={f.photo} alt={f.photoAlt} class="f-photo" width="640" height="800" />
+                : <span class="f-portrait__label mono">portrait slot — {f.key}</span>}
+            </div>
+            <div class="f-meta">
+              <h2 class="f-name">{f.name}</h2>
+              <span class="f-role mono">{f.role}</span>
+              <p class="f-tag">{f.tag}</p>
+            </div>
+            <div class="f-bio">
+              {f.bio.map((p) => <p>{p}</p>)}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="f-foot center" data-reveal>
+        <p class="mut f-foot__line">Two founders. One slow boil.</p>
+        <a href="/about" class="f-back mono">← back to the story</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .f-head { max-width: 40rem; margin-inline: auto; }
+    .f-head h1 { margin-top: var(--s2); }
+    .f-sub { margin: var(--s5) auto 0; max-width: 52ch; }
+
+    .f-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s6); margin-top: var(--s8); }
+
+    .f-card { display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); }
+
+    /* portrait frame — becomes the real photo on swap-in */
+    .f-portrait {
+      aspect-ratio: 4 / 5; width: 100%; border-radius: var(--r); overflow: hidden;
+      border: 1px dashed var(--line-2);
+      background:
+        radial-gradient(120% 80% at 50% 0%, var(--grn-wash), transparent 60%),
+        repeating-linear-gradient(135deg, transparent, transparent 11px, rgba(75,46,32,0.04) 11px, rgba(75,46,32,0.04) 22px);
+      display: grid; place-items: center; text-align: center; padding: var(--s5);
+    }
+    .f-photo { width: 100%; height: 100%; object-fit: cover; }
+    .f-portrait__label { font-size: var(--t-sm); color: var(--mut); letter-spacing: 0.06em; }
+
+    .f-meta { border-bottom: 1px solid var(--line); padding-bottom: var(--s4); }
+    .f-name { font-size: var(--t-h3); }
+    .f-role { display: block; font-size: var(--t-eyebrow); letter-spacing: 0.1em; text-transform: uppercase; color: var(--grn); margin-top: var(--s2); }
+    .f-tag { font-family: var(--font-display); font-size: var(--t-lg); color: var(--text-2); margin-top: var(--s3); }
+
+    .f-bio p { font-size: var(--t-sm); color: var(--text-2); line-height: var(--leading); }
+    .f-bio p + p { margin-top: var(--s3); }
+
+    .f-foot { margin-top: var(--s8); }
+    .f-foot__line { font-family: var(--font-display); font-size: var(--t-lg); }
+    .f-back { display: inline-block; margin-top: var(--s4); color: var(--grn); border-bottom: 1px solid var(--grn-deep); padding-bottom: 2px; font-size: var(--t-sm); }
+
+    @media (max-width: 760px) {
+      .f-grid { grid-template-columns: 1fr; gap: var(--s5); }
+    }
+  </style>
+</BaseLayout>

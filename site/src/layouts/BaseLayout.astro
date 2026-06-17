@@ -13,8 +13,10 @@ interface Props {
   description: string;
   /** optional: omit the marketing chrome (not used yet) */
   ogImage?: string;
+  /** buried/easter-egg pages: keep them out of search (still fully reachable) */
+  noindex?: boolean;
 }
-const { title, description, ogImage = '/og-default.png' } = Astro.props;
+const { title, description, ogImage = '/og-default.png', noindex = false } = Astro.props;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site ?? 'https://slowboilproductions.com').href;
 const fullTitle = title === 'Slow Boil Productions'
@@ -28,6 +30,7 @@ const fullTitle = title === 'Slow Boil Productions'
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonical} />
   <meta name="theme-color" content="#E9E4DA" />
 
