@@ -1,0 +1,52 @@
+---
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+// Swap-ready screenshot slot (W8 founders / IC pattern). Reads
+// public/screens/<unit>/ at BUILD TIME and renders whatever optimized images
+// are present — framed in the 70s panel skin, static, lazy-loaded, with
+// meaningful alt. The moment the operator drops files in that folder they
+// render on the next build, NO code change. Empty slot → the dashed `.shot`
+// placeholder (the pre-image look). One or several shots → a STATIC stacked
+// gallery (never an auto-rotating carousel — motion discipline); no-JS and
+// prefers-reduced-motion safe by construction (plain <img>, no script).
+//
+// HARD LOCK: only publish demo/illustrative or scrubbed data — no real
+// accounts, outlets, customers, $ figures, or distributor names. If a provided
+// image shows real account-level data, STOP and flag — do not publish it.
+interface Props {
+  unit: string;       // folder under public/screens/
+  label: string;      // mono placeholder shown when the slot is empty
+  alt: string;        // base alt text for each rendered shot
+  caption?: string;   // optional note under a filled gallery (e.g. the demo-data line)
+  feature?: boolean;  // stronger/larger frame (OD = the strongest single asset)
+}
+const { unit, label, alt, caption, feature = false } = Astro.props;
+
+// Resolved off the component URL, so it is cwd-independent.
+const dir = fileURLToPath(new URL(`../../public/screens/${unit}/`, import.meta.url));
+const exts = /\.(webp|avif|png|jpe?g)$/i;
+let files: string[] = [];
+try {
+  files = fs.readdirSync(dir).filter((f) => exts.test(f) && !f.startsWith('.')).sort();
+} catch { /* no dir / empty → placeholder */ }
+
+const humanize = (f: string) =>
+  f.replace(exts, '').replace(/[-_]+/g, ' ').replace(/\b\d+\b/g, '').replace(/\s+/g, ' ').trim();
+
+const shots = files.map((f) => {
+  const h = humanize(f);
+  return { src: `/screens/${unit}/${f}`, alt: h ? `${alt} — ${h}` : alt };
+});
+---
+{shots.length === 0 ? (
+  <div class="shot"><span class="shot__label">{label}</span></div>
+) : (
+  <figure class:list={['shots', { 'shots--feature': feature }]}>
+    {shots.map((s) => (
+      <div class="shot-frame">
+        <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+      </div>
+    ))}
+    {caption && <figcaption class="shot-cap">{caption}</figcaption>}
+  </figure>
+)}
