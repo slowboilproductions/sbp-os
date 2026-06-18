@@ -15,8 +15,10 @@ interface Props {
   ogImage?: string;
   /** buried/easter-egg pages: keep them out of search (still fully reachable) */
   noindex?: boolean;
+  /** holding/coming-soon: drop the nav + motion chrome, keep head + compliance */
+  bare?: boolean;
 }
-const { title, description, ogImage = '/og-default.png', noindex = false } = Astro.props;
+const { title, description, ogImage = '/og-default.png', noindex = false, bare = false } = Astro.props;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site ?? 'https://slowboilproductions.com').href;
 const fullTitle = title === 'Slow Boil Productions'
@@ -57,17 +59,17 @@ const fullTitle = title === 'Slow Boil Productions'
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
-  <Nav path={path} />
-  <Banner />
+  {!bare && <Nav path={path} />}
+  {!bare && <Banner />}
   <main id="main">
-    <SiteDrift />
+    {!bare && <SiteDrift />}
     <div class="main-content">
       <slot />
     </div>
   </main>
-  <Footer />
-  <PageWipe />
-  <SiteMotion />
+  {!bare && <Footer />}
+  {!bare && <PageWipe />}
+  {!bare && <SiteMotion />}
 </body>
 </html>
 
