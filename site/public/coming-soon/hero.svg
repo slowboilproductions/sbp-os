@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Image placeholder">
-  <rect width="1200" height="900" fill="#FBF8F2"/>
-  <rect x="28" y="28" width="1144" height="844" rx="14" fill="none" stroke="#C6B9A1" stroke-width="3" stroke-dasharray="22 16"/>
-  <g font-family="'IBM Plex Mono','SFMono-Regular',monospace" text-anchor="middle">
-    <text x="600" y="392" font-size="68" font-weight="700" fill="#A8441A" letter-spacing="2">IMAGE GOES HERE</text>
-    <text x="600" y="470" font-size="30" fill="#5C4636">drop your file in /public/coming-soon/</text>
-    <text x="600" y="540" font-size="23" fill="#8A7460">swap-ready placeholder — Slow Boil Productions</text>
-  </g>
-</svg>

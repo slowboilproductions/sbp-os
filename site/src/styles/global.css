@@ -199,6 +199,19 @@ html.motion-ready .card:hover::before { opacity: 1; }
   min-height: 320px; display: grid; place-items: center; text-align: center; padding: var(--s6); }
 .shot__label { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--mut); }
 
+/* filled screenshot gallery — real shots framed in the warm panel/instrument
+   skin (ScreenShots.astro renders these the moment files land in
+   public/screens/<unit>). Static, no-JS / reduced-motion safe. */
+.shots { display: grid; gap: var(--s5); margin: 0; }
+.shot-frame {
+  border: 1px solid var(--line-2); border-radius: var(--r-lg);
+  background: var(--panel); padding: var(--s3); box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.shot-frame img { width: 100%; height: auto; display: block; border-radius: var(--r); }
+.shots--feature .shot-frame { padding: var(--s4); box-shadow: var(--shadow-panel); }
+.shot-cap { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--mut); text-align: center; margin-top: var(--s2); max-width: none; }
+
 /* CTA band */
 .cta-band { text-align: center; }
 .cta-band h2 { margin-bottom: var(--s4); }
