@@ -16,3 +16,5 @@ npm-debug.log*
 shot.mjs
 reshot.mjs
 shots/
+# screenshot-grade loop output (scripts/screenshot-pages.mjs)
+.shots/
