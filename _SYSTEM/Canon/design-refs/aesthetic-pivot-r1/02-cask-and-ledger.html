@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direction 2 — Cask &amp; Ledger (warm-editorial / craft-modern)</title>
+<!-- SBP-AESTHETIC-PIVOT-R1 candidate sample. Illustrative, not build code.
+     Copy is the real ratified homepage copy (A-15..A-22); only the skin is the proposal. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fragment+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bone: #F3EEE3;
+    --bone-deep: #ECE5D6;
+    --panel: #FBF8F1;
+    --ink: #241D16;
+    --mut: #6B6055;
+    --line: #D9CFBD;
+    --oxblood: #6E2B27;
+    --oxblood-deep: #571F1C;
+    --s3: 16px; --s4: 24px; --s5: 32px; --s6: 48px; --s7: 76px; --s8: 110px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bone); color: var(--ink);
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: "Instrument Serif", serif; }
+  .mono { font-family: "Fragment Mono", monospace; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: var(--s5); }
+
+  /* nav */
+  nav { border-bottom: 1px solid var(--line); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .wordmark { font-family: "Instrument Serif", serif; font-size: 21px; letter-spacing: 0.005em; }
+  .wordmark em { color: var(--oxblood); }
+  .nav-links { display: flex; gap: var(--s5); align-items: center; font-size: 15px; font-weight: 500; }
+  .nav-links a { color: var(--ink); text-decoration: none; }
+  .nav-cta {
+    border: 1px solid var(--oxblood); color: var(--oxblood) !important; border-radius: 999px;
+    padding: 9px 20px; font-weight: 600; font-size: 14px;
+  }
+
+  /* hero */
+  .hero { padding-block: var(--s8) var(--s7); }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--s7); align-items: center; }
+  .eyebrow {
+    font-family: "Fragment Mono", monospace; font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--oxblood); display: block; margin-bottom: var(--s4);
+  }
+  h1 {
+    font-family: "Instrument Serif", serif; font-weight: 400;
+    font-size: clamp(42px, 5vw, 66px); line-height: 1.02; letter-spacing: -0.012em;
+  }
+  h1 .alt { font-style: italic; color: var(--oxblood); }
+  .lede { color: var(--mut); font-size: 18.5px; max-width: 46ch; margin: var(--s5) 0 var(--s6); }
+  .btns { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    text-decoration: none; font-weight: 600; font-size: 15.5px; padding: 14px 28px; border-radius: 999px;
+  }
+  .btn-primary { background: var(--oxblood); color: #F6F0E4; }
+  .btn-primary:hover { background: var(--oxblood-deep); }
+  .btn-ghost { color: var(--ink); border: 1px solid var(--ink); }
+
+  /* screenshot plate — bookplate framing */
+  .plate {
+    background: var(--panel); border: 1px solid var(--ink); border-radius: 6px;
+    box-shadow: 0 1px 0 var(--ink), 0 18px 40px -18px rgba(36,29,22,0.35);
+    overflow: hidden;
+  }
+  .plate-bar {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--bone-deep);
+  }
+  .plate-bar .t { font-family: "Instrument Serif", serif; font-size: 17px; }
+  .plate-bar .live { font-family: "Fragment Mono", monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--oxblood); }
+  .shot { padding: 20px; display: grid; gap: 14px; }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat { background: var(--bone); border: 1px solid var(--line); padding: 12px 14px; border-radius: 4px; }
+  .stat .k { font-family: "Fragment Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--mut); display: block; margin-bottom: 6px; }
+  .stat .v { font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
+  .stat .v em { font-style: normal; color: var(--oxblood); font-size: 13px; }
+  .rows { display: grid; gap: 8px; }
+  .row { display: grid; grid-template-columns: 1fr 60px; gap: 10px; align-items: center; }
+  .row .lbl { font-family: "Fragment Mono", monospace; font-size: 11px; color: var(--mut); white-space: nowrap; }
+  .row .bar { height: 10px; border-radius: 999px; background: var(--bone-deep); position: relative; overflow: hidden; grid-column: 1 / -1; }
+  .row .bar i { position: absolute; inset: 0 auto 0 0; background: var(--oxblood); border-radius: 999px; }
+  .plate-cap {
+    border-top: 1px solid var(--line); padding: 10px 18px;
+    font-family: "Fragment Mono", monospace; font-size: 11px; color: var(--mut); background: var(--panel);
+  }
+
+  /* the wall — content block */
+  .section { padding-block: var(--s7); }
+  .band { background: var(--bone-deep); border-block: 1px solid var(--line); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: start; }
+  .kick { font-family: "Fragment Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oxblood); display: block; margin-bottom: var(--s3); }
+  h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 42px); line-height: 1.08; letter-spacing: -0.01em; }
+  .body-lede { font-size: 18px; margin-bottom: var(--s4); }
+  .mut { color: var(--mut); }
+  .mut + .mut { margin-top: var(--s3); }
+
+  /* proof cells — ledger rows */
+  .cells { margin-top: var(--s6); }
+  .cell {
+    display: grid; grid-template-columns: 90px 1fr auto; gap: var(--s4); align-items: baseline;
+    padding: 20px 2px; border-top: 1px solid var(--ink);
+  }
+  .cell:last-child { border-bottom: 1px solid var(--ink); }
+  .cell .n { font-family: "Fragment Mono", monospace; font-size: 12px; color: var(--mut); }
+  .cell .t { font-family: "Instrument Serif", serif; font-size: 24px; }
+  .cell .s { font-family: "Fragment Mono", monospace; font-size: 11.5px; color: var(--oxblood); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  footer { border-top: 1px solid var(--line); padding: 18px 0 26px; }
+  footer .wrap { display: flex; justify-content: space-between; font-family: "Fragment Mono", monospace; font-size: 11px; letter-spacing: 0.04em; color: var(--mut); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <span class="wordmark">Slow Boil <em>Productions</em></span>
+    <div class="nav-links">
+      <a href="#">The Stack</a><a href="#">AI</a><a href="#">Proof</a><a href="#">About</a><a href="#">Contact</a>
+      <a class="nav-cta" href="#">Let’s get to work</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Marketing &amp; tools for beverage-alcohol brands</span>
+      <h1>Everything your spirits brand needs to compete, <span class="alt">but at a fraction of the cost.</span></h1>
+      <p class="lede">Built by a brand owner, for brand owners like you. I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#">Let’s get to work →</a>
+        <a class="btn btn-ghost" href="#">See what’s running</a>
+      </div>
+    </div>
+    <div class="plate">
+      <div class="plate-bar"><span class="t">Operational Dashboard</span><span class="live">● LIVE</span></div>
+      <div class="shot">
+        <div class="stat-row">
+          <div class="stat"><span class="k">Depletions · MTD</span><span class="v">12,480 <em>▲9%</em></span></div>
+          <div class="stat"><span class="k">Accounts sold</span><span class="v">1,205</span></div>
+          <div class="stat"><span class="k">Reorder risk</span><span class="v">17</span></div>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lbl">NC — on-premise</span><span class="bar"><i style="width:82%"></i></span></div>
+          <div class="row"><span class="lbl">SC — off-premise</span><span class="bar"><i style="width:64%"></i></span></div>
+          <div class="row"><span class="lbl">TN — control</span><span class="bar"><i style="width:47%"></i></span></div>
+        </div>
+      </div>
+      <div class="plate-cap">fig. 01 — your product screenshot lands here, framed like a plate in a field guide</div>
+    </div>
+  </div>
+</section>
+
+<section class="section band">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <span class="kick">The wall</span>
+        <h2>The brands that deserve to win are losing because of capital resources and owner bandwidth, <span style="font-style:italic">not merit.</span></h2>
+      </div>
+      <div>
+        <p class="body-lede">You built something real — a product you believe in, a vision you’ve carried for years. Then you hit the place where passion meets budget, and budget usually wins.</p>
+        <p class="mut">The agencies want $20,000 a month. The freelancers disappear after two invoices. The DIY tools look simple until you’re three hours deep in a Canva template at midnight. I’ve been on both sides of that wall — so I built the way around it.</p>
+      </div>
+    </div>
+    <div class="cells">
+      <div class="cell"><span class="n">No. 1</span><span class="t">Websites that convert</span><span class="s">design + build</span></div>
+      <div class="cell"><span class="n">No. 2</span><span class="t">A category-native CRM</span><span class="s">live + running</span></div>
+      <div class="cell"><span class="n">No. 3</span><span class="t">Operational dashboards</span><span class="s">real data, real answers</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>SLOW BOIL PRODUCTIONS LLC · CHARLOTTE, NC</span><span>PRIVACY · TERMS · CONTACT</span></div>
+</footer>
+
+</body>
+</html>

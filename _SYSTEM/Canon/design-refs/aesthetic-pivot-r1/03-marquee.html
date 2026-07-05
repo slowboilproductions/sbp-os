@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direction 3 — Marquee (bold-modernist / poster-grade)</title>
+<!-- SBP-AESTHETIC-PIVOT-R1 candidate sample. Illustrative, not build code.
+     Copy is the real ratified homepage copy (A-15..A-22); only the skin is the proposal. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,800&family=Chivo+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --white: #FBFBF9;
+    --black: #101010;
+    --mut: #585852;
+    --line: #E2E2DB;
+    --red: #D2301C;
+    --red-deep: #AE2113;
+    --s3: 16px; --s4: 24px; --s5: 32px; --s6: 48px; --s7: 76px; --s8: 112px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--white); color: var(--black);
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: "Chivo Mono", monospace; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-inline: var(--s5); }
+
+  /* nav */
+  nav { border-bottom: 2px solid var(--black); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .wordmark { font-weight: 800; letter-spacing: -0.02em; font-size: 18px; text-transform: uppercase; }
+  .wordmark span { color: var(--red); }
+  .nav-links { display: flex; gap: var(--s5); align-items: center; font-size: 15px; font-weight: 600; }
+  .nav-links a { color: var(--black); text-decoration: none; }
+  .nav-cta { background: var(--black); color: var(--white) !important; padding: 10px 18px; font-size: 14px; }
+
+  /* hero — poster: full-width type over, screenshot under */
+  .hero { padding-block: var(--s7) 0; }
+  .kick {
+    font-family: "Chivo Mono", monospace; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--red); display: block; margin-bottom: var(--s4);
+  }
+  h1 {
+    font-weight: 800; font-size: clamp(48px, 6vw, 86px); line-height: 1.0; letter-spacing: -0.035em;
+    max-width: 17ch; text-wrap: balance;
+  }
+  h1 .alt { color: var(--red); }
+  .hero-sub { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--s6); align-items: end; margin-top: var(--s6); }
+  .lede { color: var(--mut); font-size: 19px; max-width: 52ch; }
+  .btns { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+  .btn { text-decoration: none; font-weight: 800; font-size: 16px; padding: 16px 28px; }
+  .btn-primary { background: var(--red); color: var(--white); }
+  .btn-primary:hover { background: var(--red-deep); }
+  .btn-ghost { color: var(--black); outline: 2px solid var(--black); outline-offset: -2px; }
+
+  /* screenshot slab — stark border, hard shadow */
+  .slabwrap { padding-block: var(--s6) var(--s7); }
+  .slab { border: 2px solid var(--black); background: #fff; box-shadow: 10px 10px 0 var(--black); }
+  .slab-bar {
+    display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--black);
+    padding: 12px 20px; font-family: "Chivo Mono", monospace; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .slab-bar .live { color: var(--red); }
+  .shot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .stat { padding: 22px 20px 18px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: 0; }
+  .stat .k { font-family: "Chivo Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); display: block; margin-bottom: 8px; }
+  .stat .v { font-weight: 800; font-size: 34px; letter-spacing: -0.03em; line-height: 1; }
+  .stat .v em { font-style: normal; color: var(--red); font-size: 14px; font-weight: 700; }
+  .slab-cap { border-top: 2px solid var(--black); padding: 10px 20px; font-family: "Chivo Mono", monospace; font-size: 11.5px; color: var(--mut); }
+
+  /* the wall — content block */
+  .section { padding-block: var(--s7); }
+  .band { background: var(--black); color: var(--white); }
+  .band .kick { color: var(--red); }
+  .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--s7); align-items: start; }
+  h2 { font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.02; letter-spacing: -0.03em; text-wrap: balance; }
+  h2 .alt { color: var(--red); }
+  .body-lede { font-size: 18.5px; margin-bottom: var(--s4); }
+  .band .mut { color: #A5A5A0; }
+  .mut + .mut { margin-top: var(--s3); }
+
+  /* proof cells — poster tiles */
+  .cells { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: var(--s6); border: 1px solid #3A3A36; }
+  .cell { padding: 26px 24px; border-right: 1px solid #3A3A36; }
+  .cell:last-child { border-right: 0; }
+  .cell .t { font-weight: 800; font-size: 21px; letter-spacing: -0.02em; display: block; margin-bottom: 8px; }
+  .cell .s { font-family: "Chivo Mono", monospace; font-size: 11.5px; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  footer { border-top: 2px solid var(--black); padding: 18px 0 26px; }
+  footer .wrap { display: flex; justify-content: space-between; font-family: "Chivo Mono", monospace; font-size: 11.5px; color: var(--mut); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <span class="wordmark">Slow Boil <span>Productions</span></span>
+    <div class="nav-links">
+      <a href="#">The Stack</a><a href="#">AI</a><a href="#">Proof</a><a href="#">About</a><a href="#">Contact</a>
+      <a class="nav-cta" href="#">Let’s get to work</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kick">Marketing &amp; tools for beverage-alcohol brands</span>
+    <h1>Everything your spirits brand needs to compete, <span class="alt">but at a fraction of the cost.</span></h1>
+    <div class="hero-sub">
+      <p class="lede">Built by a brand owner, for brand owners like you. I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#">Let’s get to work →</a>
+        <a class="btn btn-ghost" href="#">See what’s running</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slabwrap">
+  <div class="wrap">
+    <div class="slab">
+      <div class="slab-bar"><span>Operational Dashboard</span><span class="live">● live</span></div>
+      <div class="shot">
+        <div class="stat"><span class="k">Depletions · MTD</span><span class="v">12,480</span></div>
+        <div class="stat"><span class="k">vs. last month</span><span class="v">▲ 9<em>%</em></span></div>
+        <div class="stat"><span class="k">Accounts sold</span><span class="v">1,205</span></div>
+        <div class="stat"><span class="k">Reorder risk</span><span class="v">17</span></div>
+      </div>
+      <div class="slab-cap">your product screenshot lands here — stark frame, hard shadow, no decoration</div>
+    </div>
+  </div>
+</section>
+
+<section class="section band">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <span class="kick">The wall</span>
+        <h2>The brands that deserve to win are losing on capital and bandwidth. <span class="alt">Not merit.</span></h2>
+      </div>
+      <div>
+        <p class="body-lede">You built something real — a product you believe in, a vision you’ve carried for years. Then you hit the place where passion meets budget, and budget usually wins.</p>
+        <p class="mut">The agencies want $20,000 a month. The freelancers disappear after two invoices. The DIY tools look simple until you’re three hours deep in a Canva template at midnight. I’ve been on both sides of that wall — so I built the way around it.</p>
+      </div>
+    </div>
+    <div class="cells">
+      <div class="cell"><span class="t">Websites that convert</span><span class="s">design + build</span></div>
+      <div class="cell"><span class="t">A category-native CRM</span><span class="s">live + running</span></div>
+      <div class="cell"><span class="t">Operational dashboards</span><span class="s">real data, real answers</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>SLOW BOIL PRODUCTIONS LLC · CHARLOTTE, NC</span><span>PRIVACY · TERMS · CONTACT</span></div>
+</footer>
+
+</body>
+</html>

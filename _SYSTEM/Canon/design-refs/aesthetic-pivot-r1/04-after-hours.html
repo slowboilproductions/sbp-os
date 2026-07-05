@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direction 4 — After Hours (dark-premium / backbar)</title>
+<!-- SBP-AESTHETIC-PIVOT-R1 candidate sample. Illustrative, not build code.
+     Copy is the real ratified homepage copy (A-15..A-22); only the skin is the proposal.
+     NOT Control Room: warm hospitality dark (brass/ivory/candlelight), no blue-slate, no signal green, no terminal motifs. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --night: #171310;
+    --panel: #201B16;
+    --panel-2: #262019;
+    --ivory: #EFE8DA;
+    --mut: #A29683;
+    --line: #382F26;
+    --brass: #C79C4E;
+    --brass-bright: #E0B968;
+    --s3: 16px; --s4: 24px; --s5: 32px; --s6: 48px; --s7: 76px; --s8: 110px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--night); color: var(--ivory);
+    font-family: "Albert Sans", sans-serif;
+    font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: "Martian Mono", monospace; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: var(--s5); }
+
+  /* nav */
+  nav { border-bottom: 1px solid var(--line); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .wordmark { font-family: "Gloock", serif; font-size: 20px; letter-spacing: 0.01em; }
+  .wordmark span { color: var(--brass); }
+  .nav-links { display: flex; gap: var(--s5); align-items: center; font-size: 15px; font-weight: 500; }
+  .nav-links a { color: var(--ivory); text-decoration: none; }
+  .nav-cta {
+    border: 1px solid var(--brass); color: var(--brass) !important; padding: 9px 20px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.01em;
+  }
+
+  /* hero — candle-glow */
+  .hero { padding-block: var(--s8) var(--s7); position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -30% -10% auto auto; width: 70%; height: 130%;
+    background: radial-gradient(ellipse at 70% 30%, rgba(199,156,78,0.13), transparent 62%);
+    pointer-events: none;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.04fr 0.96fr; gap: var(--s7); align-items: center; position: relative; }
+  .eyebrow {
+    font-family: "Martian Mono", monospace; font-weight: 300; font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--brass); display: block; margin-bottom: var(--s4);
+  }
+  h1 {
+    font-family: "Gloock", serif; font-weight: 400;
+    font-size: clamp(40px, 4.8vw, 62px); line-height: 1.05; letter-spacing: 0;
+  }
+  h1 .alt { color: var(--brass-bright); }
+  .lede { color: var(--mut); font-size: 18px; max-width: 46ch; margin: var(--s5) 0 var(--s6); }
+  .btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { text-decoration: none; font-weight: 600; font-size: 15.5px; padding: 14px 28px; }
+  .btn-primary { background: var(--brass); color: #1A1510; }
+  .btn-primary:hover { background: var(--brass-bright); }
+  .btn-ghost { color: var(--ivory); border: 1px solid var(--line); }
+
+  /* screenshot vitrine — raised dark panel, brass edge */
+  .plate {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line); border-top: 2px solid var(--brass);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8);
+  }
+  .plate-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 18px; border-bottom: 1px solid var(--line);
+  }
+  .plate-bar .t { font-family: "Gloock", serif; font-size: 16px; }
+  .plate-bar .live { font-family: "Martian Mono", monospace; font-weight: 300; font-size: 10.5px; letter-spacing: 0.12em; color: var(--brass); }
+  .shot { padding: 20px; display: grid; gap: 14px; }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat { background: rgba(0,0,0,0.25); border: 1px solid var(--line); padding: 12px 14px; }
+  .stat .k { font-family: "Martian Mono", monospace; font-weight: 300; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.11em; color: var(--mut); display: block; margin-bottom: 7px; }
+  .stat .v { font-weight: 700; font-size: 21px; letter-spacing: -0.01em; }
+  .stat .v em { font-style: normal; color: var(--brass-bright); font-size: 12.5px; }
+  .bars { display: flex; align-items: flex-end; gap: 7px; height: 88px; border: 1px solid var(--line); padding: 12px; background: rgba(0,0,0,0.25); }
+  .bars i { flex: 1; background: linear-gradient(180deg, var(--brass-bright), var(--brass)); }
+  .bars i:nth-child(even) { opacity: 0.35; }
+  .plate-cap {
+    border-top: 1px solid var(--line); padding: 10px 18px;
+    font-family: "Martian Mono", monospace; font-weight: 300; font-size: 10px; letter-spacing: 0.06em; color: var(--mut);
+  }
+
+  /* the wall — content block */
+  .section { padding-block: var(--s7); }
+  .band { background: var(--panel); border-block: 1px solid var(--line); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: start; }
+  .kick { font-family: "Martian Mono", monospace; font-weight: 300; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); display: block; margin-bottom: var(--s3); }
+  h2 { font-family: "Gloock", serif; font-weight: 400; font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+  .body-lede { font-size: 18px; margin-bottom: var(--s4); }
+  .mut { color: var(--mut); }
+  .mut + .mut { margin-top: var(--s3); }
+
+  /* proof cells */
+  .cells { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: var(--s6); }
+  .cell { background: var(--night); border: 1px solid var(--line); padding: 24px 22px; }
+  .cell .t { font-family: "Gloock", serif; font-size: 21px; display: block; margin-bottom: 10px; }
+  .cell .s { font-family: "Martian Mono", monospace; font-weight: 300; font-size: 10px; color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  footer { border-top: 1px solid var(--line); padding: 18px 0 26px; }
+  footer .wrap { display: flex; justify-content: space-between; font-family: "Martian Mono", monospace; font-weight: 300; font-size: 10px; letter-spacing: 0.06em; color: var(--mut); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <span class="wordmark">Slow Boil <span>Productions</span></span>
+    <div class="nav-links">
+      <a href="#">The Stack</a><a href="#">AI</a><a href="#">Proof</a><a href="#">About</a><a href="#">Contact</a>
+      <a class="nav-cta" href="#">Let’s get to work</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Marketing &amp; tools for beverage-alcohol brands</span>
+      <h1>Everything your spirits brand needs to compete, <span class="alt">but at a fraction of the cost.</span></h1>
+      <p class="lede">Built by a brand owner, for brand owners like you. I hit the same wall you did — agencies out of reach, freelancers gone after two invoices, Canva at midnight. So I built the marketing and the tools I wished existed. All of it, running.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#">Let’s get to work →</a>
+        <a class="btn btn-ghost" href="#">See what’s running</a>
+      </div>
+    </div>
+    <div class="plate">
+      <div class="plate-bar"><span class="t">Operational Dashboard</span><span class="live">● LIVE</span></div>
+      <div class="shot">
+        <div class="stat-row">
+          <div class="stat"><span class="k">Depletions · MTD</span><span class="v">12,480 <em>▲9%</em></span></div>
+          <div class="stat"><span class="k">Accounts sold</span><span class="v">1,205</span></div>
+          <div class="stat"><span class="k">Reorder risk</span><span class="v">17</span></div>
+        </div>
+        <div class="bars">
+          <i style="height:42%"></i><i style="height:58%"></i><i style="height:49%"></i><i style="height:66%"></i><i style="height:61%"></i><i style="height:78%"></i><i style="height:70%"></i><i style="height:88%"></i><i style="height:96%"></i>
+        </div>
+      </div>
+      <div class="plate-cap">your product screenshot lands here — raised vitrine, brass edge</div>
+    </div>
+  </div>
+</section>
+
+<section class="section band">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <span class="kick">The wall</span>
+        <h2>The brands that deserve to win are losing because of capital resources and owner bandwidth, not merit.</h2>
+      </div>
+      <div>
+        <p class="body-lede">You built something real — a product you believe in, a vision you’ve carried for years. Then you hit the place where passion meets budget, and budget usually wins.</p>
+        <p class="mut">The agencies want $20,000 a month. The freelancers disappear after two invoices. The DIY tools look simple until you’re three hours deep in a Canva template at midnight. I’ve been on both sides of that wall — so I built the way around it.</p>
+      </div>
+    </div>
+    <div class="cells">
+      <div class="cell"><span class="t">Websites that convert</span><span class="s">design + build</span></div>
+      <div class="cell"><span class="t">A category-native CRM</span><span class="s">live + running</span></div>
+      <div class="cell"><span class="t">Operational dashboards</span><span class="s">real data, real answers</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>SLOW BOIL PRODUCTIONS LLC · CHARLOTTE, NC</span><span>PRIVACY · TERMS · CONTACT</span></div>
+</footer>
+
+</body>
+</html>
