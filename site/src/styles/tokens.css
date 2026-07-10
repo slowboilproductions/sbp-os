@@ -1,60 +1,72 @@
 /* =====================================================================
-   Slow Boil — 70s-Retro / "Analog Console" design tokens  [A-19 PIVOT]
-   Operator 2026-06-15: "we are moving past the control room." Warm-earth
-   Mid-Century palette (Harvest Gold / Burnt Orange / Chocolate Brown) on a
-   warm-light (greige) ground, replacing the dark Control-Room skin. Keeps
-   the instrument-panel discipline (live dashboard, mono data) — warm 70s
-   instrument, not dark terminal. design-directions canon re-vote pending
-   (A-19, DRAFT — Doer does not self-ratify).
+   Slow Boil — "Classic B&W + Red/Gray" design tokens
+   Operator direction 2026-07-05: a classic black-and-white base (NOT true
+   black / true white) with red and gray as the accents. Two co-equal grounds
+   (off-white default; off-black for narrative bands), one hot red carried
+   across both, steel gray as the quiet accent. Supersedes the A-19 70s-Retro
+   skin. design-directions canon re-vote pending (Doer does not self-ratify).
 
-   A11y note: burnt orange (#E06A2C) is too mid-tone to pass WCAG-AA as small
-   text on the light ground (and even as large text), so TEXT/links/eyebrows
-   use deep rust (--grn, #A8441A, AA-safe both as text-on-light and as a fill
-   with cream ink). Bright orange + gold live only on the banner, sunset
-   chart, glows, and the live dot (decorative / large). Live-data state =
-   avocado (period-true 70s, and AA as data text).
+   Token NAMES are kept from the prior skin so every component keeps working;
+   only VALUES change. Legacy accent names (--grn*, --avocado*) are repointed
+   to the red system. A11y: bright racing red (#D63031) is used for FILLS and
+   LARGE/decorative marks (buttons with white ink, live dots, chart emphasis);
+   small accent TEXT (links, eyebrows, labels) uses the deeper AA-safe red
+   (--grn, ~4.6:1 on the off-white ground). Steel gray is the second accent.
    ===================================================================== */
 
 :root {
-  /* ---- Color: warm-earth ground ------------------------------------- */
-  --bg: #E9E4DA;            /* warm greige ground */
-  --bg-2: #E2DCCE;          /* faint deeper greige (section banding) */
-  --panel: #FBF8F2;         /* warm-white panel / cards */
-  --panel-2: #F3EDE1;       /* hover / nested panel */
-  --line: #D8CFBD;          /* warm 1px grid lines, borders */
-  --line-2: #C6B9A1;        /* stronger divider / hover border */
-  --text: #3A2418;          /* deep chocolate primary text */
-  --text-2: #5C4636;        /* secondary text (warm brown) */
-  --mut: #8A7460;           /* muted labels, captions */
+  /* ---- Color: classic B&W ground ------------------------------------ */
+  --bg: #F4F4F2;            /* off-white ground (not true white) */
+  --bg-2: #EAEAE7;          /* faint deeper off-white (section banding) */
+  --panel: #FFFFFF;         /* crisp white panel / cards (screenshots pop) */
+  --panel-2: #F2F2F0;       /* hover / nested panel */
+  --line: #DBDCDA;          /* light-gray 1px grid lines, borders */
+  --line-2: #C4C6C4;        /* stronger divider / hover border */
+  --text: #191A1C;          /* off-black primary text (not true black) */
+  --text-2: #3A3D41;        /* secondary text */
+  --mut: #565A5E;           /* muted labels/captions (AA-safe on off-white) */
 
-  /* The 70s palette — the literal era names. Bright orange + gold are
-     DECORATIVE/large-only (banner, sunset chart, glow); never small text. */
-  --gold: #E2B34A;          /* Harvest Gold */
-  --orange: #E06A2C;        /* Burnt Orange */
-  --brown: #4B2E20;         /* Chocolate Brown */
-  --cream: #FBF8F2;
+  /* Dark-ground tokens (narrative bands: .section--dark). Off-black ground,
+     off-white ink, steel muted — the two-ground system's second surface. */
+  --ink: #191A1C;           /* off-black band ground */
+  --ink-2: #232529;         /* raised panel on dark */
+  --on-ink: #F4F4F2;        /* off-white text on dark */
+  --on-ink-mut: #9BA1A6;    /* muted text on dark */
+  --line-dk: #33363B;       /* hairline on dark */
 
-  /* Live-data state = black (operator 2026-06-15: avocado didn't work). */
-  --avocado: #141414;       /* data text / live values */
-  --avocado-bright: #141414;/* live dot */
+  /* Steel gray — the second accent (labels, secondary, hairline emphasis) */
+  --steel: #636E72;
+  --steel-hi: #9BA1A6;
 
-  /* Accent system (legacy token names, repointed AA-safe). --grn carries the
-     brand accent used as TEXT and as CTA fill: deep rust passes both ways. */
-  --grn: #A8441A;           /* deep burnt-orange / rust: accent text + CTA fill */
-  --grn-deep: #7E3214;      /* gradient base / pressed / underlines */
-  --grn-ink: #FBF8F2;       /* cream text on a rust fill (AA on --grn) */
-  --grn-glow: rgba(224, 106, 44, 0.42);   /* bright-orange bloom (decorative) */
-  --grn-wash: rgba(224, 106, 44, 0.12);
+  /* Era-token names repointed to the B&W system (used by Banner + decoration):
+     the tricolor "sunset banner" becomes an ink / steel / red precision stripe. */
+  --gold: #636E72;          /* steel (was Harvest Gold) */
+  --orange: #D63031;        /* bright red (was Burnt Orange) */
+  --brown: #191A1C;         /* off-black (was Chocolate Brown) */
+  --cream: #FFFFFF;
 
-  /* muted data hues — charts only, never UI chrome */
-  --data-blue: #4C8DFF;
-  --data-amber: #D9A33A;
-  --data-violet: #A77BF0;
+  /* Live-data state = red. Label text uses the AA-safe red; the dot is bright. */
+  --avocado: #C22125;       /* live label text (AA on light) */
+  --avocado-bright: #D63031;/* live dot (bright, decorative) */
 
-  /* ---- Type --------------------------------------------------------- */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  /* Accent system (legacy --grn* names → the red accent).
+     --grn is AA-safe both as small text on light AND as a fill under white ink. */
+  --grn: #C22125;           /* accent text (links/eyebrows/labels) + CTA fill */
+  --grn-deep: #8E1A1D;      /* pressed / underline / gradient base */
+  --grn-ink: #FFFFFF;       /* white text on a red fill */
+  --grn-glow: rgba(214, 48, 49, 0.28);    /* red bloom (decorative) */
+  --grn-wash: rgba(214, 48, 49, 0.10);
+  --red: #D63031;           /* bright racing red — large/decorative emphasis */
+
+  /* muted data hues — charts only, never UI chrome (monochrome + red) */
+  --data-blue: #4A4E52;
+  --data-amber: #8A9096;
+  --data-violet: #B0B4B8;
+
+  /* ---- Type: Archivo (strong grotesque) + Spline Sans Mono (data) --- */
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'Spline Sans Mono', ui-monospace, 'SFMono-Regular', monospace;
 
   /* fluid type scale (clamp: min .. preferred .. max) */
   --t-eyebrow: 0.75rem;                                   /* 12px mono labels */
@@ -64,7 +76,7 @@
   --t-h3: clamp(1.0625rem, 0.9rem + 0.7vw, 1.35rem);
   --t-h2: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
   --t-h1: clamp(2.4rem, 1.4rem + 4.4vw, 3.6rem);          /* hero */
-  --leading-tight: 1.05;
+  --leading-tight: 1.04;
   --leading-snug: 1.3;
   --leading: 1.6;
 
@@ -81,12 +93,12 @@
   --s10: 8rem;
 
   /* ---- Radius / shadow / layout ------------------------------------- */
-  --r-sm: 6px;
-  --r: 10px;
-  --r-lg: 12px;
+  --r-sm: 3px;             /* squarer = classic-precision feel */
+  --r: 4px;
+  --r-lg: 6px;
   --r-pill: 999px;
-  --shadow-panel: 0 18px 50px rgba(75, 46, 32, 0.16);
-  --shadow-soft: 0 8px 26px rgba(75, 46, 32, 0.12);
+  --shadow-panel: 0 18px 50px rgba(25, 26, 28, 0.14);
+  --shadow-soft: 0 8px 26px rgba(25, 26, 28, 0.10);
   --maxw: 1200px;          /* content max width */
   --maxw-prose: 720px;     /* legal / prose pages */
   --nav-h: 73px;

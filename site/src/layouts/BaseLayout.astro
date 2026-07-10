@@ -32,7 +32,7 @@ const fullTitle = title === 'Slow Boil Productions'
   <meta name="description" content={description} />
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonical} />
-  <meta name="theme-color" content="#E9E4DA" />
+  <meta name="theme-color" content="#F4F4F2" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
@@ -43,12 +43,12 @@ const fullTitle = title === 'Slow Boil Productions'
   <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts: CDN for now; self-hosting is a Step-2 polish follow-up.
-       Space Grotesk (display) · IBM Plex Sans (body) · IBM Plex Mono (data). -->
+  <!-- Fonts: CDN for now; self-hosting is a polish follow-up.
+       Archivo (display + body, strong grotesque) · Spline Sans Mono (data). -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@400;500&display=swap"
     rel="stylesheet"
   />
 

@@ -18,12 +18,6 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   background: var(--bg);
-  /* faint sun-baked warmth at the top — static instrument-panel texture,
-     no motion (motion layer is a later pass). */
-  background-image:
-    radial-gradient(120% 60% at 85% -10%, rgba(226, 179, 74, 0.16), transparent 60%),
-    radial-gradient(90% 50% at 0% -5%, rgba(224, 106, 44, 0.07), transparent 55%);
-  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-size: var(--t-base);
@@ -45,16 +39,25 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .prose-wrap { width: 100%; max-width: var(--maxw-prose); margin-inline: auto; padding-inline: var(--s6); }
 .section { padding-block: var(--s9); }
 .section--band { background: var(--bg-2); border-block: 1px solid var(--line); }
+/* dark narrative band — the two-ground system's second surface. Off-black
+   ground with inverted ink; the red accent carries across unchanged. */
+.section--dark { background: var(--ink); border-block: 1px solid var(--line-dk); color: var(--on-ink); }
+.section--dark h1, .section--dark h2, .section--dark h3, .section--dark h4 { color: var(--on-ink); }
+.section--dark .lede { color: var(--on-ink); }
+.section--dark .mut, .section--dark p { color: var(--on-ink-mut); }
+.section--dark .rule { border-color: var(--line-dk); }
+.section--dark .btn--ghost { border-color: var(--steel); color: var(--on-ink); }
+.section--dark .btn--ghost:hover { border-color: var(--on-ink); color: var(--on-ink); background: transparent; }
 @media (max-width: 760px) {
   .wrap, .prose-wrap { padding-inline: var(--s5); }
   .section { padding-block: var(--s8); }
 }
 
 /* ---- type ----------------------------------------------------------- */
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: var(--leading-snug); }
-h1 { font-size: var(--t-h1); line-height: var(--leading-tight); letter-spacing: -0.03em; }
-h2 { font-size: var(--t-h2); font-weight: 500; }
-h3 { font-size: var(--t-h3); font-weight: 500; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.025em; line-height: var(--leading-snug); }
+h1 { font-size: var(--t-h1); line-height: var(--leading-tight); letter-spacing: -0.035em; font-weight: 900; }
+h2 { font-size: var(--t-h2); font-weight: 800; }
+h3 { font-size: var(--t-h3); font-weight: 700; }
 .g { color: var(--grn); }
 p { max-width: 62ch; }
 .lede { font-size: var(--t-lg); color: var(--text-2); line-height: var(--leading); }
@@ -80,12 +83,12 @@ p { max-width: 62ch; }
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-1px); }
-.btn--primary { background: var(--grn); color: var(--grn-ink); box-shadow: 0 0 0 rgba(63,185,80,0); }
+.btn--primary { background: var(--grn); color: var(--grn-ink); box-shadow: 0 0 0 rgba(214,48,49,0); }
 .btn--primary:hover { box-shadow: 0 8px 26px var(--grn-glow); }
 .btn--ghost { border: 1px solid var(--line-2); color: var(--text); }
 .btn--ghost:hover { border-color: var(--grn); color: var(--grn); }
 .btn--mono { font-family: var(--font-mono); font-size: var(--t-eyebrow); color: var(--grn); border: 1px solid var(--grn-deep); background: var(--grn-wash); border-radius: var(--r-sm); padding: 0.65em 1.2em; }
-.btn--mono:hover { background: rgba(63,185,80,0.14); }
+.btn--mono:hover { background: var(--grn-wash); }
 
 /* ---- live signal (the "alive" chip) — avocado = live/operational state -- */
 .live { font-family: var(--font-mono); font-size: var(--t-eyebrow); letter-spacing: 0.08em; color: var(--avocado); display: inline-flex; align-items: center; gap: 0.5em; }
