@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(python3:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+      "Bash(sed:*)",
+      "Bash(grep:*)",
+      "Read",
+      "Grep",
+      "Glob",
+      "mcp__github__list_pull_requests",
+      "mcp__github__pull_request_read",
+      "Bash(npm:*)",
+      "Bash(node:*)",
+      "Bash(npx:*)"
+    ]
+  }
+}
